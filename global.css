@@ -737,3 +737,258 @@ td:nth-child(even) {
 .guides-bg {
   background: transparent;
 }
+
+/* ---------------------------------------------------------------
+   Documentation page
+   --------------------------------------------------------------- */
+
+.docs-section {
+  width: 100%;
+  max-width: 1000px;
+  min-width: 0;
+  margin: 0 auto;
+  padding: 0.5rem 1rem 1.5rem;
+}
+
+.docs-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  font-size: 1.4rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.docs-heading span {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.docs-heading::before,
+.docs-heading::after {
+  content: '';
+  flex: 1 1 auto;
+  height: 2px;
+  border-radius: 2px;
+  box-shadow: 0 0 8px 1px rgba(168, 85, 247, 0.75);
+}
+
+.docs-heading::before {
+  background: linear-gradient(to right, rgba(168,85,247,0), #a855f7);
+}
+
+.docs-heading::after {
+  background: linear-gradient(to left, rgba(168,85,247,0), #a855f7);
+}
+
+.docs-subheading {
+  width: 100%;
+  font-size: 1.1rem;
+  color: #e9d5ff;
+  margin: 1.5rem 0 0.6rem;
+}
+
+.docs-list {
+  width: 100%;
+  min-width: 0;
+  list-style: none;
+  padding: 0;
+}
+
+.docs-list li {
+  padding: 0.3rem 0;
+}
+
+.docs-list a {
+  color: #e9d5ff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(168, 85, 247, 0.5);
+}
+
+.docs-list a:hover {
+  color: #fff;
+  border-bottom-color: #a855f7;
+}
+
+.docs-note {
+  color: #a898c4;
+  font-size: 0.8rem;
+}
+
+/* Sits on one line beside the filename rather than on its own row */
+.docs-inline-note {
+  display: inline;
+  margin-top: 0;
+  min-height: 0;
+}
+
+/* Character guides wrap into columns rather than one long list */
+.docs-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 130px);
+  justify-content: start;
+  gap: 4px 16px;
+}
+
+/* Collapsible Printme tables */
+.printme-list {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.printme-item {
+  width: 100%;
+  min-width: 0;
+  align-items: stretch;
+}
+
+.printme-toggle {
+  width: 100%;
+  text-align: left;
+  background-color: #2a1b3d;
+  border: 1px solid #4c1d95;
+  border-radius: 8px;
+  color: #e9d5ff;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.6rem 0.9rem;
+}
+
+.printme-toggle:hover,
+.printme-toggle:focus-visible {
+  background-color: #3b2456;
+  color: #fff;
+}
+
+.printme-caret {
+  display: inline-block;
+  width: 1.2em;
+  color: #a855f7;
+}
+
+.printme-panel {
+  width: 100%;
+  min-width: 0;
+  padding: 0.8rem 0 1.2rem;
+  /* flex-start, not the inherited centre: tables should sit against the
+     left edge like the rest of the page. */
+  align-items: flex-start;
+}
+
+.printme-note {
+  width: 100%;
+  max-width: 100%;
+  color: #c4b5fd;
+  font-size: 0.8rem;
+  margin-bottom: 0.6rem;
+  white-space: pre-line;
+}
+
+/* Wide tables scroll sideways instead of breaking the layout */
+.printme-scroll {
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  align-items: flex-start;
+}
+
+.printme-table {
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-bottom: 0;
+  border: 1px solid #4c1d95;
+}
+
+.printme-table th,
+.printme-table td {
+  border: 1px solid #4c1d95;
+  padding: 0.25rem 0.5rem;
+  text-align: left;
+  /* pre-line, not nowrap: cells may carry their own line breaks
+     (esper spell lists) and must still not wrap on spaces. */
+  white-space: pre-line;
+  color: #ededed;
+}
+
+/* A cell merged across several rows sits centred in its span. */
+.printme-table td.printme-merged {
+  vertical-align: middle;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Grids placed beside each other, wrapping on narrow screens */
+.printme-side-by-side {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 24px;
+  width: 100%;
+  min-width: 0;
+}
+
+.printme-grid {
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
+  align-items: flex-start;
+}
+
+.printme-grid-title {
+  width: auto;
+  max-width: 100%;
+  font-size: 1rem;
+  color: #e9d5ff;
+  margin-bottom: 0.3rem;
+}
+
+.printme-table th {
+  background-color: #2e1065;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* Banded rows: both shades are purple, the odd one just darker, so no
+   row reads as a transparent gap. */
+.printme-table tbody td {
+  background-color: #2a1640;
+}
+
+.printme-table tbody tr:nth-child(even) td {
+  background-color: #3a2159;
+}
+
+/* First column stays put while the table scrolls sideways, and sits a
+   shade darker so it reads as a row label rather than data. */
+.printme-table th:first-child,
+.printme-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.printme-table tbody td:first-child {
+  background-color: #241238;
+  font-weight: bold;
+}
+
+.printme-table tbody tr:nth-child(even) td:first-child {
+  background-color: #321c4d;
+}
+
+.printme-table th:first-child {
+  z-index: 3;
+}
+
+.printme-empty {
+  color: #c4b5fd;
+  font-size: 0.9rem;
+}
