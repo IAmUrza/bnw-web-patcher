@@ -4,11 +4,13 @@ import Image from "next/image";
 
 interface RomVerifierProps {
   onMatch: (romFile: File) => void;
+  errorMessage?: string | null;
 }
 
-const RomVerifier: React.FC<RomVerifierProps> = ({ onMatch }) => {
+const RomVerifier: React.FC<RomVerifierProps> = ({ onMatch, errorMessage }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
+  const [localError, setLocalError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -24,7 +26,7 @@ const RomVerifier: React.FC<RomVerifierProps> = ({ onMatch }) => {
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragging(false);
-    
+
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const file = e.dataTransfer.files[0];
       processFile(file);
@@ -39,19 +41,22 @@ const RomVerifier: React.FC<RomVerifierProps> = ({ onMatch }) => {
   };
 
   const processFile = (file: File) => {
-    setFileName(file.name);
-    
-    // Only process .sfc, .smc, or .fig files
+    // Only process .sfc or .smc files
     const validExtensions = ['.sfc', '.smc'];
     const fileExt = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
-    
+
     if (!validExtensions.includes(fileExt)) {
-      alert('Please select a valid SNES ROM file (.sfc or .smc)');
+      setFileName(null);
+      setLocalError('That file type is not supported. Choose a .sfc or .smc ROM.');
       return;
     }
-    
+
+    setLocalError(null);
+    setFileName(file.name);
     onMatch(file);
   };
+
+  const shownError = localError ?? errorMessage ?? null;
 
   const handleBrowseClick = () => {
     if (fileInputRef.current) {
@@ -61,8 +66,8 @@ const RomVerifier: React.FC<RomVerifierProps> = ({ onMatch }) => {
 
   return (
     <div
-      className={`w-100 text-center p-4 
-        ${isDragging ? 'active-border' : 'passive-border'}
+      className={`rom-dropzone text-center p-4
+        ${shownError ? 'error-border' : isDragging ? 'active-border' : 'passive-border'}
         dotted-border
       `}
       onDragOver={handleDragOver}
@@ -76,31 +81,36 @@ const RomVerifier: React.FC<RomVerifierProps> = ({ onMatch }) => {
         accept=".sfc,.smc"
         className="hidden-input"
       />
-      
+
       <div className=''>
-        <Image 
+        <Image
           src="/cloud-upload.svg"
-          width={138}
-          height={130}
-          color="white"
+          width={110}
+          height={104}
           alt="cloud upload icon"
         />
-        {fileName ? (
-          <p className="mb-2">
+        {/* One slot, always two lines tall: error, then filename, then
+            the default prompt. */}
+        {shownError ? (
+          <p className="rom-filename rom-filename-error mb-2">
+            {shownError}
+          </p>
+        ) : fileName ? (
+          <p className="rom-filename mb-2">
             Selected: <span className="font-semibold">{fileName}</span>
           </p>
         ) : (
-          <p className="mb-2">
+          <p className="rom-filename mb-2">
             Drop your ROM file here or
           </p>
         )}
-        
+
         <button
           onClick={handleBrowseClick}
           className="px-4 py-2 nicer-btn">
           Browse Files
         </button>
-        
+
         <p className="mt-2 text-xs">
           Supported formats: .sfc, .smc
         </p>

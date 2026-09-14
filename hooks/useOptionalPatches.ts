@@ -14,6 +14,7 @@ interface OptionalPatchesConfig {
     zipFile?: string; // Specific ZIP file for this category
     filePattern?: RegExp; // Pattern to match files in ZIP
     defaultChoice?: string; // needed for baseline option styling
+    order?: string[]; // display order; names not listed fall to the end
   }[];
 }
 
@@ -69,11 +70,10 @@ export const useOptionalPatches = (config: OptionalPatchesConfig) => {
                         return;
                       }
 
-                      // Creates clean UI name from filename
-                      const displayName = originalName
-                        .replace(/\.ips$/i, '') // excise file extension
-                        .replace(/[-_]/g, ' ') // dashes to spaces
-                        .replace(/\b\w/g, l => l.toUpperCase()); // capitalize each word
+                      // The .ips filename IS the label, verbatim. Don't
+                      // reformat it — hyphens, apostrophes and casing are
+                      // all deliberate (T-Edition, MSU-1, notext).
+                      const displayName = originalName.replace(/\.ips$/i, '');
                       // Generates preview image path (public/previews/)
                       const previewImagePath = `/previews/${originalName.replace(/\.ips$/i, '')}.png`;
 
@@ -100,11 +100,38 @@ export const useOptionalPatches = (config: OptionalPatchesConfig) => {
               }
             }
 
+            // Sort by the category's `order` list when it has one;
+            // anything missing from that list falls to the end,
+            // alphabetically, so a typo hides nothing.
+            const order = categoryConfig.order;
+            const sorted = order
+              ? patches.slice().sort((a, b) => {
+                  const ia = order.indexOf(a.name);
+                  const ib = order.indexOf(b.name);
+                  if (ia === -1 && ib === -1) return a.name.localeCompare(b.name);
+                  if (ia === -1) return 1;
+                  if (ib === -1) return -1;
+                  return ia - ib;
+                })
+              : patches.slice().sort((a, b) => a.name.localeCompare(b.name));
+
+            if (order) {
+              const unlisted = patches
+                .map(p => p.name)
+                .filter(n => !order.includes(n));
+              if (unlisted.length) {
+                console.warn(
+                  `[${categoryConfig.id}] not in order list, sent to the end:`,
+                  unlisted
+                );
+              }
+            }
+
             loadedCategories.push({
               id: categoryConfig.id,
               title: categoryConfig.title,
               description: categoryConfig.description,
-              patches: patches.sort((a, b) => a.name.localeCompare(b.name)),
+              patches: sorted,
               allowMultiple: categoryConfig.allowMultiple ?? true,
               defaultChoice: categoryConfig.defaultChoice
             });
@@ -181,12 +208,20 @@ export const useOptionalPatches = (config: OptionalPatchesConfig) => {
     loadOptionalPatches();
   }, [config]);
 
-  // Helper function to get selected patch objects by their IDs
+  // Returns selected patches in APPLY order, which is config order:
+  // category order first, then each category's `order` array.
+  //
+  // Do NOT return them in click order — IPS patches overwrite bytes, so
+  // whichever is applied last wins on any address two patches share. A
+  // broad patch applied after a narrow one silently undoes it.
   const getSelectedPatches = (selectedIds: string[]): OptionalPatch[] => {
-    const allPatches = categories.flatMap(cat => cat.patches);
-    return selectedIds
-      .map(id => allPatches.find(patch => patch.id === id))
-      .filter((patch): patch is OptionalPatch => patch !== undefined);
+    const ordered: OptionalPatch[] = [];
+    categories.forEach(cat => {
+      cat.patches.forEach(patch => {
+        if (selectedIds.includes(patch.id)) ordered.push(patch);
+      });
+    });
+    return ordered;
   };
 
   return {

@@ -1,0 +1,3 @@
+The Diary, but entries show comprehensive enemy scripts rather than Scan hints.
+
+Credit: Ryo_Hazuki

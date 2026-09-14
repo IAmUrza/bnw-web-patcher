@@ -1,4 +1,0 @@
-SPOILERS AHEAD!!!!!!!!!!!!!!!!!!!!
-
-Description: In ASC, there is a special armor worn by Shadow that you may find late-game. This Armor also changes the sprite of any character wearing it into Shadow's sprite. This optional
-patch will REMOVE this behavior (Shadow's Armor will still be available, but the character wearing it won't take on the appearance of Shadow anymore).

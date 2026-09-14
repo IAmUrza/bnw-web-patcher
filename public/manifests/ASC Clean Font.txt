@@ -1,4 +1,0 @@
-This patch will change the font to a "Clean Font" by xJ4cks. Elemental icons are also changed. 
-
-Installation:
-Apply this over the main hack. You can apply this either before or after other optional patches.

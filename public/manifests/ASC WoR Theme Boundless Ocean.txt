@@ -1,4 +1,0 @@
-This patch will change the World of Ruin music after obtaining the Falcon to "Final Fantasy 3 - Boundless Ocean", converted by MetroidQuest. 
-
-NOTE: The default WoR music after obtaining the Falcon is ALREADY changed to "FF9 - You Are Not Alone", converted by Gi Nattak. This optional patch replaces
-this theme with Boundless Ocean instead.

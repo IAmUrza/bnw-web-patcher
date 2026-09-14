@@ -1,11 +1,44 @@
-html,
+/* The fallback colour lives on <html>, not <body>: body::before sits at
+   z-index -1, which is behind the body's own background but in front of
+   the html background. An opaque body would hide the image. */
+html {
+  background: #0d0d0d;
+  /* Base size everything in rem scales from. */
+  font-size: 20px;
+}
+
 body {
   max-width: 100vw;
   color: #ededed;
-  background: #000;
+  background: transparent;
+  font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Fixed backdrop: covers the window, keeps its aspect ratio, ignores
+   scroll. Done with ::before rather than background-attachment: fixed,
+   which is unreliable on iOS Safari. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('/img/Muted_BG.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  z-index: -1;
+}
+
+/* Chicago, self-hosted from public/fonts/ */
+@font-face {
+  font-family: 'ChicagoFLF';
+  src: url('/fonts/ChicagoFLF.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 * {
@@ -19,8 +52,9 @@ a.primary {
   gap: 8px;
 }
 
-body, h1, h2, h3, h4, h5, h6, p, button, a .nav {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+/* Site-wide face. */
+body, h1, h2, h3, h4, h5, h6, p, button, a, li, td, th, input, label, span {
+  font-family: 'ChicagoFLF', 'Trebuchet MS', 'Lucida Sans Unicode', Arial, sans-serif;
 }
 
 main {
@@ -41,8 +75,46 @@ main div {
   justify-content: flex-start;
 }
 
-.nav, button {
-  background-color: #212529;
+/* Top navigation bar */
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: rgba(15, 6, 25, 0.85);
+  border-bottom: 1px solid #4c1d95;
+}
+
+.top-nav a {
+  color: #d6c7f0;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+}
+
+.top-nav a:hover,
+.top-nav a:focus-visible {
+  background-color: #4c1d95;
+  color: #fff;
+}
+
+.top-nav a.active {
+  background-color: #4c1d95;
+  color: #fff;
+}
+
+@media (max-width: 576px) {
+  .top-nav {
+    gap: 0.4rem;
+    font-size: 0.9rem;
+  }
+  .top-nav a {
+    padding: 0.35rem 0.4rem;
+  }
 }
 
 .nav-l1nk {
@@ -53,6 +125,10 @@ main div {
 .nav-item {
   text-decoration: none;
   padding: 0.6rem;
+}
+
+button {
+  background-color: #2a1b3d;
 }
 
 .footer {
@@ -72,16 +148,86 @@ main div {
 }
 
 
+/* Centred hero: title screenshot + intro copy */
+.patcher-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+/* Keeps the SNES art crisp when scaled up instead of blurring it */
+.title-screen {
+  image-rendering: pixelated;
+  max-width: 90vw;
+  height: auto;
+  border: 4px solid #facc15;
+  border-radius: 4px;
+  box-shadow: 0 0 14px 2px rgba(250, 204, 21, 0.3);
+}
+
+
 /* RomVerifier */
+/* Square corners; the old `border: #ededed 8 dotted` was invalid CSS
+   (the 8 had no unit), so this is now valid shorthand. */
 .dotted-border {
-  border-radius: 20%;
-  border:#ededed 8 dotted;
+  border-radius: 0;
+  border: 6px dotted #ededed;
 }
 .active-border {
-  border:#ae7517 8 dotted;
+  border: 6px dotted #ae7517;
 }
 .passive-border {
-  border:#ededed 8 dotted;
+  border: 6px dotted #ededed;
+}
+.error-border {
+  border: 6px dotted #ef4444;
+}
+
+/* Constrains the drop target so it doesn't stretch the full viewport.
+   A class beats the `main div` type selector on specificity, so
+   min-width: 0 here successfully cancels its min-width: 100%. */
+.rom-dropzone {
+  /* A real width, not 100%: inside a content-sized grid/flex column a
+     percentage width is circular and resolves too wide. */
+  width: 420px;
+  min-width: 0;
+  max-width: 90vw;
+  margin: 0 auto;
+  gap: 10px;
+  background-color: rgba(13, 13, 13, 0.55);
+}
+
+.rom-dropzone > div {
+  width: 100%;
+  min-width: 0;
+  gap: 10px;
+}
+
+/* The filename line always occupies two lines' worth of height, so the
+   box doesn't resize between "Drop your ROM file here" and a long
+   filename. Anything past two lines is clamped with an ellipsis. */
+.rom-filename {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.6em;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.rom-filename-error {
+  color: #fca5a5;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  min-height: 3.9em;
+  font-size: 0.8rem;
 }
 
 /* CustomOptionsPanel */
@@ -97,30 +243,294 @@ main div {
   pointer-events: none;
 }
 
-
-.option-box {
-  background: linear-gradient(rgba(0,0,0,0.5),rgba(255,255,255,0.5));
-  border-radius: 5px;
+/* Locked (password-protected) patch boxes */
+.option-box.locked-box {
+  border: 3px solid #ef4444;
+  background: radial-gradient(#2a1b3d, #2a1b3d, #7f1d1d);
+  box-shadow: 0 0 12px 2px rgba(239, 68, 68, 0.5);
 }
 
-.chosen-box {
+.lock-icon {
+  font-size: 0.95em;
+}
+
+/* 0.8rem = 16px at the 20px base. Not italic: ChicagoFLF has no italic
+   cut, so the browser fakes one by skewing the upright, which is what
+   made this line look off. */
+.locked-note {
+  color: #fca5a5;
+  font-size: 0.8rem;
+  font-style: normal;
+  line-height: 1.3;
+  min-height: 1.3em;
+  margin-top: 2px;
+}
+
+.unlocked-note {
+  color: #4ade80;
+}
+
+/* Dependency not met: the Diary isn't selected, so this can't be chosen. */
+.option-box.dep-locked {
+  opacity: 0.4;
+  filter: grayscale(0.6);
+}
+
+/* In-box password entry */
+.password-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Padding and radius match .option-btn so the field is exactly a
+   button's height and the box doesn't change size when the form opens. */
+.password-input {
+  width: 100%;
+  min-width: 0;
+  padding: 0.57rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid #ef4444;
+  background-color: #1a0b0b;
+  color: #fff;
+  text-align: center;
+}
+
+/* Wrong password: flash red and shake. No extra element, so the box
+   keeps its height. */
+.password-input-error {
+  border-color: #ef4444;
+  background-color: #3b0d0d;
+  animation: password-shake 0.35s ease;
+}
+
+.password-input-error::placeholder {
+  color: #fca5a5;
+}
+
+@keyframes password-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+}
+
+.password-form-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 6px;
+  width: 100%;
+}
+
+/* Same vertical padding and font size as .option-btn, so the open form
+   is exactly as tall as the two buttons it replaces. */
+.password-form-actions .option-btn {
+  flex: 1 1 0;
+  padding: 0.5rem 0.3rem;
+  font-size: 1rem;
+}
+
+/* Collapsible options toggle */
+.options-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  margin-top: 2.5rem;
+}
+
+.options-toggle-btn {
+  background-color: #4c1d95;
+  border: 1px solid #7c3aed;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.6rem 1.4rem;
+}
+
+.options-toggle-btn:hover,
+.options-toggle-btn:focus-visible {
+  background-color: #5b21b6;
+}
+
+.options-count {
+  color: #c4b5fd;
+  font-size: 1rem;
+}
+
+/* Category sections, separated by glowing rules that run out to both
+   edges from the category name. */
+.category-block {
+  width: 100%;
+  padding: 1.4rem 0 2rem;
+}
+
+.category-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+
+.category-title span {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.category-title::before,
+.category-title::after {
+  content: '';
+  flex: 1 1 auto;
+  height: 2px;
+  border-radius: 2px;
+  box-shadow: 0 0 8px 1px rgba(168, 85, 247, 0.75);
+}
+
+.category-title::before {
+  background: linear-gradient(to right, rgba(168,85,247,0), #a855f7);
+}
+
+.category-title::after {
+  background: linear-gradient(to left, rgba(168,85,247,0), #a855f7);
+}
+
+.category-description {
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  font-size: 0.8rem;
+  color: #d8c8f0;
+  margin-bottom: 1rem;
+}
+
+/* Grid, not flex: fixed 215px columns mean a box that wraps to a second
+   row sits exactly under the first box of the row above. auto-fit drops
+   the unused columns so the filled ones stay centred as a block. */
+.option-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 215px);
+  justify-content: center;
+  align-items: stretch;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Opaque enough to stay readable over the background art */
+.option-box {
+  background: linear-gradient(rgba(0,0,0,0.8),rgba(60,40,80,0.8));
   border-radius: 5px;
-  border: #2b8dca 3px groove;
-  background: radial-gradient(#333, #333,#2b8dca);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* The title block absorbs the slack, so however many lines the patch
+   name wraps to, the buttons below it still line up across the row. */
+.option-head {
+  flex: 1 1 auto;
+  width: 100%;
+  text-align: center;
+}
+
+/* Equal-width buttons inside each option box */
+.option-btn {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.option-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.option-box.chosen-box {
+  border-radius: 5px;
+  border: 3px solid #fde047;
+  box-shadow: 0 0 12px 2px rgba(253, 224, 71, 0.65);
+  background: radial-gradient(#2a1b3d, #2a1b3d, #854d0e);
 }
 .unchosen-box {
-  border: 2px black solid;
+  border: 3px solid #000;
 }
 
 /* for empty "dummy" option .ips files, scoped in PlusPatcher */
 .default-option {
   border-radius: 5px;
-  /* border: #2b8dca 3px groove; */
-  background: radial-gradient(#333, #333,#39a);
+  background: radial-gradient(#2a1b3d, #2a1b3d, #7c3aed);
 }
 
 .nicer-btn {
   border-radius: 10px;
+}
+
+/* Fixed min-width so the button doesn't resize when the label changes
+   from "No Uploaded ROM" to "Download Patched ROM". */
+.download-btn {
+  width: 340px;
+  max-width: 90vw;
+  padding: 1rem 1.5rem;
+  border: 2px solid #4c1d95;
+  border-radius: 10px;
+  background-color: #2a1b3d;
+  color: #fff;
+  cursor: pointer;
+}
+
+.download-btn.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #3f3f46;
+}
+
+.download-btn.is-ready {
+  border-color: #4ade80;
+  background-color: #14532d;
+  box-shadow: 0 0 14px 2px rgba(74, 222, 128, 0.45);
+}
+
+.download-btn.is-ready:hover {
+  background-color: #166534;
+}
+
+.download-btn-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+}
+
+.download-btn-icon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+}
+
+.download-btn-spinner {
+  animation: download-spin 1s linear infinite;
+}
+
+@keyframes download-spin {
+  to { transform: rotate(360deg); }
 }
 
 /* ImagePreviewModal */
@@ -160,7 +570,7 @@ td, th {
 
 /* striped rows */
 tr:nth-child(even) {
-  background-color: rgba(255,200,200,0.3);
+  background-color: rgba(196,181,253,0.2);
 }
 
 /* striped columns */
@@ -169,15 +579,45 @@ td:nth-child(even) {
 }
 
 /* Workaround for the overhyped garbage that is Bootstrap columns */
+/* Columns sized to their content and centred as a pair, so the gap you
+   see is the `gap` value rather than leftover column space.
+   min-width: 0 is required — `main div` sets min-width: 100%, and a
+   min-width always beats a max-width, so without this the grid is
+   forced to full viewport width no matter what cap is set. */
 .two-column-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  min-width: 0;
+  margin: 0 auto;
+}
+
+/* Descendant selector, not `>`: `main div` applies at EVERY depth, so
+   the divs nested inside DownloadRomButton were also being forced to
+   100% width, which stretched the button and filled the column. */
+.two-column-layout div {
+  width: auto;
+  min-width: 0;
+  flex: 0 0 auto;
+}
+
+/* Exception: the dropzone sets its own width and its inner wrapper
+   should still fill it. */
+.two-column-layout .rom-dropzone {
+  width: 420px;
+  max-width: 90vw;
+}
+
+.two-column-layout .rom-dropzone > div {
+  width: 100%;
 }
 
 @media (max-width: 576px) {
   .two-column-layout {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 }
 
@@ -236,14 +676,37 @@ td:nth-child(even) {
 }
 
 
-/* index.tsx title styling */
+/* Page title styling (home + documentation) */
+/* width/max-width override the global `p { max-width: 80vw }` so the
+   title can actually centre across the full column. */
 .app-title {
-  line-height: 1;
-  color: #ffc;
-  font-size: 50px;
-  text-shadow: 2px 2px 0px rgba(0, 0, 0, 1), 4px 4px 0px #bb8;
+  font-family: 'ChicagoFLF', 'Trebuchet MS', Arial, sans-serif;
+  line-height: 1.2;
+  color: #e9d5ff;
+  font-size: clamp(28px, 4.8vw, 56px);
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 1), 4px 4px 0px #6b21a8;
   font-weight: bold;
   margin-bottom: 1rem;
+  padding: 0 12px;
+}
+
+/* Second line of the title, e.g. "Web Patcher" / "Documentation" */
+.app-subtitle {
+  display: block;
+  font-size: 0.62em;
+  color: #facc15;
+  letter-spacing: 0.06em;
+  margin-top: 0.25em;
+}
+
+/* Bootstrap's reboot sets p { margin-bottom: 1rem }, which a type
+   selector applies over the `* { margin: 0 }` reset. Tighten it here. */
+.attribution p {
+  margin-bottom: 0.15rem;
+  text-align: center;
 }
 
 .image-sizing {
@@ -263,17 +726,14 @@ td:nth-child(even) {
 }
 
 .kard {
-  background-color: #112;
+  background-color: #1e1030;
 }
 
 
 /* per page styling */
-.plus-patcher-bg {
-  background: radial-gradient(#9d1a3f, #710f2b, #000);
-}
-.discord-bg {
-  background: linear-gradient(#112,#000, #000);
-}
+/* Transparent so the fixed background image shows through. */
+.plus-patcher-bg,
+.discord-bg,
 .guides-bg {
-  background: linear-gradient(#9d1a3f, #710f2b, #000);
+  background: transparent;
 }

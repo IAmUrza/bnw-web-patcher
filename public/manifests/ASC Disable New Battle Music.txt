@@ -1,5 +1,0 @@
-This patch removes all the new music tracks that you hear in battles. This is only if someone for some reason doesn't
-want the new music. If you want to re-enable the music, just re-apply the main ASC patch file...
-
-NOTE: This does not remove the new music in towns, dungeons, and overworld maps. There is a different patch for that in the same folder. If you use this patch together with that one,
-all the new music will effectively be gone.

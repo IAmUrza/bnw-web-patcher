@@ -1,4 +1,0 @@
-If applied, this patch will change all the bestiary descriptions to alternate versions created by Ace Aileron. These descriptions are much more comedic than the default,
-and contain a lot of cross-references to other games, movies and more.  If you want something a bit more fresh and amusing, this is for you!
-
-INSTRUCTIONS: You may apply this over the main hack file at any time.  It works with both Flavor A and Flavor B.

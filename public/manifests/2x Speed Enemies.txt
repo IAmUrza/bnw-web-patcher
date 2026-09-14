@@ -1,0 +1,3 @@
+Doubles enemy action speed, substantially raising the difficulty of every battle.
+
+Credit: Nowea

@@ -1,4 +1,0 @@
-The Active Time Battle System works exactly the same as in the original FF6.
-
-Drawbacks:
-ATB is always running in the background regardless of battle animations, so commands can quickly pile up on the queue. This functionally caps the effectiveness of the Agility stat. Furthermore, it enables "Wait tricking" abuse with the Wait mode config setting, where the player enters a command submenu to pause ATB during player animations, but lets ATB resume during enemy animations to gain a turn order advantage. Finally, the Battle Speed config setting only serves to make enemy ATB speed slower relative to the player, instead of adjusting the actual pace of battles as the player would expect.

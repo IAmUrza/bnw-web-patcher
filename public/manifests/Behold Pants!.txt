@@ -1,0 +1,5 @@
+The vanilla character sprite set, but Terra and Celes have pants.
+
+Not compatible with other optional sprite patches.
+
+Credit: Think

@@ -1,0 +1,7 @@
+Adds a full bestiary with graphics and details for every monster.
+
+Includes all Scan behavioral hints, as well as Diary-exclusive boss hints for an easier first-time experience. Also includes a music player (by Madsuir), wallpaper gradient switch, and font switch.
+
+Expands the ROM to 4MB and unlocks the optional font patches.
+
+Credit: Ryo_Hazuki

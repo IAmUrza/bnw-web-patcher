@@ -1,7 +1,0 @@
-Mild difficulty is about on par with the original FF6. Veterans of FF6 might find this to be too easy, while others who are not as familiar with all the strategies of the original might find this skill more suitable.
-
-This skill adjusts the following things:
-\n
-1) Monsters have slightly lower stats (more on par with the original FF6).\n
-2) Monsters are a bit slower and less aggressive.\n
-3) Monster AI scaling will happen at higher levels when compared to the other difficulty levels, which means the monsters won't get much tougher until you are really overleveled.

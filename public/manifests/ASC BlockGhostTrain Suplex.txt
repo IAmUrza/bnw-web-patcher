@@ -1,2 +1,0 @@
-This patch will disallow Sabin from being able to Suplex the train. This is for those people who feel this is a bug that needs fixing... In version 1.0 of ASC, Sabin could
-not Suplex the train. As of version 2.0 however, he is allowed to do so (out of popular demand).

@@ -1,6 +1,0 @@
-By default in ASC, Gau no longer has to leap to learn Rages.  He learns them simply by fighting monsters anywhere.  This patch brings back Leap, but in an optimized
-form. Gau has to leap on the Veldt with this patch applied, but the battle no longer ends, and he returns to your party after each battle.
-You no longer have to wait for him to come back sit through the "I'm your friend" scene every time.
-
-NOTE: Most people will prefer the default ASC behavior which allows Gau to learn rages anywhere.  This patch is only for people that enjoy hunting for monsters
-on the Veldt with Gau.  If you don't enjoy Veldt hunting, then DO NOT apply this patch.

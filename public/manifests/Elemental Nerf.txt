@@ -1,0 +1,3 @@
+Weakness to an element will result in a 150% damage bonus, instead of the typical 200% damage bonus.
+
+Credit: 

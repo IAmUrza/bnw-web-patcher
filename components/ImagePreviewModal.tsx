@@ -34,20 +34,17 @@ const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
     const loadManifest = async () => {
       setLoadingManifest(true);
       setManifestError(false);
-      
+
       try {
-        console.log(`Loading manifest from: ${manifestPath}`);
         const response = await fetch(manifestPath);
-        
         if (!response.ok) {
-          throw new Error(`Failed to load manifest: ${response.status}`);
+          throw new Error(`${manifestPath} returned HTTP ${response.status}`);
         }
-        
-        const content = await response.text();
-        setManifestContent(content);
-        console.log('Manifest loaded successfully');
+        const text = await response.text();
+        console.log(`Manifest loaded: ${manifestPath} (${text.length} chars)`);
+        setManifestContent(text);
       } catch (error) {
-        console.error('Error loading manifest:', error);
+        console.warn('No manifest shown:', error);
         setManifestError(true);
         setManifestContent(null);
       } finally {
@@ -58,56 +55,32 @@ const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
     loadManifest();
   }, [isOpen, manifestPath]);
 
-  // Handle ESC key to close modal
+  // ESC to close, and lock background scrolling while open
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
+      if (e.key === 'Escape') onClose();
     };
 
     if (isOpen) {
       document.addEventListener('keydown', handleEsc);
-      // Prevent body scrolling when modal is open
-      document.body.style.overflow = 'scroll';
+      document.body.style.overflow = 'hidden';
     }
 
     return () => {
       document.removeEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
   const hasManifest = manifestPath && !manifestError;
-  console.log(manifestPath);
+
   return (
+    // Clicking anywhere closes, including the card itself.
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-        {/* Close button, lightly animated w local CSS */}
-        <button
-          className="modal-close-btn"
-          onClick={onClose}
-          aria-label="Close modal"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-
-        {/* Header */}
-        {title && (
-          <div className="modal-header">
-            <h2>{title}</h2>
-            {/* {description && <p>{description}</p>} maybe worthwhile, but manifest is better*/}
-          </div>
-        )}
-
-        {/* Main content area: 2-column layout when manifest exists! */}
-        <div className={`modal-content ${hasManifest ? 'with-manifest' : ''}`}>
-          {/* Image container */}
+      <div className="modal-container">
+        <div className="modal-body">
           <div className="modal-image-container">
             <img
               src={src}
@@ -115,319 +88,173 @@ const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
               className="modal-image"
               onError={(e) => {
                 console.error('Failed to load preview image:', src);
-                e.currentTarget.src = '/placeholder-image.png'; // fallback image
+                e.currentTarget.src = '/placeholder-image.png';
               }}
             />
           </div>
 
-          {/* .txt manifest container */}
-          {hasManifest && (
-            <div className="manifest-container">
-              <div className="manifest-header">
-                <h3>Patch Function</h3>
-              </div>
-              <div className="manifest-content">
-                {loadingManifest ? (
-                  <div className="manifest-loading">
-                    <div className="spinner"></div>
-                    <p>Loading credits...</p>
-                  </div>
-                ) : manifestContent ? (
-                  <div className="manifest-text">
-                    {manifestContent.split('\\n').map((line, index) => (
-                      <div key={index}>{line || '\\u00A0'}</div>
-                      // forcing line breaks; <pre> element wasn't visible so can't be used
-                    ))}
-                  </div>
-                ) : (
-                  <p className="manifest-error">Unable to load credits information</p>
-                )}
-              </div>
-            </div>
-          )}
+          <div className="modal-text">
+            {title && <h2 className="modal-title">{title}</h2>}
+
+            {hasManifest && (
+              loadingManifest ? (
+                <p className="modal-loading">Loading…</p>
+              ) : manifestContent ? (
+                // Rendered as one block with white-space: pre-wrap, not
+                // split into a div per line. Those divs sat inside <main>
+                // and picked up its flex-column-centred rule, which
+                // centred every line and collapsed the blank ones.
+                <p className="manifest-text">{manifestContent}</p>
+              ) : null
+            )}
+          </div>
         </div>
 
-        {/* Footer with filename */}
-        <div className="modal-footer">
-          <small>{imageAlt}</small>
-        </div>
+        <p className="modal-hint">Click anywhere to close</p>
       </div>
 
       <style jsx>{`
+        /* Rules below re-declare width, min-width and flex-direction on
+           purpose. The global stylesheet forces every div inside main to
+           full width in a column, which otherwise stretches this card to
+           fill the viewport and stacks its columns. */
         .modal-overlay {
           position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
+          inset: 0;
+          width: 100vw;
+          min-width: 0;
+          flex-direction: row;
           background-color: rgba(0, 0, 0, 0.85);
+          backdrop-filter: blur(4px);
           display: flex;
           justify-content: center;
           align-items: center;
           z-index: 8999;
-          padding: 20px;
+          padding: 24px;
           box-sizing: border-box;
+          cursor: pointer;
         }
 
         .modal-container {
           position: relative;
-          background: linear-gradient(#444,#444,#533608);
+          width: auto;
+          min-width: 0;
+          background: linear-gradient(#241633, #1a0f26);
+          border: 2px solid #7c3aed;
           border-radius: 12px;
-          max-width: 95vw;
-          max-height: 95vh;
+          box-shadow: 0 0 30px 4px rgba(124, 58, 237, 0.35);
+          padding: 22px;
+          width: auto;
+          max-width: min(900px, 92vw);
+          max-height: 88vh;
           display: flex;
           flex-direction: column;
-          overflow: overlay;
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+          gap: 12px;
         }
 
-        .modal-close-btn {
-          position: absolute;
-          top: 15px;
-          right: 15px;
-          z-index: 10;
-          background: rgba(0, 0, 0, 0.7);
-          border: none;
-          border-radius: 50%;
-          width: 40px;
-          height: 40px;
+        .modal-body {
           display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          cursor: pointer;
-          transition: all 0.2s ease;
-        }
-
-        .modal-close-btn:hover {
-          background: rgba(0, 0, 0, 0.9);
-          transform: scale(1.2);
-          border: 3px #ae7517 solid;
-        }
-
-        .modal-header {
-          padding: 20px 20px 10px 20px;
-          border-bottom: 1px solid #666666;
-          text-align: center;
-        }
-
-        .modal-header h2 {
-          margin: 0 0 8px 0;
-          color: #e5e5e5;
-          font-size: 1.5rem;
-        }
-
-        .modal-header p {
-          margin: 0;
-          color: #ddd;
-          font-size: 0.95rem;
-        }
-
-        /* main content container */
-        .modal-content {
-          flex: 1;
-          display: grid;
-          grid-template-columns: 1fr;
+          flex-direction: row;
+          align-items: flex-start;
+          gap: 22px;
           min-height: 0;
-          overflow: scroll;
-        }
-
-        .modal-content.with-manifest {
-          grid-template-columns: 60% 40%; /* Two columns with manifest */
-          gap: 0;
+          width: auto;
+          min-width: 0;
         }
 
         .modal-image-container {
+          flex: 0 0 auto;
           display: flex;
+          align-items: flex-start;
           justify-content: center;
-          align-items: center;
-          padding: 20px;
-          overflow: hidden;
-          grid-column: 1;
+          width: auto;
+          min-width: 0;
         }
 
-        .modal-content.with-manifest .modal-image-container {
-          grid-column: 1;
-          padding-right: 10px;
-        }
-
+        /* Native size where it fits, capped so it never dominates.
+           Pixelated to match the rest of the site's SNES art. */
         .modal-image {
-          width: 300%;
-          max-width: 90vw;
-          height: 300%;
-          max-height: 90vh;
-          object-fit: contain;
-          border-radius: 8px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-          background: black;
+          display: block;
+          max-width: 480px;
+          max-height: 70vh;
+          width: auto;
+          height: auto;
+          image-rendering: auto;
+          border: 3px solid #facc15;
+          border-radius: 4px;
+          background: #000;
         }
 
-        .modal-content.with-manifest .modal-image {
-          max-width: 100%;
+        .modal-text {
+          flex: 1 1 auto;
+          min-width: 260px;
+          width: 320px;
+          max-width: 340px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          /* auto, not scroll: the bar only appears if the blurb is long */
+          overflow-y: auto;
           max-height: 70vh;
         }
 
-        /* optional manifest */
-        .manifest-container {
-          display: flex;
-          flex-direction: column;
-          grid-column: 2;
-          background: rgba(0, 0, 0, 0.3);
-          border-left: 1px solid #666;
-          overflow: overlay;
-        }
-
-        .manifest-header {
-          padding: 15px 20px 10px 20px;
-          border-bottom: 1px solid #666;
-          background: rgba(0, 0, 0, 0.2);
-        }
-
-        .manifest-header h3 {
+        .modal-title {
           margin: 0;
-          color: #e5e5e5;
-          font-size: 1.1rem;
-          text-align: center;
-        }
-
-        .manifest-content {
-          flex: 1;
-          padding: 15px 20px;
-          overflow-y: scroll;
-          overflow-x: scroll;
-          min-height: 0; /* needed for flex shrinking */
-          max-height: 100%; /* locked to parent element */
+          color: #e9d5ff;
+          font-size: 1.2rem;
+          line-height: 1.3;
         }
 
         .manifest-text {
-          color: white;
-          font-family: 'Courier New', monospace;
-          font-size: 0.85rem;
-          line-height: 1.4;
-          margin: 0;
-          padding: 0;
+          width: 100%;
+          min-width: 0;
           max-width: 100%;
-          display: block;
-          box-sizing: border-box;
-        }
-        .manifest-text div {
           margin: 0;
-          padding: 0;
-          word-wrap: break-word;
-          overflow-wrap: break-word;
+          text-align: left;
+          color: #ddd0f0;
+          font-size: 0.8rem;
+          line-height: 1.5;
+          overflow-wrap: anywhere;
+          white-space: pre-wrap;
         }
 
-        .manifest-loading {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: left;
-          height: 100px;
-          color: #ccc;
+        .modal-loading {
+          color: #c4b5fd;
+          font-size: 0.85rem;
         }
 
-        .spinner {
-          width: 24px;
-          height: 24px;
-          border: 2px solid #666;
-          border-top: 2px solid #ae7517;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-          margin-bottom: 10px;
-        }
-
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-
-        .manifest-error {
-          color: #ff9999;
-          font-style: italic;
+        .modal-hint {
+          margin: 0;
           text-align: center;
-          margin: 20px 0;
+          color: #8b7aa8;
+          font-size: 0.8rem;
         }
 
-        .modal-footer {
-          padding: 10px 20px;
-          background: #555555;
-          border-top: 1px solid #666666;
-          text-align: center;
-          color: #666;
-        }
-
-        /* mobile responsive display */
-        @media (max-width: 768px) {
-          .modal-overlay {
-            padding: 10px;
-          }
-          
-          .modal-container {
-            max-width: 98vw;
-            max-height: 98vh;
-          }
-
-          .modal-content.with-manifest {
-            flex-direction: column;
-          }
-
-          .modal-content.with-manifest .modal-image-container {
-            flex: 0 0 50%;
-            padding-right: 20px;
-          }
-
-          .manifest-container {
-            flex: 0 0 50%;
-            border-left: none;
-            border-top: 1px solid #666;
-          }
-          
-          .modal-header {
-            padding: 15px 15px 8px 15px;
-          }
-          
-          .modal-header h2 {
-            font-size: 1.25rem;
-          }
-          
-          .modal-image-container {
-            padding: 15px;
-          }
-          
-          .modal-close-btn {
-            top: 10px;
-            right: 10px;
-            width: 35px;
-            height: 35px;
-          }
-
-          .manifest-text {
-            font-size: 0.75rem;
-            justify-content: left;
-          }
-        }
-
-        /* ensures modal appears above everything */
-        .modal-overlay {
-          backdrop-filter: blur(4px);
-        }
-
-        /* scrollbar for manifest */
-        .manifest-content::-webkit-scrollbar {
+        /* Thin, dark scrollbar for the rare long blurb */
+        .modal-text::-webkit-scrollbar {
           width: 6px;
         }
-
-        .manifest-content::-webkit-scrollbar-track {
-          background: #333;
+        .modal-text::-webkit-scrollbar-track {
+          background: transparent;
         }
-
-        .manifest-content::-webkit-scrollbar-thumb {
-          background: #666;
+        .modal-text::-webkit-scrollbar-thumb {
+          background: #4c1d95;
           border-radius: 3px;
         }
 
-        .manifest-content::-webkit-scrollbar-thumb:hover {
-          background: #888;
+        @media (max-width: 700px) {
+          .modal-body {
+            flex-direction: column;
+            align-items: center;
+          }
+          .modal-image {
+            max-width: 100%;
+            max-height: 40vh;
+          }
+          .modal-text {
+            max-width: 100%;
+            max-height: 30vh;
+          }
         }
       `}</style>
     </div>

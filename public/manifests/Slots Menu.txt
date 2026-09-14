@@ -1,0 +1,7 @@
+Replaces Setzer's Slots reels with a menu selection, removing the dexterity requirement.
+
+This patch changes game balance significantly. If you would like to make Slots more enjoyable, consider the Forgiving Slots patch instead. If you must use this patch, it is recommended you do not use 7-7-7 more than once each boss fight.
+
+Not compatible with Forgiving Slots or Slow Reels.
+
+Credit: 

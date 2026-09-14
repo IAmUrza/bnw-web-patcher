@@ -1,3 +1,0 @@
-Makes Locke a sorceror who can equip Espers and learn new magic from them.
-
-WARNING: ASC is meant to be played with a limited number of magic users. Adding more will change the balance of the game and the experience as a whole.  Use these patches minimally and AT YOUR OWN RISK!

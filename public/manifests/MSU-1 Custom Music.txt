@@ -1,0 +1,3 @@
+Enables MSU-1 support, allowing the SNES soundtrack to be replaced with streamed audio. Requires the matching music pack and an emulator or flash cart with MSU-1 support.
+
+Credit: 

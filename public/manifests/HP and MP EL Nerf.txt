@@ -1,0 +1,3 @@
+Reduces the HP and MP gained from Esper Levels.
+
+Credit: 

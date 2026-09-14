@@ -1,0 +1,3 @@
+Multitap is a peripheral for the SNES that supports up to 4 controllers. The patch replaces the game's built-in 2-controller support with a 1-4 controller scheme. Invite all your friends!
+
+Credit: Sir Newton Fig

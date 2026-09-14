@@ -1,54 +1,51 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Geist, Geist_Mono } from "next/font/google";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+type NavLink = {
+  href: string;
+  label: string;
+  external?: boolean;
+};
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: 'guides', label: 'Guides' },
-  { href: '/discord', label: 'Discord' }
+const navLinks: NavLink[] = [
+  { href: '/', label: 'Web Patcher' },
+  { href: '/guides', label: 'Documentation' },
+  { href: 'https://ngplus.net/mods/brave-new-world/', label: 'Website', external: true },
+  { href: 'https://discord.com/invite/bsuKp5A', label: 'Discord', external: true }
 ];
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
+  // No <html> or <body> here — those belong in pages/_document.tsx.
   return (
-    <html lang="en">
+    <>
       <Head>
-        <title>FF6 ASC Patcher</title>
-        <meta name="description" content="Get FF6 ASC" title="FF6 ASC Patcher" />
-        <link rel="icon" href="https://ff6asc.vercel.app/img/favicon.png" sizes="any" />
+        <title>FF6 BNW Web Patcher</title>
+        <meta name="description" content="Get FF6 BNW" />
       </Head>
 
-      <body>
-          <ul className="nav d-flex justify-content-center">
-            {navLinks.map(({ href, label }) => (
-              <Link key={href} href={href} passHref>
-                <li
-                  className={`nav-item  ${
-                    router.pathname === href ? 'nav-l1nk active' : 'nav-l1nk'
-                  }`}
-                >
-                  {label}
-                </li>
-              </Link>
-            ))}
-          </ul>
-          <main>{children}</main>
-        </body>
-      </html>
+      <nav className="top-nav">
+        {navLinks.map(({ href, label, external }) =>
+          external ? (
+            <a key={href} href={href} target="_blank" rel="noopener noreferrer">
+              {label}
+            </a>
+          ) : (
+            <Link
+              key={href}
+              href={href}
+              className={router.pathname === href ? 'active' : undefined}
+            >
+              {label}
+            </Link>
+          )
+        )}
+      </nav>
+
+      <main>{children}</main>
+    </>
   );
 };
 

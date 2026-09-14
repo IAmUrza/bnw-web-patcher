@@ -1,10 +1,10 @@
 const Attribution = () => {
     return(
     <>
-    <div className='mt-5 mb-1 block-inline'>
-        <p>FF6 "A Soldier's Contingency": a romhack of "Final Fantasy VI" by Lightning Hunter.</p>
+    <div className='attribution mt-5 mb-1 block-inline'>
+        <p>Brave New World: a Final Fantasy VI Romhack by Synchysi and BTB.</p>
         <p>Not endorsed by Square Enix, and not affiliated with them in any way. 
-        Site built by <a href="https://jacks.media" rel="noopener noreferrer" target="_blank" className="special">Jacks.Media</a>, 2025.</p>
+        Site built by <a href="https://jacks.media" rel="noopener noreferrer" target="_blank" className="special">Jacks.Media</a>, 2026.</p>
     </div>
 
     <style jsx>{`

@@ -1,8 +1,0 @@
-I only recommend insane difficulty for someone that has completed the default difficulty of ASC first and desires a bigger challenge.  Or, if you have gotten through much of the game and feel it is too easy for you, then you can always switch to this difficulty (remember, you can change difficulties at any time and your savegame will continue working).
-\n
-This difficulty level does several things to make the game harder:\n
-
-1) Monsters have slightly higher stats (although nothing over the top).\n
-2) Monsters are a bit faster and more aggressive.\n
-3) Monsters have modified AI scripts that allow them to use stronger abilities slightly more often.\n
-4) Monster AI scaling will happen at lower levels when compared to the other difficulty levels.

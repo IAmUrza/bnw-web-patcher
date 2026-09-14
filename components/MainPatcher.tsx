@@ -19,10 +19,97 @@ type Patch = {
 // Interface for ROM state mgmt
 type RomState = {
   originalFile: File;
-  processedRom: Uint8Array; // headerless, expanded ROM ready for patching
+  processedRom: Uint8Array; // headerless ROM, NOT yet expanded
   matchingPatch: Patch;
   originalCRC32: string; // previously discrete state
 };
+
+// Patch names (matching the .ips filename, minus extension) that need the
+// larger ROM. Anything not listed here runs at the 3MB default.
+const EXPANDING_PATCH_NAMES: string[] = [
+  'The Diary',
+  'Advanced Diary',
+];
+
+
+// Mutually exclusive tags. Selecting a patch clears any other selected
+// patch that shares a tag — across categories, not just within one.
+// "Slots Menu" sits in both SLOTS groups, so it blocks the other two
+// while those two can still be used together.
+const EXCLUSIVE_GROUPS: Record<string, string[]> = {
+  "The Diary": ["DIARY"],
+  "Advanced Diary": ["DIARY"],
+  "Vanilla New World": ["DIALOGUE"],
+  "Italian": ["DIALOGUE"],
+  "Spanish": ["DIALOGUE"],
+  "Slots Menu": ["SLOTS A", "SLOTS B"],
+  "Forgiving Slots": ["SLOTS A"],
+  "Slow Reels": ["SLOTS B"],
+  "Chrono Trigger": ["WALLPAPER"],
+  "T-Edition (1)": ["WALLPAPER"],
+  "T-Edition (2)": ["WALLPAPER"],
+  "RotDS": ["WALLPAPER"],
+  "Dev Compilation": ["WALLPAPER"],
+  "Legacy": ["PORTRAITS"],
+  "Laurel Classic": ["PORTRAITS"],
+  "Laurel Modern": ["PORTRAITS"],
+  "AbyssWolf": ["PORTRAITS"],
+  "Mothra": ["PORTRAITS"],
+  "AceroSteel (Side)": ["PORTRAITS"],
+  "AceroSteel (Front)": ["PORTRAITS"],
+  "Final Fantasy Tactics": ["PORTRAITS"],
+  "T-Edition": ["SPRITES"],
+  "Side-B": ["SPRITES"],
+  "Dryad Terra": ["SPRITES"],
+  "Behold Pants!": ["SPRITES"],
+  "Comic Sans Menu": ["MENU"],
+  "Dragon Quest Menu": ["MENU"],
+  "FFT Menu": ["MENU"],
+  "Ghosts 'n Goblins Menu": ["MENU"],
+  "Metroid Menu": ["MENU"],
+  "Shin Megami Tensei Menu": ["MENU"],
+  "Star Ocean Menu": ["MENU"],
+  "Sea of Stars Menu": ["MENU"],
+  "Tales of Phantasia Menu": ["MENU"],
+  "Wild Arms Menu": ["MENU"],
+  "Dragon Quest Font": ["TEXT"],
+  "Final Fantasy 7 Font": ["TEXT"],
+  "FFT Font": ["TEXT"],
+  "A Link to the Past Font": ["TEXT"],
+  "Metroid Font": ["TEXT"],
+  "Super Mario RPG Font": ["TEXT"],
+  "Sea of Stars Font": ["TEXT"],
+  "Wild Arms Font": ["TEXT"],
+  "Yoshi's Island Font": ["TEXT"],
+};
+
+// Tags a patch needs before it can be selected. A tag counts as provided
+// when some selected patch carries it in EXCLUSIVE_GROUPS above, so
+// either Diary satisfies DIARY. Deselecting the Diary drops these.
+const PATCH_REQUIRES: Record<string, string[]> = {
+  "Comic Sans Menu": ["DIARY"],
+  "Dragon Quest Menu": ["DIARY"],
+  "FFT Menu": ["DIARY"],
+  "Ghosts 'n Goblins Menu": ["DIARY"],
+  "Metroid Menu": ["DIARY"],
+  "Shin Megami Tensei Menu": ["DIARY"],
+  "Star Ocean Menu": ["DIARY"],
+  "Sea of Stars Menu": ["DIARY"],
+  "Tales of Phantasia Menu": ["DIARY"],
+  "Wild Arms Menu": ["DIARY"],
+  "Dragon Quest Font": ["DIARY"],
+  "Final Fantasy 7 Font": ["DIARY"],
+  "FFT Font": ["DIARY"],
+  "A Link to the Past Font": ["DIARY"],
+  "Metroid Font": ["DIARY"],
+  "Super Mario RPG Font": ["DIARY"],
+  "Sea of Stars Font": ["DIARY"],
+  "Wild Arms Font": ["DIARY"],
+  "Yoshi's Island Font": ["DIARY"],
+};
+
+const BASE_ROM_MB = 3;
+const EXPANDED_ROM_MB = 4;
 
 export default function MainPatcher() {
   const [patches, setPatches] = useState<Patch[]>([]);
@@ -36,71 +123,195 @@ export default function MainPatcher() {
   const optionalPatchesConfig = useMemo(() => ({
     categories : [
       {
-        id: 'graphics',
-        title: 'Graphics',
-        description: 'Changes hero sprites & portraits',
+        id: 'expansion',
+        // Display order. Rearrange these lines to reorder the boxes.
+        order: [
+          "The Diary",
+          "Advanced Diary"
+        ],
+        title: 'Diary Expansion',
+        description: 'Adds the in-game Diary. This will expand the ROM size to 4MB and will enable optional fonts.',
         allowMultiple: false,
-        zipFile: 'Graphics.zip',
-        defaultChoice: 'ASC A Moogles',
-        hasManifest: false,
-        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
-        // filePattern: /Style/i // can be used filter a multi-catergory archive
-      },
-      {
-        id: 'difficulty',
-        title: 'Difficulty',
-        description: 'Mild and Insane vs Normal',
-        allowMultiple: false,
-        zipFile: 'Difficulty.zip',
-        defaultChoice: 'ASC Difficulty NORMAL',
-        hasManifest: true,
-        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
-      },
-      {
-        id: 'battle-system',
-        title: 'Active Mode Battle',
-        description: 'RoSoDude\'s Comprehensive ATB Enhancement',
-        allowMultiple: false,
-        zipFile: 'ATB-Comprehensive.zip',
-        defaultChoice: 'FF6 Vanilla ATB',
-        hasManifest: true,
-        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
-      },
-      {
-        id: 'fonts',
-        title: 'Alt Font',
-        description: 'Serif "Clean Font" with New Element Icons',
-        allowMultiple: false,
-        zipFile: 'Fonts.zip',
+        zipFile: 'Expansion.zip',
         defaultChoice: '',
-        hasManifest: false
+        hasManifest: true,
+        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
+      },
+      {
+        id: 'dialogue',
+        // Display order. Rearrange these lines to reorder the boxes.
+        order: [
+          "Vanilla New World",
+          "Italian",
+          "Spanish",
+          "notext"
+        ],
+        title: 'Dialogue',
+        description: 'Alternate scripts and translations.',
+        // true, not false: the three translations are kept mutually
+        // exclusive by their DIALOGUE tag, while notext carries no tag
+        // and can be combined with any of them.
+        allowMultiple: true,
+        zipFile: 'Dialogue.zip',
+        defaultChoice: '',
+        hasManifest: true,
+        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
+      },
+      {
+        id: 'accessibility',
+        // Display order. Rearrange these lines to reorder the boxes.
+        order: [
+          "Blitz Menu",
+          "Bushido Menu",
+          "Forgiving Slots",
+          "Slow Reels",
+          "Slots Menu",
+          "Slow Scrolling BG"
+        ],
+        title: 'Accessibility',
+        description: 'Options to ease gameplay elements. In some cases, multiple options can be selected.',
+        allowMultiple: true,
+        zipFile: 'Accessibility.zip',
+        defaultChoice: '',
+        hasManifest: true,
+        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
+      },
+      {
+        id: 'gameplay',
+        // Display order. Rearrange these lines to reorder the boxes.
+        order: [
+          "Multitap Support",
+          "Party Randomizer",
+          "Elemental Nerf",
+          "HP and MP EL Nerf",
+          "Inventory Cap 20",
+          "Level Cap 30 and 20",
+          "2x Speed Enemies",
+        ],
+        title: 'Gameplay',
+        description: 'Tweaks to gameplay mechanics and features. Multiple options can be selected.',
+        allowMultiple: true,
+        zipFile: 'Gameplay.zip',
+        defaultChoice: '',
+        hasManifest: true,
+        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
+      },
+      {
+        id: 'wallpapers',
+        // Display order. Rearrange these lines to reorder the boxes.
+        order: [
+          "Chrono Trigger",
+          "T-Edition (1)",
+          "T-Edition (2)",
+          "RotDS",
+          "Dev Compilation"
+        ],
+        title: 'Wallpapers',
+        description: 'Alternative text box backgrounds.',
+        allowMultiple: false,
+        zipFile: 'Wallpapers.zip',
+        defaultChoice: '',
+        hasManifest: true,
+        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
+      },
+      {
+        id: 'portraits',
+        // Display order. Rearrange these lines to reorder the boxes.
+        order: [
+          "Legacy",
+          "Laurel Classic",
+          "Laurel Modern",
+          "AbyssWolf",
+          "Mothra",
+          "AceroSteel (Front)",
+          "AceroSteel (Side)",
+          "Final Fantasy Tactics"
+        ],
+        title: 'Character Portraits',
+        description: 'Alternative character portraits, as seen in the main menu.',
+        allowMultiple: false,
+        zipFile: 'Character Portraits.zip',
+        defaultChoice: '',
+        hasManifest: true,
+        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
+      },
+      {
+        id: 'sprites',
+        // Display order. Rearrange these lines to reorder the boxes.
+        order: [
+          "T-Edition",
+          "Side-B",
+          "Dryad Terra",
+          "Behold Pants!",
+          "Vanilla Zombies",
+          "Alternative Dadaluma",
+          "Alternative Dragons",
+          "International Signs",
+          "FFT Chocobos"
+        ],
+        title: 'Sprites & Graphics',
+        description: 'Alternative character sprites and graphical swaps. In some cases, multiple options can be selected.',
+        allowMultiple: true,
+        zipFile: 'Character Sprites and Graphics.zip',
+        defaultChoice: '',
+        hasManifest: true,
+        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
+      },
+      {
+        id: 'menu-fonts',
+        // Display order. Rearrange these lines to reorder the boxes.
+        order: [
+          "Comic Sans Menu",
+          "Dragon Quest Menu",
+          "FFT Menu",
+          "Ghosts 'n Goblins Menu",
+          "Metroid Menu",
+          "Sea of Stars Menu",
+          "Shin Megami Tensei Menu",
+          "Star Ocean Menu",
+          "Tales of Phantasia Menu",
+          "Wild Arms Menu"
+        ],
+        title: 'Menu Font',
+        description: 'These alternative fonts require the Diary expansion.',
+        allowMultiple: false,
+        zipFile: 'Menu Fonts - Requires Diary Expansion.zip',
+        defaultChoice: '',
+        hasManifest: true,
+        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
+      },
+      {
+        id: 'dialogue-fonts',
+        // Display order. Rearrange these lines to reorder the boxes.
+        order: [
+          "A Link to the Past Font",
+          "Dragon Quest Font",
+          "FFT Font",
+          "Final Fantasy 7 Font",
+          "Metroid Font",
+          "Sea of Stars Font",
+          "Super Mario RPG Font",
+          "Wild Arms Font",
+          "Yoshi's Island Font"
+        ],
+        title: 'Dialogue Font',
+        description: 'These alternative fonts require the Diary expansion.',
+        allowMultiple: false,
+        zipFile: 'Dialogue Fonts - Requires Diary Expansion.zip',
+        defaultChoice: '',
+        hasManifest: true,
+        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
       },
       {
         id: 'music',
-        title: 'Music Options',
-        description: 'Customize Certain Songs (Can Choose Multiple)',
-        allowMultiple: true,
-        zipFile: 'Music-Options.zip',
-        defaultChoice: '',
-        hasManifest: true,
-        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
-      },
-      {
-        id: 'other',
-        title: 'Other Patches',
-        description: 'Mechanics & Items Options (Can Choose Multiple)',
-        allowMultiple: true,
-        zipFile: 'Other-Patches.zip',
-        defaultChoice: '',
-        hasManifest: true,
-        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
-      },
-      {
-        id: 'magic',
-        title: 'More Magic',
-        description: 'Give Additional Heroes Magic (Use Sparingly to Avoid a Nerfed Game)',
-        allowMultiple: true,
-        zipFile: 'More-Magic.zip',
+        // Display order. Rearrange these lines to reorder the boxes.
+        order: [
+          "MSU-1 Custom Music"
+        ],
+        title: 'Music',
+        description: 'MSU-1 custom soundtrack support.',
+        allowMultiple: false,
+        zipFile: 'Music.zip',
         defaultChoice: '',
         hasManifest: true,
         manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
@@ -116,7 +327,7 @@ export default function MainPatcher() {
   } = useOptionalPatches(optionalPatchesConfig);
 
   // name of the core romhack patches' zip
-  const corePatches = '/FF6ASC.zip'
+  const corePatches = '/FF6BNW.zip'
 
   useEffect(() => {
     // Loads main patches
@@ -204,32 +415,27 @@ export default function MainPatcher() {
       // Finds matching main patch by CRC32
       const matchingPatch = patches.find(patch => patch.name === romCRC32);
       if (!matchingPatch) {
-        throw new Error(`No matching patch found for ROM with CRC32: ${romCRC32}`);
+        throw new Error(
+          `You need an unmodified Final Fantasy III (US) v1.0 or v1.1 ROM.`
+        );
       }
       console.log(`Found matching patch: ${matchingPatch.originalName}`);
 
-      // Expands uploaded rom to correct size for romhack
-      // value in MB below: 6MB for FF6ASC ; 2MB for FF4UP
-      const finalSize = 6;
-      const expandedRom = headerlessRom.length < finalSize * 1024 * 1024
-        ? (() => {
-            const newRom = new Uint8Array(finalSize * 1024 * 1024);
-            newRom.set(headerlessRom);
-            return newRom;
-          })()
-        : headerlessRom;
-
-      // Stores ROM state; allows for optional patches to be added
+      // NOTE: expansion happens in generatePatchedRom, not here — the
+      // target size depends on which optional patches are selected, and
+      // nothing is selected yet at upload time.
       setRomState({
         originalFile: romFile,
-        processedRom: expandedRom,
+        processedRom: headerlessRom,
         matchingPatch: matchingPatch,
         originalCRC32: romCRC32
       });
 
       console.log('ROM validated and ready for patching');
     } catch (err: any) {
-      console.error('Error during ROM validation:', err);
+      // warn, not error: a wrong ROM is normal user input, and Next's dev
+      // overlay opens on console.error
+      console.warn('ROM validation failed:', err);
       setError(err.message || 'An unknown error occurred.');
     } finally {
       setIsPatching(false);
@@ -242,13 +448,28 @@ export default function MainPatcher() {
       throw new Error('No ROM loaded');
     }
     console.log('Generating patched ROM...');
-    // Starts with the processed ROM...
-    let patchedRom = new Uint8Array(romState.processedRom.buffer.slice(0)); // snaps the Type into conformity! What madness!
+
+    // Applies optional patches (in order of selection)
+    const selectedOptionals = getSelectedPatches(selectedOptionalPatches);
+
+    // 3MB unless a selected patch needs the larger ROM, then 4MB.
+    const needsExpansion = selectedOptionals.some(p =>
+      EXPANDING_PATCH_NAMES.includes(p.name)
+    );
+    const targetMB = needsExpansion ? EXPANDED_ROM_MB : BASE_ROM_MB;
+    const targetBytes = targetMB * 1024 * 1024;
+    console.log(`Target ROM size: ${targetMB}MB (expansion ${needsExpansion ? 'required' : 'not required'})`);
+
+    let patchedRom = new Uint8Array(romState.processedRom);
+    if (patchedRom.length < targetBytes) {
+      const resized = new Uint8Array(targetBytes);
+      resized.set(patchedRom);
+      patchedRom = resized;
+    }
+
     // Applies main patch
     patchedRom = applyIPS(patchedRom, romState.matchingPatch.data as Uint8Array);
     console.log(`Applied main patch: ${romState.matchingPatch.originalName}`);
-    // Applies optional patches (in order of selection)
-    const selectedOptionals = getSelectedPatches(selectedOptionalPatches);
     for (const optionalPatch of selectedOptionals) {
       console.log(`Applying optional patch: ${optionalPatch.name}`);
       patchedRom = applyIPS(patchedRom, optionalPatch.data);
@@ -264,28 +485,33 @@ export default function MainPatcher() {
   
   return (
   <>
-    <div className="two-column-layout">
-      <div className='d-flex justify-content-center align-items-center h-100'>
-        <PlusTitle />
-        <p className="text-center mb-2">
-          Upload your FFIII or FFVI(J) ROM file to create a copy of FF6 ASC.<br/>
-          Choose alternate graphics, difficulty, & a different font if you wish!
-        </p>
-        <DownloadRomButton
-          onGenerateRom={generatePatchedRom} // Now uses generator function
-          filename={`FF6 ASC${selectedOptionalPatches.length > 0 ? ' Custom' : ''}.sfc`}
-          disabled={!hasValidRom || isPatching}
-        />
-      </div>
+    {/* Centred hero: title screenshot + intro copy */}
+    <div className="patcher-hero">
+      <PlusTitle />
+      <p className="text-center mb-2">
+        Upload your FFIII ROM file to create a copy of FF6: BNW.<br/>
+        Customize your experience with additional options below.
+      </p>
+    </div>
 
+    {/* Upload on the left, download on the right */}
+    <div className="two-column-layout">
       <div className='d-flex justify-content-center align-items-center h-100'>
         {loadingPatches ? (
           <p>Loading main patches...</p>
         ) : isReady ? (
-          <RomVerifier onMatch={handleMatch} />
+          <RomVerifier onMatch={handleMatch} errorMessage={error} />
         ) : (
           <p className="text-danger">No patches could be loaded. Please refresh the page.</p>
         )}
+      </div>
+
+      <div className='d-flex justify-content-center align-items-center h-100'>
+        <DownloadRomButton
+          onGenerateRom={generatePatchedRom} // Now uses generator function
+          filename={`FF6_BNW_v3.0${selectedOptionalPatches.length > 0 ? '_Custom' : ''}.sfc`}
+          disabled={!hasValidRom || isPatching}
+        />
       </div>
     </div>
 {/* Optional Patches Panel */}
@@ -296,14 +522,25 @@ export default function MainPatcher() {
           selectedPatches={selectedOptionalPatches}
           onSelectionChange={setSelectedOptionalPatches}
           isDisabled={isPatching || !hasValidRom}
+          exclusiveGroups={EXCLUSIVE_GROUPS}
+          requires={PATCH_REQUIRES}
+          lockedPatchNames={[
+            "Advanced Diary",
+            "notext",
+            "Party Randomizer",
+            "Elemental Nerf",
+            "HP and MP EL Nerf",
+            "Inventory Cap 20",
+            "Level Cap 30 and 20",
+            "2x Speed Enemies",
+          ]}
         />
       )}
       {/* Loading state for optional patches */}
       {loadingOptional && (
         <p className="text-gray-400 text-sm">Loading optional patches...</p>
       )}
-      {/* Errors */}
-      {error && <p className="text-red-500 font-medium">{error}</p>}
+      {/* ROM errors are shown inside the drop box instead */}
       {optionalError && <p className="text-yellow-500 font-medium">Optional patches: {optionalError}</p>}
       
       {/* ROM Information */}

@@ -2,6 +2,7 @@
 // code co-authored by Claude Sonnet 4
 import React, { useState } from 'react';
 import ImagePreviewModal from './ImagePreviewModal';
+import { usePasswordUnlock, PasswordForm } from './PasswordGate';
 
 export interface OptionalPatch {
   id: string;
@@ -29,17 +30,27 @@ interface CustomOptionsPanelProps {
   onSelectionChange: (selectedPatchIds: string[]) => void;
   onPreviewImage?: (imageSrc: string, title: string, description: string) => void;
   isDisabled?: boolean;
+  lockedPatchNames?: string[]; // patch.name values that need the password
+  // patch name -> exclusive group tags. Selecting one clears any other
+  // selected patch sharing a tag, across categories.
+  exclusiveGroups?: Record<string, string[]>;
+  // patch name -> tags it needs. A tag is satisfied when some selected
+  // patch carries that tag in exclusiveGroups.
+  requires?: Record<string, string[]>;
 }
 
 const CustomOptionsPanel: React.FC<CustomOptionsPanelProps> = ({
   categories,
   selectedPatches,
   onSelectionChange,
-  onPreviewImage,
-  isDisabled = false
+  isDisabled = false,
+  lockedPatchNames = [],
+  exclusiveGroups = {},
+  requires = {}
 }) => {
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [promptingFor, setPromptingFor] = useState<string | null>(null);
   const [modalProps, setModalProps] = useState<{
     src: string;
     title: string;
@@ -47,61 +58,86 @@ const CustomOptionsPanel: React.FC<CustomOptionsPanelProps> = ({
     manifestPath: string;
   } | null>(null);
 
+  const expectedHash = process.env.NEXT_PUBLIC_CUSTOM_OPTIONS_HASH ?? '';
+  const { unlocked, attempt } = usePasswordUnlock(expectedHash);
+
   const handlePreviewClick = (patch: OptionalPatch) => {
-  // if (patch.previewImage) {
-  // Creates manifest path for fonts category
-  const manifestPath = ( patch.category === 'difficulty' ||
-                  patch.category === 'battle-system' ||
-                  patch.category === 'fonts' ||
-                  patch.category === 'music' ||
-                  patch.category === 'other' ||
-                  patch.category === 'magic' )
-    ? `/manifests/${patch.name}.txt`  // Pattern for patch.id matches manifest title
-    : ``;
-  console.log(`Generated ${manifestPath} for manifest text file name.`)
-  if (patch.previewImage) {
+    // Always look for a manifest. The modal hides the text panel by itself
+    // when the fetch 404s, so there's no list of category ids to keep in
+    // sync here — the old one still named categories that no longer exist.
+    const manifestPath = `/manifests/${patch.name}.txt`;
+
     setModalProps({
-      src: patch.previewImage,
+      src: patch.previewImage ?? '/placeholder-image.png',
       title: patch.name,
       description: patch.description,
       manifestPath: manifestPath
     });
     setModalOpen(true);
-  } else {
-    setModalProps({
-      src: '/placeholder-image.png',
-      title: patch.name,
-      description: patch.description,
-      manifestPath: manifestPath
-    });
-    setModalOpen(true);
-  }
-};
+  };
+
+  const allPatches = categories.flatMap(cat => cat.patches);
+  const nameOf = (id: string) => allPatches.find(p => p.id === id)?.name ?? '';
+
+  // Tags currently provided by a selection.
+  const tagsProvidedBy = (ids: string[]) => {
+    const tags = new Set<string>();
+    ids.forEach(id => (exclusiveGroups[nameOf(id)] ?? []).forEach(t => tags.add(t)));
+    return tags;
+  };
+
+  // Drop any selected patch whose required tags are no longer present.
+  // Loops because removing one dependent can invalidate another.
+  const pruneUnsatisfied = (ids: string[]) => {
+    let current = ids;
+    for (;;) {
+      const provided = tagsProvidedBy(current);
+      const kept = current.filter(id => {
+        const needed = requires[nameOf(id)] ?? [];
+        return needed.every(tag => provided.has(tag));
+      });
+      if (kept.length === current.length) return kept;
+      current = kept;
+    }
+  };
+
+  const isSatisfied = (patch: OptionalPatch) => {
+    const needed = requires[patch.name] ?? [];
+    if (needed.length === 0) return true;
+    const provided = tagsProvidedBy(selectedPatches);
+    return needed.every(tag => provided.has(tag));
+  };
 
   const handlePatchToggle = (patchId: string, categoryId: string) => {
     const category = categories.find(cat => cat.id === categoryId);
     if (!category) return;
 
+    const patchName = nameOf(patchId);
+    const alreadyOn = selectedPatches.includes(patchId);
     let newSelection = [...selectedPatches];
 
-    if (!category.allowMultiple) {
-      // Radio button behavior - only one patch per category
-      const categoryPatchIds = category.patches.map(p => p.id);
-      newSelection = newSelection.filter(id => !categoryPatchIds.includes(id));
-      
-      if (!selectedPatches.includes(patchId)) {
-        newSelection.push(patchId);
-      }
+    if (alreadyOn) {
+      newSelection = newSelection.filter(id => id !== patchId);
     } else {
-      // Checkbox behavior - multiple patches allowed
-      if (selectedPatches.includes(patchId)) {
-        newSelection = newSelection.filter(id => id !== patchId);
-      } else {
-        newSelection.push(patchId);
+      if (!category.allowMultiple) {
+        // Radio behaviour within the category
+        const categoryPatchIds = category.patches.map(p => p.id);
+        newSelection = newSelection.filter(id => !categoryPatchIds.includes(id));
       }
+
+      // Clear anything sharing an exclusive tag with this patch
+      const myTags = exclusiveGroups[patchName] ?? [];
+      if (myTags.length) {
+        newSelection = newSelection.filter(id => {
+          const theirTags = exclusiveGroups[nameOf(id)] ?? [];
+          return !theirTags.some(t => myTags.includes(t));
+        });
+      }
+
+      newSelection.push(patchId);
     }
 
-    onSelectionChange(newSelection);
+    onSelectionChange(pruneUnsatisfied(newSelection));
   };
 
   const isPatchSelected = (patchId: string) => selectedPatches.includes(patchId);
@@ -111,117 +147,126 @@ const CustomOptionsPanel: React.FC<CustomOptionsPanelProps> = ({
     return null;
   }
 
-  // string of defaultChoice debugging
-  React.useEffect(() => {
-    console.log('=== DEBUG: Categories and Default Choices ===');
-    categories.forEach(category => {
-      console.log(`Category: ${category.id} (${category.title})`);
-      console.log(`  defaultChoice: "${category.defaultChoice}"`);
-      console.log(`  patches in this category:`);
-      category.patches.forEach(patch => {
-        console.log(`    patch.id: "${patch.id}"`);
-        console.log(`    patch.name: "${patch.name}"`);
-        console.log(`    matches defaultChoice: ${category.defaultChoice === patch.id}`);
-      });
-      console.log('---');
-    });
-  }, [categories]);
-
-
   return (
-    <div className="w-full max-w-2xl ">
+    <div className="w-full max-w-2xl">
 
-        <div className="flex items-center justify-between p-2">
-          <h3>Number of Custom Options</h3>
-          <div className="flex items-center space-x-2">
-            {getSelectedCount() > 0 && (
-              <span className="px-2 py-1 text-sm">
-                {getSelectedCount()} selected
-              </span>
-            )}
-          </div>
-        </div>
- 
+      <div className="options-toggle">
+        <button
+          type="button"
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="options-toggle-btn"
+        >
+          {isExpanded ? 'Hide Optional Patches' : 'Click for Optional Patches'}
+        </button>
+        {/* Always rendered, so the layout doesn't shift on first selection */}
+        <span className="options-count">
+          {getSelectedCount() > 0 ? `${getSelectedCount()} selected` : 'None selected'}
+        </span>
+      </div>
+
       {/* Options Panel */}
       {isExpanded && (
         <div className="">
           <div className="p-3 m-2">
             {categories.map((category) => (
-              <div key={category.id} className="border-b border-gray-700 last:border-b-0 pb-4 last:pb-0">
-                <h3 className="text-xl font-semibold text-white mb-2">
-                  {category.title}
+              <div key={category.id} className="category-block">
+                <h3 className="category-title">
+                  <span>{category.title}</span>
                 </h3>
-                
+
                 {category.description && (
-                  <p className="text-gray-300 text-sm mb-3">
+                  <p className="category-description">
                     {category.description}
                   </p>
                 )}
 
-                <div className="d-flex flex-row flex-wrap justify-content-evenly">
-                  
+                <div className="option-grid">
+
                   {category.patches.map((patch) => {
                     const isDefaultPatch = category.defaultChoice === patch.name;
                     const isSelected = isPatchSelected(patch.id);
-                    // exquisitiely conditional CSS madness
+                    const isLockedPatch = lockedPatchNames.includes(patch.name);
+                    const isLocked = isLockedPatch && !unlocked;
+                    const depMet = isSatisfied(patch);
+                    const isPrompting = promptingFor === patch.id;
                     const classes = [
                       'p-2', 'd-flex', 'flex-column', 'option-box',
                       isSelected ? 'chosen-box' : 'unchosen-box',
                       isDefaultPatch ? 'default-option' : '',
+                      isLocked ? 'locked-box' : '',
+                      !depMet ? 'dep-locked' : '',
                       isDisabled ? 'cursor-not-allowed opacity-50' : ''
                     ].filter(Boolean).join(' ');
 
                     return (
-                      <label 
+                      <div
                         key={patch.id}
                         className={classes}
                       >
-                        <input
-                          type={category.allowMultiple ? "checkbox" : "radio"}
-                          name={category.allowMultiple ? undefined : `category-${category.id}`}
-                          checked={isPatchSelected(patch.id)}
-                          onChange={() => handlePatchToggle(patch.id, category.id)}
-                          disabled={isDisabled}
-                          className={category.allowMultiple ? "hidden-checkbox" : "hidden-radio"}
-                        />
-                        
-                        <div className="">
+                        <div className="option-head">
                           <div className="font-medium text-white">
                             {patch.name}
                           </div>
-                          {/* <div className="text-sm text-gray-300 mt-1">
-                            {patch.description}
-
-                            // this may end up not getting used
-                          
-                          </div> */}
+                          {/* Always rendered for locked patches, so the box
+                              keeps its height once unlocked. */}
+                          {isLockedPatch && (
+                            <div className={unlocked ? 'locked-note unlocked-note' : 'locked-note'}>
+                              {unlocked ? 'Unlocked!' : 'Beat BNW to Unlock'}
+                            </div>
+                          )}
                         </div>
-                        {/* UX Select button, with duplicate actions from the hidden <input> above*/}
-                        <button
-                          onClick={(e) => {
-                              e.preventDefault();
-                              handlePatchToggle(patch.id, category.id);
-                            }}
-                          disabled={isDisabled}
-                          className="mx-auto px-5 py-2 text-white nicer-btn"
-                        >
-                          Select
-                        </button>
-                        {/* Preview button, loaded from public/previews */}
-                        {patch.previewImage && (
+
+                        {isLocked ? (
+                          isPrompting ? (
+                            <PasswordForm
+                              onAttempt={async (candidate) => {
+                                const ok = await attempt(candidate);
+                                if (ok) {
+                                  // Close the form and select the patch the
+                                  // user was trying to unlock.
+                                  setPromptingFor(null);
+                                  handlePatchToggle(patch.id, category.id);
+                                }
+                                return ok;
+                              }}
+                              onCancel={() => setPromptingFor(null)}
+                            />
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => setPromptingFor(patch.id)}
+                              disabled={isDisabled}
+                              className="option-btn"
+                            >
+                              Password
+                            </button>
+                          )
+                        ) : (
                           <button
                             type="button"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              handlePreviewClick(patch);
-                            }}
-                            disabled={isDisabled}
-                            className="mx-auto px-2 py-2 text-white nicer-btn"
+                            onClick={() => handlePatchToggle(patch.id, category.id)}
+                            disabled={isDisabled || !depMet}
+                            aria-pressed={isSelected}
+                            className="option-btn"
                           >
-                            Info
+                            {isSelected ? 'Selected' : 'Select'}
                           </button>
                         )}
-                      </label>
+
+                        {/* Preview button, loaded from public/previews.
+                            Hidden while the password form is open so the
+                            box doesn't grow taller than its neighbours. */}
+                        {patch.previewImage && !isPrompting && (
+                          <button
+                            type="button"
+                            onClick={() => handlePreviewClick(patch)}
+                            disabled={isDisabled}
+                            className="option-btn"
+                          >
+                            Information
+                          </button>
+                        )}
+                      </div>
                     );
                   })}
                 </div>
@@ -246,20 +291,16 @@ const CustomOptionsPanel: React.FC<CustomOptionsPanelProps> = ({
             </div>
           )}
 
-          {/* Image Preview Modal
-          moot until preview button is enabled again, line 165
-          */}
-            {modalOpen && modalProps && (
-              <ImagePreviewModal
-                isOpen={modalOpen}
-                onClose={() => setModalOpen(false)}
-                src={modalProps.src}
-                imageAlt={modalProps.title}
-                title={modalProps.title}
-                manifestPath={modalProps.manifestPath}
-                // description={modalProps.description} unused currently
-              />
-            )}
+          {modalOpen && modalProps && (
+            <ImagePreviewModal
+              isOpen={modalOpen}
+              onClose={() => setModalOpen(false)}
+              src={modalProps.src}
+              imageAlt={modalProps.title}
+              title={modalProps.title}
+              manifestPath={modalProps.manifestPath}
+            />
+          )}
 
         </div>
       )}

@@ -1,0 +1,5 @@
+Changes the Brave New World script to be more... vanilla. Also makes some adjustments to various item names and enemy attacks.
+
+This optional patch does not affect gameplay.
+
+Credit: Deschain

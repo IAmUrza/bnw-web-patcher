@@ -1,3 +1,0 @@
-This patch will remove the Blitz and Bushio menus, and revert them back to default behavior.
-This of course means you will need to go back to key inputs for Sabin's Blitz, and charge up the bar for Cyan's Bushido
-(although his bar charging is much faster compared to vanilla).

@@ -1,0 +1,3 @@
+Replaces text-based signage with pictograms, so signs can be read without knowing English.
+
+Credit: 
