@@ -1,3 +1,0 @@
-The vanilla character sprite set, but Terra has an alternative palette when morphed.
-
-Not compatible with other optional sprite patches.
