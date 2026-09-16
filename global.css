@@ -418,6 +418,100 @@ button {
 /* Grid, not flex: fixed 215px columns mean a box that wraps to a second
    row sits exactly under the first box of the row above. auto-fit drops
    the unused columns so the filled ones stay centred as a block. */
+/* Links revealed beneath a category when a patch that has them is
+   selected (currently the MSU-1 soundtrack packs). */
+.patch-links {
+  width: 100%;
+  min-width: 0;
+  align-items: flex-start;
+  margin-top: 1rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid #4c1d95;
+  border-radius: 8px;
+  background-color: rgba(15, 6, 25, 0.6);
+}
+
+/* 1rem = 20px, the site base. ChicagoFLF renders cleanly at 20px and
+   16px but looks off at 18px, so avoid 0.9rem here. */
+.patch-links-howto {
+  width: 100%;
+  max-width: 100%;
+  color: #e9d5ff;
+  font-size: 1rem;
+  line-height: 1.5;
+  white-space: pre-line;
+  margin-bottom: 0.9rem;
+}
+
+.patch-links-intro,
+.patch-links-note {
+  width: 100%;
+  max-width: 100%;
+  color: #fca5a5;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.patch-links-intro {
+  margin-bottom: 0.6rem;
+}
+
+.patch-links-list {
+  width: 100%;
+  min-width: 0;
+  list-style: none;
+  padding: 0;
+}
+
+.patch-links-list li {
+  padding: 0.15rem 0;
+  font-size: 0.8rem;
+}
+
+.patch-links-list a {
+  color: #e9d5ff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.patch-links-list a:hover {
+  color: #fff;
+}
+
+.patch-links-yt {
+  margin-left: 0.6rem;
+  font-size: 0.7rem;
+  color: #c4b5fd !important;
+}
+
+.patch-links-list li a:first-child {
+  font-weight: bold;
+}
+
+.patch-links-note {
+  margin: 0.4rem 0 0.4rem;
+}
+
+/* Screenshot under a category heading, showing either the category
+   default or whichever patch is currently selected. */
+.category-preview {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.category-preview img {
+  display: block;
+  width: 448px;
+  max-width: 90%;
+  height: auto;
+  border: 3px solid #facc15;
+  border-radius: 4px;
+  background: #000;
+}
+
 .option-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, 215px);

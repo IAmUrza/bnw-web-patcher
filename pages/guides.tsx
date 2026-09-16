@@ -1,17 +1,18 @@
 import { NextPage } from 'next';
 import Layout from '@/layout';
-import PrintmeTables from '@/components/PrintmeTables';
 
 const downloads = [
   { href: '/downloads/readme.txt', label: 'readme.txt' },
   { href: '/downloads/printme.pdf', label: 'printme.pdf' },
   { href: '/downloads/PDFme.pdf', label: 'PDFme.pdf' },
+  { href: '/downloads/char_planner.ods', label: 'char_planner.ods' },
   { href: '/downloads/unlockme.rar', label: 'unlockme.rar', note: 'Beat BNW to Unlock' },
 ];
 
 const links = [
   { href: 'https://bnw.pages.dev/', label: 'Online Searchable Printme' },
-  { href: 'https://ngplus.net/', label: 'Character Planner' },
+  { href: 'https://ngplus.net/', label: 'NGPlus' },
+  { href: 'https://www.ff6hacking.com/', label: 'FF6Hacking' },
 ];
 
 const characterGuides = [
@@ -50,11 +51,6 @@ const Guides: NextPage = () => {
               </li>
             ))}
           </ul>
-        </section>
-
-        <section className='docs-section'>
-          <h2 className='docs-heading'><span>Printme Information</span></h2>
-          <PrintmeTables />
         </section>
 
         <section className='docs-section'>

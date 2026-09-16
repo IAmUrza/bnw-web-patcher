@@ -1,4 +1,6 @@
-Randomizes which characters join your party, for a fresh run with an unfamiliar lineup.
+Randomizes the player's party whenever the option to select characters is present. Under ordinary circumstances, the player is able to select only a single party leader.
+
+If no team leader is chosen, then the slot will be empty. This is necessary for recruiting Shadow at Kohlingen or Gau in the World of Ruin.
 
 The New Game Plus of Brave New World.
 

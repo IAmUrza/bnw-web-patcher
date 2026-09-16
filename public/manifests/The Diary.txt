@@ -4,4 +4,4 @@ Includes all Scan behavioral hints, as well as Diary-exclusive boss hints for an
 
 Expands the ROM to 4MB and unlocks the optional font patches.
 
-Credit: Ryo_Hazuki
+Credit: Ryo_Hazuki, Gens

@@ -1,3 +1,7 @@
-Multitap is a peripheral for the SNES that supports up to 4 controllers. The patch replaces the game's built-in 2-controller support with a 1-4 controller scheme. Invite all your friends!
+This patch, named for the SNES peripheral that added support for up to 4 inputs, allows up to 4 players (instead of just 2) to play the game cooperatively.
+
+To access the menu, go to Config > Controller > Multiple, then push the 'A' button.
+
+Invite all your friends!
 
 Credit: Sir Newton Fig

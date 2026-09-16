@@ -2,4 +2,4 @@ An alternate character sprite set.
 
 Not compatible with other optional sprite patches.
 
-Credit: 
+Credit: T-Edition Contributors

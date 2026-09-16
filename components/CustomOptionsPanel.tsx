@@ -15,6 +15,20 @@ export interface OptionalPatch {
   previewImage?: string;
 }
 
+export interface PatchLinkItem {
+  label: string;
+  href: string;
+  yt?: string;       // optional YouTube playlist for the same pack
+}
+
+export interface PatchLinkSection {
+  howTo?: string;
+  intro?: string;
+  items: PatchLinkItem[];
+  noteTitle?: string;
+  noteItems?: PatchLinkItem[];
+}
+
 export interface PatchCategory {
   id: string;
   title: string;
@@ -33,6 +47,10 @@ interface CustomOptionsPanelProps {
   lockedPatchNames?: string[]; // patch.name values that need the password
   // patch name -> exclusive group tags. Selecting one clears any other
   // selected patch sharing a tag, across categories.
+  // patch name -> extra links revealed once that patch is selected
+  patchLinks?: Record<string, PatchLinkSection>;
+  // category id -> { exclusive tag that drives the preview, default image }
+  categoryPreviews?: Record<string, { tag: string; image: string }>;
   exclusiveGroups?: Record<string, string[]>;
   // patch name -> tags it needs. A tag is satisfied when some selected
   // patch carries that tag in exclusiveGroups.
@@ -46,7 +64,9 @@ const CustomOptionsPanel: React.FC<CustomOptionsPanelProps> = ({
   isDisabled = false,
   lockedPatchNames = [],
   exclusiveGroups = {},
-  requires = {}
+  requires = {},
+  patchLinks = {},
+  categoryPreviews = {}
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -180,6 +200,25 @@ const CustomOptionsPanel: React.FC<CustomOptionsPanelProps> = ({
                   </p>
                 )}
 
+                {categoryPreviews[category.id] && (() => {
+                  const { tag, image } = categoryPreviews[category.id];
+                  // Only a patch carrying this category's exclusive tag
+                  // changes the preview; untagged extras don't.
+                  const chosen = category.patches.find(p =>
+                    selectedPatches.includes(p.id) &&
+                    (exclusiveGroups[p.name] ?? []).includes(tag)
+                  );
+                  return (
+                    <div className="category-preview">
+                      <img
+                        src={chosen?.previewImage ?? image}
+                        alt={chosen ? chosen.name : `${category.title} default`}
+                        onError={(e) => { e.currentTarget.src = '/placeholder-image.png'; }}
+                      />
+                    </div>
+                  );
+                })()}
+
                 <div className="option-grid">
 
                   {category.patches.map((patch) => {
@@ -270,6 +309,56 @@ const CustomOptionsPanel: React.FC<CustomOptionsPanelProps> = ({
                     );
                   })}
                 </div>
+
+                {/* Extra links for any selected patch in this category */}
+                {category.patches
+                  .filter(p => selectedPatches.includes(p.id) && patchLinks[p.name])
+                  .map(p => {
+                    const section = patchLinks[p.name];
+                    return (
+                      <div key={`links-${p.id}`} className="patch-links">
+                        {section.howTo && (
+                          <p className="patch-links-howto">{section.howTo}</p>
+                        )}
+                        {section.intro && (
+                          <p className="patch-links-intro">{section.intro}</p>
+                        )}
+                        <ul className="patch-links-list">
+                          {section.items.map(item => (
+                            <li key={item.href}>
+                              <a href={item.href} target="_blank" rel="noopener noreferrer">
+                                {item.label}
+                              </a>
+                              {item.yt && (
+                                <a
+                                  href={item.yt}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="patch-links-yt"
+                                >
+                                  playlist
+                                </a>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                        {section.noteTitle && (
+                          <p className="patch-links-note">{section.noteTitle}</p>
+                        )}
+                        {section.noteItems && (
+                          <ul className="patch-links-list">
+                            {section.noteItems.map(item => (
+                              <li key={item.href}>
+                                <a href={item.href} target="_blank" rel="noopener noreferrer">
+                                  {item.label}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    );
+                  })}
 
                 {category.patches.length === 0 && (
                   <p className="text-gray-400 italic">No options available in this category.</p>

@@ -1,3 +1,3 @@
 Caps each inventory stack at 20 items instead of 99, tightening resource management.
 
-Credit: 
+Credit: Bropedio

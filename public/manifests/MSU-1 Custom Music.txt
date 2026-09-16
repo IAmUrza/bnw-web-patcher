@@ -1,3 +1,6 @@
-Enables MSU-1 support, allowing the SNES soundtrack to be replaced with streamed audio. Requires the matching music pack and an emulator or flash cart with MSU-1 support.
+Enables MSU-1 support, replacing the SNES soundtrack with a high quality custom soundtrack. Requires an emulator or flash cart with MSU-1 support.
+ 
+Select this patch to see the available soundtrack packs.
 
-Credit: 
+Credit: Dizzy611, edale2
+https://codeberg.org/Dizzy611/DancingMadFF6

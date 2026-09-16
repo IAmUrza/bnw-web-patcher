@@ -40,8 +40,8 @@ const EXCLUSIVE_GROUPS: Record<string, string[]> = {
   "The Diary": ["DIARY"],
   "Advanced Diary": ["DIARY"],
   "Vanilla New World": ["DIALOGUE"],
-  "Italian": ["DIALOGUE"],
-  "Spanish": ["DIALOGUE"],
+  "Italiano": ["DIALOGUE"],
+  "Espanol": ["DIALOGUE"],
   "Slots Menu": ["SLOTS A", "SLOTS B"],
   "Forgiving Slots": ["SLOTS A"],
   "Slow Reels": ["SLOTS B"],
@@ -59,7 +59,7 @@ const EXCLUSIVE_GROUPS: Record<string, string[]> = {
   "AceroSteel (Front)": ["PORTRAITS"],
   "Final Fantasy Tactics": ["PORTRAITS"],
   "T-Edition": ["SPRITES"],
-  "Side-B": ["SPRITES"],
+  "B-Side": ["SPRITES"],
   "Dryad Terra": ["SPRITES"],
   "Behold Pants!": ["SPRITES"],
   "Comic Sans Menu": ["MENU"],
@@ -108,6 +108,80 @@ const PATCH_REQUIRES: Record<string, string[]> = {
   "Yoshi's Island Font": ["DIARY"],
 };
 
+
+// Links revealed under a patch once it is selected. MSU-1 soundtrack
+// packs can't be hosted here, so these point at the originals.
+const PATCH_LINKS: Record<string, {
+  intro?: string;
+  items: { label: string; href: string; yt?: string }[];
+  noteTitle?: string;
+  noteItems?: { label: string; href: string }[];
+  howTo?: string;
+}> = {
+  "MSU-1 Custom Music": {
+    howTo: [
+      "How to set up custom music:",
+      "",
+      "1. Download and extract a soundtrack pack.",
+      "2. Look at what the .pcm files are named. They will all share a base name followed by a number, like SomeName-1.pcm, SomeName-2.pcm.",
+      "3. Rename your patched ROM to that base name, keeping the .sfc extension. So SomeName-1.pcm means the ROM becomes SomeName.sfc.",
+      "4. Rename the pack's .msu file to match as well: SomeName.msu.",
+      "5. BNW also needs one extra song, the Four Fiends track. Name it SomeName-37.pcm and put it in the same folder.",
+      "6. Put the ROM, the .msu file and every .pcm file in the same folder.",
+    ].join("\n"),
+    intro: "Choose a soundtrack, then rename your patched ROM (and its .msu file) to match the pack's track names.",
+    items: [
+      { label: "Original Soundtrack",
+        href: "https://d9z02nz0xcifk.cloudfront.net/DancingMad-OST.7z" },
+      { label: "ChrystalChameleon's remasters",
+        href: "https://d9z02nz0xcifk.cloudfront.net/DancingMad-CRC.7z",
+        yt: "https://www.youtube.com/playlist?list=PLdYEU9SXADalemHUSvDg52eVpDalwzkBD" },
+      { label: "Sean Schafianski — Final Fantasy VI Remaster",
+        href: "https://d9z02nz0xcifk.cloudfront.net/DancingMad-SSC.7z",
+        yt: "https://youtube.com/playlist?list=PLv3607Rzyj4jWhDSZbKy-n3TpqDty8ilW" },
+      { label: "Final Fantasy Acoustic Rendition",
+        href: "https://d9z02nz0xcifk.cloudfront.net/DancingMad-FFAR.7z",
+        yt: "https://youtube.com/playlist?list=PLJSNlUwe_ilz2momglZW2l8-AWSCRsUZV" },
+      { label: "OCRemix Balance & Ruin",
+        href: "https://d9z02nz0xcifk.cloudfront.net/DancingMad-OCR.7z",
+        yt: "https://www.youtube.com/playlist?list=PLWk40K1PeZwGckAnyxtnLDaYA6Us-dzuf" },
+      { label: "Piano PCM Pack by edale",
+        href: "https://mega.nz/file/HAp0kQwT#QA2-WGrK2KpMRkPrdpKludpkYXL_iXR4MBjAZYPExXU",
+        yt: "https://www.youtube.com/watch?v=J5mOs7O1dvg" },
+      { label: "Final Fantasy VI (Pixel Remaster) PCMs by Brutapode",
+        href: "https://mega.nz/file/wOABQILL#9nRRGBcEGG6cQmCSDUoGyS4l1nhmEuFlg2MJFOiB-wg",
+        yt: "https://www.youtube.com/watch?v=YUk4ai6krwU" },
+      { label: "Synthetic Origins PCM Pack by edale",
+        href: "https://mega.nz/file/3JAVhZZB#9tjKzhNC7mNVJb2dsvllvfbmuHi73GW8On5uCIPP66Q",
+        yt: "https://www.youtube.com/playlist?list=PLNRafIhbJER0M8imkJKCphnNoCYpZF08j" },
+    ],
+    noteTitle: "BNW also needs one of these Four Fiends tracks (from FFIV). Rename it to SomeName-37.pcm, matching the rest of your set:",
+    noteItems: [
+      { label: "Metal",
+        href: "https://mega.nz/file/eEg0RDrb#RFqDE7MXfx6TQV-RTmWnk98I5SY0GWk5mBZKMmqcjFA" },
+      { label: "Synthetic Origins",
+        href: "https://mega.nz/file/2dxmjb7I#GouwzyB53KKnKu6lXq8MytwALu7UPiO7RA1zHAplGsM" },
+      { label: "Pixel Remaster",
+        href: "https://mega.nz/file/fEAAAZjL#_n6i5gjLkqwiCfgOHO_8vtH33AQPjkYRN3Sf_1vw86A" },
+    ],
+  },
+};
+
+
+// A screenshot shown under a category heading. Swaps to the selected
+// patch's own preview once one is chosen, so the picture always shows
+// what the player will actually get.
+// Keyed by exclusive tag, not by category: Sprites & Graphics also holds
+// untagged extras like Alternative Dadaluma, and selecting one of those
+// shouldn't change the sprite-set preview.
+const CATEGORY_PREVIEWS: Record<string, { tag: string; image: string }> = {
+  "wallpapers":      { tag: "WALLPAPER", image: "/previews/default_wallpaper.png" },
+  "portraits":       { tag: "PORTRAITS", image: "/previews/default_portraits.png" },
+  "sprites":         { tag: "SPRITES",   image: "/previews/default_sprites.png" },
+  "menu-fonts":      { tag: "MENU",      image: "/previews/default_menufont.png" },
+  "dialogue-fonts":  { tag: "TEXT",      image: "/previews/default_dialoguefont.png" },
+};
+
 const BASE_ROM_MB = 3;
 const EXPANDED_ROM_MB = 4;
 
@@ -142,8 +216,8 @@ export default function MainPatcher() {
         // Display order. Rearrange these lines to reorder the boxes.
         order: [
           "Vanilla New World",
-          "Italian",
-          "Spanish",
+          "Italiano",
+          "Espanol",
           "notext"
         ],
         title: 'Dialogue',
@@ -166,6 +240,7 @@ export default function MainPatcher() {
           "Forgiving Slots",
           "Slow Reels",
           "Slots Menu",
+          "Easy Mode",
           "Slow Scrolling BG"
         ],
         title: 'Accessibility',
@@ -240,7 +315,7 @@ export default function MainPatcher() {
         // Display order. Rearrange these lines to reorder the boxes.
         order: [
           "T-Edition",
-          "Side-B",
+          "B-Side",
           "Dryad Terra",
           "Behold Pants!",
           "Vanilla Zombies",
@@ -522,6 +597,8 @@ export default function MainPatcher() {
           selectedPatches={selectedOptionalPatches}
           onSelectionChange={setSelectedOptionalPatches}
           isDisabled={isPatching || !hasValidRom}
+          patchLinks={PATCH_LINKS}
+          categoryPreviews={CATEGORY_PREVIEWS}
           exclusiveGroups={EXCLUSIVE_GROUPS}
           requires={PATCH_REQUIRES}
           lockedPatchNames={[

@@ -87,7 +87,7 @@ const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
               alt={imageAlt}
               className="modal-image"
               onError={(e) => {
-                console.error('Failed to load preview image:', src);
+                console.warn('No preview image for:', src);
                 e.currentTarget.src = '/placeholder-image.png';
               }}
             />
@@ -147,6 +147,7 @@ const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
           width: auto;
           max-width: min(900px, 92vw);
           max-height: 88vh;
+          overflow-y: auto;
           display: flex;
           flex-direction: column;
           gap: 12px;
@@ -155,7 +156,9 @@ const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
         .modal-body {
           display: flex;
           flex-direction: row;
-          align-items: flex-start;
+          /* centre, not flex-start: with a long blurb the image should sit
+             in the middle of the column rather than pinned to the top. */
+          align-items: center;
           gap: 22px;
           min-height: 0;
           width: auto;
@@ -164,8 +167,9 @@ const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
 
         .modal-image-container {
           flex: 0 0 auto;
+          max-width: 448px;
           display: flex;
-          align-items: flex-start;
+          align-items: center;
           justify-content: center;
           width: auto;
           min-width: 0;
@@ -173,11 +177,13 @@ const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
 
         /* Native size where it fits, capped so it never dominates.
            Pixelated to match the rest of the site's SNES art. */
+        /* Fixed width, automatic height: every preview lines up at the
+           same width, and the yellow border hugs the image instead of
+           letterboxing it. Taller shots just make the box taller. */
         .modal-image {
           display: block;
-          max-width: 480px;
-          max-height: 70vh;
-          width: auto;
+          width: 448px;
+          max-width: 100%;
           height: auto;
           image-rendering: auto;
           border: 3px solid #facc15;
@@ -248,8 +254,7 @@ const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
             align-items: center;
           }
           .modal-image {
-            max-width: 100%;
-            max-height: 40vh;
+            width: 100%;
           }
           .modal-text {
             max-width: 100%;

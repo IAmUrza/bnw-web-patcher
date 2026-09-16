@@ -1,3 +1,7 @@
 Replaces text-based signage with pictograms, so signs can be read without knowing English.
 
-Credit: 
+Sostituisce i cartelli scritti con pittogrammi, così da poterli leggere senza sapere l'inglese.
+
+Sustituye los carteles escritos por pictogramas, para poder leerlos sin saber inglés.
+
+Credit: Gens

@@ -1,4 +1,4 @@
-Restores the vanilla zombie sprites in place of the custom Brave New World zombies.
+Restores the vanilla zombie sprites in place of the custom Brave New World zombie sprites.
 
 If you plan to apply your own custom sprite patch on top of the final Brave New World ROM, we recommend you use this optional patch.
 
