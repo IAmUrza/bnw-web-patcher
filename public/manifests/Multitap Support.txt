@@ -1,6 +1,4 @@
-This patch, named for the SNES peripheral that added support for up to 4 inputs, allows up to 4 players (instead of just 2) to play the game cooperatively.
-
-To access the menu, go to Config > Controller > Multiple, then push the 'A' button.
+This patch, named for the SNES peripheral that added support for up to 4 controllers, allows up to 4 players to play the game cooperatively.
 
 Invite all your friends!
 

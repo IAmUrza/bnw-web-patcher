@@ -1,3 +1,3 @@
-Slows some of the very fast scrolling background effects, which can be uncomfortable for players sensitive to motion.
+Slows some of the very fast scrolling backgrounds, for players who are sensitive to motion.
 
 Credit: Fëanor

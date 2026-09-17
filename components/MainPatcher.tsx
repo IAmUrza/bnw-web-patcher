@@ -45,9 +45,9 @@ const EXCLUSIVE_GROUPS: Record<string, string[]> = {
   "Slots Menu": ["SLOTS"],
   "Forgiving Slots": ["SLOTS"],
   "Chrono Trigger": ["WALLPAPER"],
-  "T-Edition": ["WALLPAPER"],
-  "Dark Sorcerer": ["WALLPAPER"],
-  "Dev Compilation": ["WALLPAPER"],
+  "Square Collection": ["WALLPAPER"],
+  "RPG Collection": ["WALLPAPER"],
+  "Dealer's Choice": ["WALLPAPER"],
   "Legacy": ["PORTRAITS"],
   "Classic": ["PORTRAITS"],
   "Modern": ["PORTRAITS"],
@@ -158,6 +158,7 @@ const PATCH_LINKS: Record<string, {
 // Categories whose option boxes drop the Information button. The category
 // preview above them already shows the font, so the popup added nothing.
 const HIDE_INFO_IN: string[] = [
+  "wallpapers",
   "menu-fonts",
   "dialogue-fonts",
 ];
@@ -247,7 +248,7 @@ export default function MainPatcher() {
           "HP and MP Nerf",
           "Inventory Cap",
           "Level Cap",
-          "Speedy Enemies"
+          "Fast Enemies"
         ],
         title: 'Gameplay',
         description: 'Tweaks to gameplay mechanics and features. Multiple options can be selected.',
@@ -258,18 +259,19 @@ export default function MainPatcher() {
         manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
       },
       {
-        id: 'wallpapers',
+        id: 'sprites',
         // Display order. Rearrange these lines to reorder the boxes.
         order: [
-          "Chrono Trigger",
-          "T-Edition",
-          "Dark Sorcerer",
-          "Dev Compilation"
+          "T-Edition Sprites",
+          "B-Side Sprites",
+          "Behold Pants!",
+          "Vanilla Zombies",
+          "Altered Bosses"
         ],
-        title: 'Wallpapers',
-        description: 'Alternative text box backgrounds.',
-        allowMultiple: false,
-        zipFile: 'Wallpapers.zip',
+        title: 'Sprites & Graphics',
+        description: 'Alternative character sprites and graphical swaps. In some cases, multiple options can be selected.',
+        allowMultiple: true,
+        zipFile: 'Character Sprites and Graphics.zip',
         defaultChoice: '',
         hasManifest: true,
         manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
@@ -294,19 +296,37 @@ export default function MainPatcher() {
         manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
       },
       {
-        id: 'sprites',
+        id: 'wallpapers',
         // Display order. Rearrange these lines to reorder the boxes.
         order: [
-          "T-Edition Sprites",
-          "B-Side Sprites",
-          "Behold Pants!",
-          "Vanilla Zombies",
-          "Altered Bosses"
+          "Chrono Trigger",
+          "Square Collection",
+          "RPG Collection",
+          "Dealer's Choice"
         ],
-        title: 'Sprites & Graphics',
-        description: 'Alternative character sprites and graphical swaps. In some cases, multiple options can be selected.',
-        allowMultiple: true,
-        zipFile: 'Character Sprites and Graphics.zip',
+        title: 'Wallpapers',
+        description: 'Alternative text box backgrounds.',
+        allowMultiple: false,
+        zipFile: 'Wallpapers.zip',
+        defaultChoice: '',
+        hasManifest: true,
+        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
+      },
+      {
+        id: 'dialogue-fonts',
+        // Display order. Rearrange these lines to reorder the boxes.
+        order: [
+          "Final Fantasy 7",
+          "Final Fantasy Tactics",
+          "A Link to the Past",
+          "Metroid",
+          "Sea of Stars",
+          "Super Mario RPG"
+        ],
+        title: 'Dialogue Font',
+        description: 'These alternative fonts require the Diary expansion.',
+        allowMultiple: false,
+        zipFile: 'Dialogue Fonts - Requires Diary Expansion.zip',
         defaultChoice: '',
         hasManifest: true,
         manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
@@ -327,25 +347,6 @@ export default function MainPatcher() {
         description: 'These alternative fonts require the Diary expansion.',
         allowMultiple: false,
         zipFile: 'Menu Fonts - Requires Diary Expansion.zip',
-        defaultChoice: '',
-        hasManifest: true,
-        manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
-      },
-      {
-        id: 'dialogue-fonts',
-        // Display order. Rearrange these lines to reorder the boxes.
-        order: [
-          "Final Fantasy 7",
-          "Final Fantasy Tactics",
-          "A Link to the Past",
-          "Metroid",
-          "Sea of Stars",
-          "Super Mario RPG"
-        ],
-        title: 'Dialogue Font',
-        description: 'These alternative fonts require the Diary expansion.',
-        allowMultiple: false,
-        zipFile: 'Dialogue Fonts - Requires Diary Expansion.zip',
         defaultChoice: '',
         hasManifest: true,
         manifestPath: (patchName: string) => `/manifests/${patchName}.txt`
@@ -583,7 +584,7 @@ export default function MainPatcher() {
             "HP and MP Nerf",
             "Inventory Cap",
             "Level Cap",
-            "Speedy Enemies",
+            "Fast Enemies",
           ]}
         />
       )}
