@@ -51,6 +51,9 @@ interface CustomOptionsPanelProps {
   patchLinks?: Record<string, PatchLinkSection>;
   // category id -> { exclusive tag that drives the preview, default image }
   categoryPreviews?: Record<string, { tag: string; image: string }>;
+  // category ids whose boxes hide the Information button - useful where the
+  // category preview already shows what the patch does
+  hideInfoIn?: string[];
   exclusiveGroups?: Record<string, string[]>;
   // patch name -> tags it needs. A tag is satisfied when some selected
   // patch carries that tag in exclusiveGroups.
@@ -66,7 +69,8 @@ const CustomOptionsPanel: React.FC<CustomOptionsPanelProps> = ({
   exclusiveGroups = {},
   requires = {},
   patchLinks = {},
-  categoryPreviews = {}
+  categoryPreviews = {},
+  hideInfoIn = []
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -295,7 +299,8 @@ const CustomOptionsPanel: React.FC<CustomOptionsPanelProps> = ({
                         {/* Preview button, loaded from public/previews.
                             Hidden while the password form is open so the
                             box doesn't grow taller than its neighbours. */}
-                        {patch.previewImage && !isPrompting && (
+                        {patch.previewImage && !isPrompting
+                          && !hideInfoIn.includes(category.id) && (
                           <button
                             type="button"
                             onClick={() => handlePreviewClick(patch)}

@@ -68,7 +68,7 @@ const EXCLUSIVE_GROUPS: Record<string, string[]> = {
   "A Link to the Past": ["TEXT"],
   "Metroid": ["TEXT"],
   "Sea of Stars": ["TEXT"],
-  "Super Mario RPG ": ["TEXT"],
+  "Super Mario RPG": ["TEXT"],
 };
 
 // Tags a patch needs before it can be selected. A tag counts as provided
@@ -86,7 +86,7 @@ const PATCH_REQUIRES: Record<string, string[]> = {
   "A Link to the Past": ["DIARY"],
   "Metroid": ["DIARY"],
   "Sea of Stars": ["DIARY"],
-  "Super Mario RPG ": ["DIARY"],
+  "Super Mario RPG": ["DIARY"],
 };
 
 
@@ -155,6 +155,13 @@ const PATCH_LINKS: Record<string, {
 // Keyed by exclusive tag, not by category: Sprites & Graphics also holds
 // untagged extras like Alternative Dadaluma, and selecting one of those
 // shouldn't change the sprite-set preview.
+// Categories whose option boxes drop the Information button. The category
+// preview above them already shows the font, so the popup added nothing.
+const HIDE_INFO_IN: string[] = [
+  "menu-fonts",
+  "dialogue-fonts",
+];
+
 const CATEGORY_PREVIEWS: Record<string, { tag: string; image: string }> = {
   "wallpapers":      { tag: "WALLPAPER", image: "/previews/default_wallpaper.png" },
   "portraits":       { tag: "PORTRAITS", image: "/previews/default_portraits.png" },
@@ -293,7 +300,8 @@ export default function MainPatcher() {
           "T-Edition Sprites",
           "B-Side Sprites",
           "Behold Pants!",
-          "Vanilla Zombies"
+          "Vanilla Zombies",
+          "Altered Bosses"
         ],
         title: 'Sprites & Graphics',
         description: 'Alternative character sprites and graphical swaps. In some cases, multiple options can be selected.',
@@ -564,6 +572,7 @@ export default function MainPatcher() {
           isDisabled={isPatching || !hasValidRom}
           patchLinks={PATCH_LINKS}
           categoryPreviews={CATEGORY_PREVIEWS}
+          hideInfoIn={HIDE_INFO_IN}
           exclusiveGroups={EXCLUSIVE_GROUPS}
           requires={PATCH_REQUIRES}
           lockedPatchNames={[

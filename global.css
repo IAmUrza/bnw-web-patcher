@@ -728,6 +728,54 @@ td:nth-child(even) {
   .two-column-layout {
     flex-direction: column;
   }
+
+  /* Two fluid columns instead of fixed 215px tracks. On a 360px phone the
+     panel's padding leaves ~312px, so a fixed track would only ever fit
+     one; minmax(0, 1fr) lets each box take whatever half is available. */
+  .option-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  /* An odd-numbered last box sits alone on its row. Let it span both
+     columns and centre itself at one column's width, rather than
+     hugging the left edge. Mobile only - the desktop grid stays
+     left-aligned. */
+  .option-grid > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 5px);
+  }
+
+  /* Smaller type so long names like "Tales of Phantasia Menu" stay to two
+     lines in a ~150px box. */
+  .option-box {
+    font-size: 0.8rem;
+    gap: 6px;
+  }
+
+  .option-box .option-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.3rem;
+  }
+
+  .option-box .p-2 {
+    padding: 0.4rem !important;
+  }
+
+  .locked-note {
+    font-size: 0.7rem;
+  }
+
+  .password-input {
+    font-size: 0.8rem;
+    padding: 0.42rem 0.4rem;
+  }
+
+  .password-form-actions .option-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.2rem;
+  }
 }
 
 
