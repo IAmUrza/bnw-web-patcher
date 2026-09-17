@@ -1,3 +1,5 @@
 Doubles enemy action speed, substantially raising the difficulty of every battle.
 
+Not for the faint of heart.
+
 Credit: Nowea

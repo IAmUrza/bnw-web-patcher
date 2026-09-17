@@ -1,0 +1,5 @@
+Character sprite set from the FF6 Romhack: T-Edition.
+
+Not compatible with other optional sprite patches.
+
+Credit: T-Edition Contributors

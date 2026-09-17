@@ -1,1 +1,0 @@
-Replaces chocobo sprites with the Final Fantasy Tactics versions.

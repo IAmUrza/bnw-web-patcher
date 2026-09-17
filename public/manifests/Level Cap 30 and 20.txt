@@ -1,3 +1,0 @@
-Caps character levels at 30 and esper levels at 20, thereby increasing difficulty.
-
-Credit: Bropedio

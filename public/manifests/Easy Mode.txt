@@ -1,3 +1,0 @@
-Replaces the "XP Gain" switch in the Config menu with a switch that instead doubles XP and GP.
-
-Credit: Khaos
