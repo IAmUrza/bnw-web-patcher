@@ -9,6 +9,7 @@ html {
 
 body {
   max-width: 100vw;
+  overflow-x: hidden;
   color: #ededed;
   background: transparent;
   font-size: 1rem;
@@ -78,10 +79,13 @@ main div {
 /* Top navigation bar */
 .top-nav {
   display: flex;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: center;
-  gap: 1.75rem;
+  gap: 0.25rem 1.75rem;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   padding: 0.75rem 1rem;
   background-color: rgba(15, 6, 25, 0.85);
   border-bottom: 1px solid #4c1d95;
@@ -107,13 +111,24 @@ main div {
   color: #fff;
 }
 
+/* Target .top-nav a directly: a font-size on .top-nav alone is overridden
+   by the .top-nav a rule above, so the shrink never applied and the bar
+   overflowed the viewport - which also pushed the page off-centre. */
 @media (max-width: 576px) {
   .top-nav {
-    gap: 0.4rem;
-    font-size: 0.9rem;
+    gap: 0.2rem 0.6rem;
+    padding: 0.6rem 0.4rem;
   }
   .top-nav a {
-    padding: 0.35rem 0.4rem;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.35rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .top-nav a {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.25rem;
   }
 }
 

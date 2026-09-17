@@ -62,24 +62,17 @@ const EXCLUSIVE_GROUPS: Record<string, string[]> = {
   "B-Side": ["SPRITES"],
   "Dryad Terra": ["SPRITES"],
   "Behold Pants!": ["SPRITES"],
-  "Comic Sans Menu": ["MENU"],
   "Dragon Quest Menu": ["MENU"],
-  "FFT Menu": ["MENU"],
-  "Ghosts 'n Goblins Menu": ["MENU"],
-  "Metroid Menu": ["MENU"],
+  "Ghouls 'n Ghosts Menu": ["MENU"],
   "Shin Megami Tensei Menu": ["MENU"],
   "Star Ocean Menu": ["MENU"],
-  "Sea of Stars Menu": ["MENU"],
   "Tales of Phantasia Menu": ["MENU"],
   "Wild Arms Menu": ["MENU"],
-  "Dragon Quest Font": ["TEXT"],
   "Final Fantasy 7 Font": ["TEXT"],
-  "FFT Font": ["TEXT"],
   "A Link to the Past Font": ["TEXT"],
   "Metroid Font": ["TEXT"],
   "Super Mario RPG Font": ["TEXT"],
   "Sea of Stars Font": ["TEXT"],
-  "Wild Arms Font": ["TEXT"],
   "Yoshi's Island Font": ["TEXT"],
 };
 
@@ -87,24 +80,17 @@ const EXCLUSIVE_GROUPS: Record<string, string[]> = {
 // when some selected patch carries it in EXCLUSIVE_GROUPS above, so
 // either Diary satisfies DIARY. Deselecting the Diary drops these.
 const PATCH_REQUIRES: Record<string, string[]> = {
-  "Comic Sans Menu": ["DIARY"],
   "Dragon Quest Menu": ["DIARY"],
-  "FFT Menu": ["DIARY"],
-  "Ghosts 'n Goblins Menu": ["DIARY"],
-  "Metroid Menu": ["DIARY"],
+  "Ghouls 'n Ghosts Menu": ["DIARY"],
   "Shin Megami Tensei Menu": ["DIARY"],
   "Star Ocean Menu": ["DIARY"],
-  "Sea of Stars Menu": ["DIARY"],
   "Tales of Phantasia Menu": ["DIARY"],
   "Wild Arms Menu": ["DIARY"],
-  "Dragon Quest Font": ["DIARY"],
   "Final Fantasy 7 Font": ["DIARY"],
-  "FFT Font": ["DIARY"],
   "A Link to the Past Font": ["DIARY"],
   "Metroid Font": ["DIARY"],
   "Super Mario RPG Font": ["DIARY"],
   "Sea of Stars Font": ["DIARY"],
-  "Wild Arms Font": ["DIARY"],
   "Yoshi's Island Font": ["DIARY"],
 };
 
@@ -336,12 +322,8 @@ export default function MainPatcher() {
         id: 'menu-fonts',
         // Display order. Rearrange these lines to reorder the boxes.
         order: [
-          "Comic Sans Menu",
           "Dragon Quest Menu",
-          "FFT Menu",
-          "Ghosts 'n Goblins Menu",
-          "Metroid Menu",
-          "Sea of Stars Menu",
+          "Ghouls 'n Ghosts Menu",
           "Shin Megami Tensei Menu",
           "Star Ocean Menu",
           "Tales of Phantasia Menu",
@@ -360,13 +342,10 @@ export default function MainPatcher() {
         // Display order. Rearrange these lines to reorder the boxes.
         order: [
           "A Link to the Past Font",
-          "Dragon Quest Font",
-          "FFT Font",
           "Final Fantasy 7 Font",
           "Metroid Font",
           "Sea of Stars Font",
           "Super Mario RPG Font",
-          "Wild Arms Font",
           "Yoshi's Island Font"
         ],
         title: 'Dialogue Font',
