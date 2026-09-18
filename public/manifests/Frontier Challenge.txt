@@ -1,0 +1,8 @@
+A challenging mode that owes its name to thzfunnyman's Brave New World spinoff, Final Frontier.
+
+1. Caps character levels at 30 and esper levels at 20.
+2. Weakness to an element will result in a 150% damage bonus, down from 200%.
+3. Reduces the HP and MP gained from Esper Levels.
+4. Caps each inventory stack at a maximum of 20 items, instead of 99.
+
+Credit: Bropedio, Sir Newton Fig, Nowea

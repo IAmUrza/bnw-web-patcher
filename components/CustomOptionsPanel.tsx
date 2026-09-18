@@ -297,9 +297,28 @@ const CustomOptionsPanel: React.FC<CustomOptionsPanelProps> = ({
                         )}
 
                         {/* Preview button, loaded from public/previews.
-                            Hidden while the password form is open so the
-                            box doesn't grow taller than its neighbours. */}
-                        {patch.previewImage && !isPrompting
+                            Hidden while the password form is open, and while
+                            the patch is still locked - the taller Password
+                            button above takes up the same room, so the box
+                            keeps its height either way. */}
+                        {/* Invisible stand-in for the hidden Information
+                            button. Keeping the element in the layout - rather
+                            than computing a taller Password button - means a
+                            locked box is exactly as tall as an unlocked one,
+                            whatever the text above does. */}
+                        {patch.previewImage && !isPrompting && isLocked
+                          && !hideInfoIn.includes(category.id) && (
+                          <button
+                            type="button"
+                            className="option-btn option-btn-ghost"
+                            aria-hidden="true"
+                            tabIndex={-1}
+                          >
+                            Information
+                          </button>
+                        )}
+
+                        {patch.previewImage && !isPrompting && !isLocked
                           && !hideInfoIn.includes(category.id) && (
                           <button
                             type="button"

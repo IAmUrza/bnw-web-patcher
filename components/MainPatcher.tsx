@@ -171,10 +171,25 @@ const CATEGORY_PREVIEWS: Record<string, { tag: string; image: string }> = {
   "dialogue-fonts":  { tag: "TEXT",      image: "/previews/default_dialoguefont.png" },
 };
 
+// Selecting every one of these flips the page into "Brave New Hell":
+// the title changes and the background fades red. Deselecting any one
+// of them reverts it.
+const HELL_MODE_PATCHES: string[] = [
+  "New Game Plus",
+  "Frontier Challenge",
+  "Hard Mode",
+];
+
 const BASE_ROM_MB = 3;
 const EXPANDED_ROM_MB = 4;
 
-export default function MainPatcher() {
+interface MainPatcherProps {
+  // Told whether every HELL_MODE_PATCHES entry is currently selected, so
+  // the page can retitle itself and recolour.
+  onHellModeChange?: (active: boolean) => void;
+}
+
+export default function MainPatcher({ onHellModeChange }: MainPatcherProps) {
   const [patches, setPatches] = useState<Patch[]>([]);
   const [romState, setRomState] = useState<RomState | null>(null); // Stores ROM + patch info
   const [isPatching, setIsPatching] = useState(false);
@@ -224,13 +239,14 @@ export default function MainPatcher() {
         id: 'accessibility',
         // Display order. Rearrange these lines to reorder the boxes.
         order: [
+		  "Multitap Support",
           "Blitz and Bushido Menus",
           "Forgiving Slots",
           "Slots Menu",
           "Slow Backgrounds"
         ],
         title: 'Accessibility',
-        description: 'Options to ease gameplay elements. In some cases, multiple options can be selected.',
+        description: 'Options to ease gameplay and increase accessibility. In some cases, multiple options can be selected.',
         allowMultiple: true,
         zipFile: 'Accessibility.zip',
         defaultChoice: '',
@@ -241,16 +257,12 @@ export default function MainPatcher() {
         id: 'gameplay',
         // Display order. Rearrange these lines to reorder the boxes.
         order: [
-          "Multitap Support",
-          "Party Randomizer",
-          "Elemental Nerf",
-          "HP and MP Nerf",
-          "Inventory Cap",
-          "Level Cap",
-          "Fast Enemies"
+          "New Game Plus",
+          "Frontier Challenge",
+          "Hard Mode"
         ],
         title: 'Gameplay',
-        description: 'Tweaks to gameplay mechanics and features. Multiple options can be selected.',
+        description: 'Options to increase the difficulty of gameplay. Multiple options can be selected.',
         allowMultiple: true,
         zipFile: 'Gameplay.zip',
         defaultChoice: '',
@@ -526,6 +538,15 @@ export default function MainPatcher() {
     return patchedRom;
   };
 
+  // Report Hell Mode to the page. Names are compared rather than ids
+  // because ids carry the category prefix.
+  useEffect(() => {
+    if (!onHellModeChange) return;
+    const selectedNames = getSelectedPatches(selectedOptionalPatches).map(p => p.name);
+    const active = HELL_MODE_PATCHES.every(n => selectedNames.includes(n));
+    onHellModeChange(active);
+  }, [selectedOptionalPatches, optionalCategories, onHellModeChange]);
+
   // Control checks
   const hasValidRom = romState !== null;
   const isReady = !loadingPatches && patches.length > 0;
@@ -578,12 +599,9 @@ export default function MainPatcher() {
           lockedPatchNames={[
             "Advanced Diary",
             "notext",
-            "Party Randomizer",
-            "Elemental Nerf",
-            "HP and MP Nerf",
-            "Inventory Cap",
-            "Level Cap",
-            "Fast Enemies",
+            "New Game Plus",
+            "Frontier Challenge",
+            "Hard Mode",
           ]}
         />
       )}

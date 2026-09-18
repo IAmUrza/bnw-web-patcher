@@ -2,6 +2,4 @@ Randomizes the player's party whenever the option to select characters is presen
 
 If no team leader is chosen, then the slot will be empty. This is necessary for recruiting Shadow at Kohlingen or Gau in the World of Ruin.
 
-The New Game Plus of Brave New World.
-
 Credit: Bropedio

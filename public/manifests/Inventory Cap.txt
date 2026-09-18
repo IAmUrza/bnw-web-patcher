@@ -1,3 +1,0 @@
-Caps each inventory stack at a maximum of 20 items, instead of 99.
-
-Credit: Bropedio
