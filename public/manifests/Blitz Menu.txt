@@ -1,3 +1,0 @@
-Replaces Sabin's Blitz button inputs with a menu selection, removing the dexterity requirement.
-
-Credit: Fëanor

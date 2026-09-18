@@ -45,7 +45,7 @@ const EXCLUSIVE_GROUPS: Record<string, string[]> = {
   "Slots Menu": ["SLOTS"],
   "Forgiving Slots": ["SLOTS"],
   "Chrono Trigger": ["WALLPAPER"],
-  "Square Collection": ["WALLPAPER"],
+  "SNES Collection": ["WALLPAPER"],
   "RPG Collection": ["WALLPAPER"],
   "Dealer's Choice": ["WALLPAPER"],
   "Legacy": ["PORTRAITS"],
@@ -224,8 +224,7 @@ export default function MainPatcher() {
         id: 'accessibility',
         // Display order. Rearrange these lines to reorder the boxes.
         order: [
-          "Blitz Menu",
-          "Bushido Menu",
+          "Blitz and Bushido Menus",
           "Forgiving Slots",
           "Slots Menu",
           "Slow Backgrounds"
@@ -300,7 +299,7 @@ export default function MainPatcher() {
         // Display order. Rearrange these lines to reorder the boxes.
         order: [
           "Chrono Trigger",
-          "Square Collection",
+          "SNES Collection",
           "RPG Collection",
           "Dealer's Choice"
         ],

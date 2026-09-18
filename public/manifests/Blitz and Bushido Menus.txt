@@ -1,0 +1,3 @@
+Replaces the Blitz button inputs and the Bushido charge gauge with menus, removing the dexterity requirement.
+
+Credit: Fëanor

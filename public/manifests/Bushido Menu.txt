@@ -1,3 +1,0 @@
-Replaces Cyan's Bushido charge gauge with a menu selection, removing the dexterity requirement.
-
-Credit: Fëanor
