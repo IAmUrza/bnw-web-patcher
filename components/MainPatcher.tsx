@@ -520,7 +520,11 @@ export default function MainPatcher({ onHellModeChange }: MainPatcherProps) {
     const targetBytes = targetMB * 1024 * 1024;
     console.log(`Target ROM size: ${targetMB}MB (expansion ${needsExpansion ? 'required' : 'not required'})`);
 
-    let patchedRom = new Uint8Array(romState.processedRom);
+    // Annotated, not inferred: `new Uint8Array(...)` infers the narrow
+    // Uint8Array<ArrayBuffer>, while applyIPS returns the wide
+    // Uint8Array<ArrayBufferLike> (TS 5.7+ made typed arrays generic over
+    // their buffer). Without this the reassignments below fail to compile.
+    let patchedRom: Uint8Array = new Uint8Array(romState.processedRom);
     if (patchedRom.length < targetBytes) {
       const resized = new Uint8Array(targetBytes);
       resized.set(patchedRom);
