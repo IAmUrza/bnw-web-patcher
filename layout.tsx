@@ -9,7 +9,7 @@ type NavLink = {
 };
 
 const navLinks: NavLink[] = [
-  { href: '/', label: 'Web Patcher' },
+  { href: '/', label: 'Beta Web Patcher' },
   { href: '/guides', label: 'Documentation' },
   { href: 'https://ngplus.net/mods/brave-new-world/', label: 'Website', external: true },
   { href: 'https://discord.com/invite/bsuKp5A', label: 'Discord', external: true }
@@ -22,8 +22,27 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Head>
-        <title>FF6 BNW Web Patcher</title>
-        <meta name="description" content="Get FF6 BNW" />
+        <title>FF6: Brave New World Web Patcher</title>
+        <meta
+          name="description"
+          content="Patch your FF6 ROM in browser."
+        />
+
+        <meta property="og:site_name" content="FF6: BNW Web Patcher" />
+        <meta property="og:title" content="FF6: BNW Web Patcher" />
+        <meta
+          property="og:description"
+          content="Patch your FF6 ROM in browser."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ff6bnw.vercel.app/" />
+        <meta property="og:image" content="https://ff6bnw.vercel.app/og.png" />
+        <meta property="og:image:width" content="250" />
+        <meta property="og:image:height" content="250" />
+        <meta property="og:image:alt" content="FF6: Brave New World" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="theme-color" content="#7b2d8e" />
       </Head>
 
       <nav className="top-nav">

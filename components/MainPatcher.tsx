@@ -335,7 +335,7 @@ export default function MainPatcher({ onHellModeChange }: MainPatcherProps) {
           "Super Mario RPG"
         ],
         title: 'Dialogue Font',
-        description: 'These alternative fonts require the Diary expansion.',
+        description: 'These alternative fonts require the Diary expansion. Enable them from the in-game Config menu.',
         allowMultiple: false,
         zipFile: 'Dialogue Fonts - Requires Diary Expansion.zip',
         defaultChoice: '',
@@ -355,7 +355,7 @@ export default function MainPatcher({ onHellModeChange }: MainPatcherProps) {
           "Wild Arms"
         ],
         title: 'Menu Font',
-        description: 'These alternative fonts require the Diary expansion.',
+        description: 'These alternative fonts require the Diary expansion. Enable them from the in-game Config menu.',
         allowMultiple: false,
         zipFile: 'Menu Fonts - Requires Diary Expansion.zip',
         defaultChoice: '',
