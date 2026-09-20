@@ -29,16 +29,16 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         />
 
         <meta property="og:site_name" content="FF6: BNW Web Patcher" />
-        <meta property="og:title" content="FF6: BNW Web Patcher" />
+        <meta property="og:title" content="FF6: Brave New World" />
         <meta
           property="og:description"
-          content="Patch your FF6 ROM in browser."
+          content="Patch your ROM in browser."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ff6bnw.vercel.app/" />
         <meta property="og:image" content="https://ff6bnw.vercel.app/og.png" />
-        <meta property="og:image:width" content="250" />
-        <meta property="og:image:height" content="250" />
+        <meta property="og:image:width" content="192" />
+        <meta property="og:image:height" content="96" />
         <meta property="og:image:alt" content="FF6: Brave New World" />
 
         <meta name="twitter:card" content="summary_large_image" />
