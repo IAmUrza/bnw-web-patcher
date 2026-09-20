@@ -36,7 +36,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ff6bnw.vercel.app/" />
-        <meta property="og:image" content="https://ff6bnw.vercel.app/og.png" />
+        <meta property="og:image" content="https://ff6bnw.vercel.app/og.png?v=2" />
         <meta property="og:image:width" content="192" />
         <meta property="og:image:height" content="96" />
         <meta property="og:image:alt" content="FF6: Brave New World" />
