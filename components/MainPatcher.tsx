@@ -335,7 +335,7 @@ export default function MainPatcher({ onHellModeChange }: MainPatcherProps) {
           "Super Mario RPG"
         ],
         title: 'Dialogue Font',
-        description: 'These alternative fonts require the Diary expansion. Enable them from the in-game Config menu.',
+        description: 'Alternative fonts require the Diary expansion.\nSwitch from the default font to any of the below fonts via the in-game Config menu.',
         allowMultiple: false,
         zipFile: 'Dialogue Fonts - Requires Diary Expansion.zip',
         defaultChoice: '',
@@ -355,7 +355,7 @@ export default function MainPatcher({ onHellModeChange }: MainPatcherProps) {
           "Wild Arms"
         ],
         title: 'Menu Font',
-        description: 'These alternative fonts require the Diary expansion. Enable them from the in-game Config menu.',
+        description: 'Alternative fonts require the Diary expansion.\nSwitch from the default font to any of the below fonts via the in-game Config menu.',
         allowMultiple: false,
         zipFile: 'Menu Fonts - Requires Diary Expansion.zip',
         defaultChoice: '',
@@ -562,7 +562,7 @@ export default function MainPatcher({ onHellModeChange }: MainPatcherProps) {
     <div className="patcher-hero">
       <PlusTitle />
       <p className="text-center mb-2">
-        Upload your FFIII ROM file to create a copy of FF6: BNW.<br/>
+        Upload your FFIII (US) ROM to download FF6: BNW v3.0B2.1.<br/>
         Customize your experience with additional options below.
       </p>
     </div>
@@ -579,7 +579,7 @@ export default function MainPatcher({ onHellModeChange }: MainPatcherProps) {
         )}
       </div>
 
-      <div className='d-flex justify-content-center align-items-center h-100'>
+	  <div className='d-flex justify-content-center align-items-center h-100' id="download-rom-section">
         <DownloadRomButton
           onGenerateRom={generatePatchedRom} // Now uses generator function
           filename={`FF6_BNW_v3.0${selectedOptionalPatches.length > 0 ? '_Custom' : ''}.sfc`}

@@ -1,0 +1,76 @@
+UMARO
+Hulk Smash!
+
+BASE STATS (experience & growth chart >printme)
+
+Vigor Magic Speed Stamina (HPBase) (MPBase) (ATTBase) Def&MagDef Evade&MagEva RetreatSpeed 
+90    -     24    90       255      -        128      60 / 60       6 / 6     Low
+
+SKILLS
+
+Fight - just a regular attack (Vigor)
+Tackle - same as above (Vigor), but ignores defense
+Rage (equip Storm Belt) - throw a random ally at a foe for critical defense-ignoring damage (Vigor)
+Blizzard (equip Blizzard Orb) - massive ice damage (Stamina) to all foes
+
+EQUIPMENT
+
+WEAPONS: Clubs
+		Att	Eva	Stats		Description
+Bone Club	130
+Magic Bone	80		+7 Mag
+
+HELMETS:	Def	Eva	Stats		Description
+Skull Cap	30/30		+7 Sta
+
+ARMORS:
+Snow Muffler	60/60		-3 Spd		+25% HP, blocks Ice/Wind
+
+RELICS: (details>printme)
+
+Spirit Stone	15/-		+5 Vig/Sta	Blocks Blind, Poison, Petrify
+Amulet		-/15		+5 Mag/Sta	Blocks Sleep, Muddle, Berserk
+White Cape		-/10	+5 Mag +3 Spd	Blocks Imp, Mute, Berserk
+Knight Cape		10/-	+5 Vig +3 Spd	+12.5% HP, cover
+Back Guard	20/20				Prevents ambushes
+Hyper Wrist					Auto Berserk
+Guard Ring	5/15				Auto-Safe
+Wall Ring	15/5				Auto-Shell
+Sprint Shoes		20/-			Auto-Haste (blocks Slow)
+Stat Stick			+5 All		+12.5% HP/MP
+----------
+Reflect Ring					Auto-Reflect
+Ribbon			20/20			Blocks Stop, Petrify, Death
+Quartz Charm			+7 Sta		Auto-Safe/Shell
+Zephyr Cape		10/10	+7 Spd +5 Sta	Haste on low Hp
+Life Bell			+5 Sta		Auto-Regen (blocks Sap)
+Black Belt			+7 Spd		Hits, CounterAtt
+Power Glove			+7 Vig		Physical output +25%
+Magic Cube		-/20	+7 Mag		+50% MP
+Hero Ring			+7 Vig +7 Mag	+25% HP/MP, cover
+Black Heart					+50% HP; blocks Poison/Holy; weak to all else
+Mistery Egg					It's a mistery...
+----------
+Psycho Belt			+5 Spd		Physical output +25%, blocks Bolt (??)
+Blizzard Orb			+5 Sta		Magical output +25%, blocks Fire  (??)
+
+SET-UPS  
+
+- Berserker
+
+GIVE IMAGE!! UMARO SMASH!!
+Equip Black Belt & Psycho Belt. Pair him up with Mog, set Image on Umaro. Smash stuff, throw allies. 
+Throwing Mog nets 9999 damage. Could even have some Dragoons on the team (not Mog, obviously; rather, Edgar and/or 
+Gogo) to increase Umaro's chance to throw Mog.
+
+- Big, Dumb Bodyguard
+
+WHY UMARO NOT SMASH?!
+Equip Black Belt & Knight Cape. Let Umaro tank hits for the whole party with his stupidly high stamina stat, and 
+counter those hits nearly 100% of the time. Don't set Image (doesn't work with Cover). Safe & Regen support 
+preferred.
+
+- Abominable Snowman
+
+HOW MAGIC WORK?!
+Equip Blizzard Orb work Ice weak foes or for random clearing. Probably still use Psycho Belt as your other relic.

@@ -1,0 +1,214 @@
+EDGAR RONI FIGARO
+Hail To The King, Baby
+
+BASE STATS (experience & growth chart >printme) 
+
+Vigor Magic Speed Stamina (HPBase) (MPBase) (ATTBase) Def&MagDef Evade&MagEva RetreatSpeed 
+36    30    30    24       72       -        64       42 / 24       6 / 6     Average
+
+SKILLS
+
+(Tools)
+AutoCrossbow		physical attack vs. enemy group (Vigor); ignores row, can miss
+NoiseBlaster		sets Muddle on a group of foes
+Bio Blaster		dark damage (Magic) to a group of foes; sets Poison
+Drill			physical attack (Vigor); ignores defense, sets Sap
+Flash			non-elemental damage (Magic) to a group of foes; sets Blind
+Defibrillator		revives a fallen ally; Magic determines amount of HP restored
+Mana Battery		restores MP to an ally (Magic)
+Chainsaw		physical attack (Vigor); ignores defense, may instantly kill
+---
+Jump (replaces Fight)	Fight (Vigor) + 100% damage (spears) or 50% (other weapons); ignores row
+
+ESPERS	 Cost   Effect
+	   
+Siren	 16 MP: sets Bserk on all foes
+Unicorn	 24 MP: restores HP to party (Stamina) and lifts most bad statuses
+Golem	 48 MP: blocks physical hits for party (durability = caster's max HP)
+Palidor	 24 MP: party attacks with Jump (Vigor)
+	   
+SPELLS (details >printme)
+
+Gray			White
+
+Rasp - Magic		Cure 2 - Magic	
+Bserk			Remedy - Stamina
+Slow
+SlowX
+Safe
+Haste
+Float
+Scan			
+
+EQUIPMENT ($ shoppable, details >printme)
+
+WEAPONS: Spears, Swords 
+
+		Att	Eva	Stats		Description
+$ Stout Spear	90				+25% HP
+$ Trident	100				Water damage, +12.5% HP
+$ Fire Lance	120				Fire damage, +12.5% HP
+
+$ Flametongue	125	-/10	+3 Vig/Mag	Fire2
+$ Icebrand	125	-/10	+3 Sta/Mag	Ice2
+$ Elec Sword	125	-/10	+3 Spd/Mag	Bolt2
+Blood Sword	160	10/-			Drain
+
+$ Scimitar	150	10/-	+3 Vig/Spd	DualWield, CounterAtt
+--WOR--
+$ Partisan	140				+25% HP
+Gungnir		160				Hits, +50% HP
+Longinus	180				Holy damage, +25% HP
+
+$ Rune Blade	140	-/10	+5 Vig/Mag	Mp crit
+Zantetsuken	210	20/20	+7 Vig/Spd	CountAtt, Hits, HighCrit, Instakill
+Excalibur	210	10/10	+7 Vig/Mag	MP crit, 2 hands
+Atma Weapon	255				Stamina Att, weaker at low Hp
+
+$ Falchion	200 	10/-	+5 Vig/Spd 	DualWield, CounterAtt
+
+SHIELDS:  	Def	Eva	Stats		Description
+
+$ Gold Shield	30/30	10/10	-2 Spd		Halves Water
+--WOR--
+Flameguard	20/30	-/10	+3 Vig/Mag	Absorbs Fire
+Iceguard	20/30	-/10	+3 Sta/Mag	Absorbs Ice
+Thunderguard	20/30	-/10	+3 Spd/Mag	Absorbs Bolt
+$ Diamond Kite	40/35	10/10	-2 Spd		Halves Bolt
+$ Crystal Kite	50/40	10/10	-2 Spd		Halves Wind 
+Genji Shield	45/30	20/-	+5 Vig/Sta	Auto-Safe
+Force Shield	30/45	-/20	+5 Mag		Auto-Shell
+Aegis Shield	25/25	20/20	+5 Spd		Auto-Haste (blocks Slow)
+Multiguard	20/40	-/10	-3 All		Absorb Fire,Ice,Bolt
+
+HELMETS:
+$ Green Beret	10/10	10/10	+3 Sta		+12,5% HP-MP
+$ Gold Helm	30/25		-2 Spd		Halves Water
+Stat Hat	10/10		+5 All
+--WOR--
+$ Crystal Helm	40/35	-	-2 Spd		Halves Wind 
+$ Dark Hood	10/25	20/-	+5 Spd		
+Red Cap		15/15	10/10	+5 Sta		+25% HP-MP
+Genji Helm	40/20	10/-	+5 Vig +3 Sta	
+Dragon Helm	20/40	-/10	+5 Vig +3 Mag	Jump random hits 2x
+Skull Cap	30/30		+7 Sta
+
+ARMORS:
+$ Power Armor	40/25		+5 Vig +3 Sta
+$ Gold Armor	55/40		-3 Spd		Halves Water
+--WOR--
+$ Crystal Mail	75/50		-3 Spd		Halves Wind
+$ Dark Gear	40/35	20/-	+5 Vig/Spd	
+Genji		70/35	10/-	+7 Vig/Sta
+Force Armor	35/70	-/10	+7 Mag		Halves Fire,Ice,Bolt
+Royal Jacket	50/40	20/-	+5 Vig		+25% HP
+Mirage Vest	35/35	20/20	+7 Spd		Auto-Haste (blocks Slow)
+Lazy Shell	70/70		-7 Vig/Spd	Halves Bolt/Wind
+
+RELICS:	(details >printme)
+Spirit Stone	15/-		+5 Vig/Sta	Blocks Blind, Poison, Petrify
+Amulet		-/15		+5 Mag/Sta	Blocks Sleep, Muddle, Berserk
+White Cape		-/10	+5 Mag +3 Spd	Blocks Imp, Mute, Berserk
+Knight Cape		10/-	+5 Vig +3 Spd	+12.5% HP, cover
+Back Guard	20/20				Prevents ambushes
+Hyper Wrist					Auto Berserk
+Guard Ring	5/15				Auto-Safe
+Wall Ring	15/5				Auto-Shell
+Sprint Shoes		20/-			Auto-Haste (blocks Slow)
+Stat Stick			+5 All		+12.5% HP/MP
+----------
+Reflect Ring					Auto-Reflect
+Ribbon			20/20			Blocks Stop, Petrify, Death
+Quartz Charm			+7 Sta		Auto-Safe/Shell
+Zephyr Cape		10/10	+7 Spd +5 Sta	Haste on low Hp
+Life Bell			+5 Sta		Auto-Regen (blocks Sap)
+Black Belt			+7 Spd		Hits, CounterAtt
+Power Glove			+7 Vig		Physical output +25%
+Magic Cube		-/20	+7 Mag		+50% MP
+Hero Ring			+7 Vig +7 Mag	+25% HP/MP, cover
+Muscle Belt	10/10				+25% HP, physical output +25%
+Crystal Orb					+25% MP, magical output +25%
+Black Heart					+50% HP; blocks Poison/Holy; weak to all else
+Mistery Egg					It's a Mistery...
+----------
+Dragoon Seal		20/-	+3 Vig +5 Spd	Fight to Jump, sword spellcast rate up
+Nirvana Band	10/-		+3 Vig +3 Sta	All output +25%
+
+
+ESPERS:		Esper Level Bonus	Equip Bonus
+
+Siren		Magic+1/Speed+1		Blocks Blind/Mute/Muddle
+Unicorn		HP+30/Stamina+1		Vigor +5
+Golem		HP+20/Vigor+1		Defense +10
+Palidor		Vigor+1/Speed+1		Auto-Haste		
+
+ANALYSIS
+
+The King, The Chainsaw, The Engineer, One of the Figaro Bros., The Ones Who Uses Main Character Weapons 
+Without Being a Main Character. He and Sabin can break the rules like that.
+
+Strengths
+
+Incredible Versatility
+Strong throughout the whole game
+Very Tanky; Golem levels, Great Armor Selection, HP+ Spears
+Superb AoE & status control; Lots of status debuffs
+Solid physical damage; defense-ignoring, elemental control, high multiplier, even an AoE physical
+Secondary Healer, has Defibrillator Tool
+Solid party support abilities; Has unique MP recovery Tool
+Has two speed espers
+Unique damage booster, boosting physicals & magics
+Weaknesses
+
+Low stamina, slow growth
+Magical damage limited to AoE
+WoB Spear Selection is weak
+Slow in WoB because of armor, Speed builds slowly
+Edgar has few weaknesses, with his only major weakness being his low stamina. He's a jack-of-all-trades, 
+master-of-several, and nearly a master of the rest. Easily a contender for best character in Brave New World, 
+even if he's not as simple to use as his brother. (Still simpler than Gau & Gogo).
+
+BUILDS (go for 1300+ hp, focus EL down one path, focus on a primary damage type, don't neglect defense and auto-status)
+
+- Dragoon
+
+Vigor Edgar, taking an even mix of Golem & Palidor levels. Golem in the WoB, solidifying his HP, and Palidor 
+in the WoR, correcting his slow speed. Don't let the class name fool you: Edgar will easily spend half or more 
+of his time running support or using the Chainsaw. Save Jump for boss fights, unless you don't have Chainsaw 
+yet or unless you just hate a particular random. This build can easily fit into any party and perform exceptionally 
+well. Just don't forget to give him the Nirvana Band to boost his healing (Cure 2 & Defibrillator) alongside his damage.
+
+- Engineer
+
+Siren (magic & speed) levels, with some Unicorn (HP) levels for bulk. Pure support Edgar, possibly a primary healer.
+He's mostly about abusing his free & powerful revive, though the Mana Battery, boosted Cure 2, and other support 
+skills certainly play a solid role too. Lacks offensive options outside of AoE magical damage, 
+though for how great a support character Edgar is, such damage is still pretty good.
+
+- Red Mage
+
+A mix of both vigor & magic levels. Can grab either Golem for some bulk, or Palidor to focus this build around speed ELs. 
+Golem version is honestly more of a variant on the Dragoon build. Unlike other characters, 
+the two stats at play here (vigor & magic) actually play different roles for Edgar, so the hybridization actually works. 
+The hybridization also works because Edgar's so powerful he can get away with a lack of focus.
+
+- Phalanx
+
+Unicorn (stamina) Edgar, possibly with some speed levels (Palidor or Siren). Main shtick is better chances to defend 
+the party with the "Cover allies" property of spears & ultra bulky Golem summons. Equip all Genji & Nirvana for better 
+Cover chances, absurd physical defense, & for boosting your damage. Equip Palidor for randoms; for boss fights, 
+equip Golem and just apply Haste manually.
+
+Downside is that this is Edgar's slowest & least damaging/healing build, while still not having the greatest Cover 
+chances amongst the whole cast. Two-handing a spear with Black Belt (counterattacks) can help with damage & speed, 
+though you won't be quite as invincible. Then again, how much defense does Edgar really need?
+
+MISC
+
+NoiseBlaster + BioBlaster/Flash is a stupidly good combo, especially in the early game. Please abuse it.
+Equip the Nirvana Band, regardless of build. The only other character who has any reason to equip it is Kirin Cyan, 
+and he lacks the raw diversity the Edgar gains from the band. Optimally, keep Kirin Cyan on a different team.
+Elemental Blade Jumping is solid all game long, even into the final dungeon. Jump with these in the WoB, 
+and never sell them. Gungnir is less powerful than Longinus, but it's HP boost is HUGE - big enough that Edgar can 
+scorn the lack of a shield. Certain X-Mages can burn MP too fast for even the Mana Battery to keep up if you get
+careless. Golem is stupidly powerful, especially paired with Image, and you should abuse this powerful summon.

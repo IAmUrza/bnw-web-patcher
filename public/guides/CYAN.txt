@@ -1,0 +1,150 @@
+CYAN GARAMONDE
+Retainer to the King of Doma
+
+BASE STATS (experience & growth chart >printme)
+
+Vigor Magic Speed Stamina (HPBase) (MPBase) (ATTBase) Def&MagDef Evade&MagEva RetreatSpeed 
+42    24    30    36       132      -        64       42 / 36      18 / 6     Low 
+
+SKILLS
+
+(Bushido)
+
+(Note: all Bushidos are untargetable)
+Dispatch	(lv. 1)  strong physical attack (Vigor); ignores defense, 2x damage to humans
+Mindblow	(lv. 8)  MP damage
+Empowerer 	(lv. 10) absorbs HP/MP from foe (Magic); damage halved from back row
+Flurry 		(lv. 12) four physical attacks (Vigor); sets muddle
+Dragon 		(lv. 16) Stamina-based (magical) attack; may petrify
+Eclipse 	(lv. 20) non-elemental damage (Magic) to all foes; sets Blind
+Tempest 	(lv. 30) four powerful physical attacks (Vigor)
+Cleave 		(Nightmare) instant death to all foes
+
+ESPERS		Cost   Effect
+	   
+Kirin 		24 MP: restores party's HP (Magic) and sets Regen
+Bismark 	32 MP: water damage (Magic) on all foes
+Crusader	64 MP: dark damage (Magic) on all foes
+	   
+SPELLS (details >printme)
+
+Storm - Magic		Cure - Magic
+Merton - Magic		Cure 2 - Magic
+Demi			Life
+Quartr			Regen - Stamina
+
+EQUIPMENT ($ shoppable, details >printme)
+
+WEAPONS: Katanas
+		Att	Eva	Stats		Description
+
+$ Ichimonji	140	10/-	+3 Spd/Sta	High Crit, Instakill
+Kazekiri	150	10/-	+5 Spd/Sta	Stamina-based wind attack
+Murasame	160	10/-	+5 Vig/Sta	Counter-att
+--WOR--
+Masamune	180	10/-	+7 Vig/Sta	Counter-att
+Mutsunokami	210	10/-	+7 Spd/Sta	Stamina-based wind attack
+
+HELMETS:	Def	Eva	Stats		Description
+$ Green Beret	10/10	10/10	+3 Sta		+12.5% HP-MP
+$ Gold Helm	30/25		-2 Spd		Halves Water
+Stat Hat	10/10		+5 All
+--WOR--
+$ Crystal Helm	40/35	-	-2 Spd		Halves Wind 
+$ Dark Hood	10/25	20/-	+5 Spd		
+Red Cap		15/15	10/10	+5 Sta		+25% HP-MP
+Genji Helm	40/20	10/-	+5 Vig +3 Sta	
+Skull Cap	30/30		+7 Sta
+
+ARMORS:
+$ Power Armor	40/25		+5 Vig +3 Sta
+$ Gold Armor	55/40		-3 Spd		Halves Water
+--WOR--
+$ Diamond Mail	65/45		-3 Spd		Halves Bolt
+$ Crystal Mail	75/50		-3 Spd		Halves Wind	
+Genji Armor	70/35	10/-	+7 Vig/Sta
+Force Armor	35/70	-/10	+7 Mag		Halves Fire,Ice,Bolt
+Mirage Vest	35/35	20/20	+7 Spd		Auto-Haste (blocks Slow)
+Lazy Shell	70/70		-7 Vig/Spd	Halves Bolt/Wind
+
+RELICS:	(details >printme)
+Spirit Stone	15/-		+5 Vig/Sta	Blocks Blind, Poison, Petrify
+Amulet		-/15		+5 Mag/Sta	Blocks Sleep, Muddle, Berserk
+White Cape		-/10	+5 Mag +3 Spd	Blocks Imp, Mute, Berserk
+Knight Cape		10/-	+5 Vig +3 Spd	+12.5% HP, cover
+Back Guard	20/20				Prevents ambushes
+Hyper Wrist					Auto Berserk
+Guard Ring	5/15				Auto-Safe
+Wall Ring	15/5				Auto-Shell
+Sprint Shoes		20/-			Auto-Haste (blocks Slow)
+Stat Stick			+5 All		+12.5% HP/MP
+----------
+Reflect Ring					Auto-Reflect
+Ribbon			20/20			Blocks Stop, Petrify, Death
+Quartz Charm			+7 Sta		Auto-Safe/Shell
+Zephyr Cape		10/10	+7 Spd +5 Sta	Haste on low Hp
+Life Bell			+5 Sta		Auto-Regen (blocks Sap)
+Black Belt			+7 Spd		Hits, CounterAtt
+Power Glove			+7 Vig		Physical output +25%
+Magic Cube		-/20	+7 Mag		+50% MP
+Hero Ring			+7 Vig +7 Mag	+25% HP/MP, cover
+Muscle Belt	10/10				+25% HP, physical output +25%
+Crystal Orb					+25% MP, magical output +25%
+Black Heart					+50% HP; blocks Poison/Holy; weak to all else
+Mistery Egg					It's a mistery...
+----------
+Nirvana Band	10/-		+3 Vig +3 Sta	All output +25%
+
+ESPERS:		Equip level Bonus	Esper level bonus
+
+Kirin		Magic +5		HP+30/Stamina+1
+Bismark		Halves Water		Vigor+2	
+Crusader	Auto-Reflect		HP+60
+
+ANALYSIS
+
+The Samurai, The Retainer to the King of Doma, The Most Improved in This Hack, 
+and the Infinitely Cooler than Cloud Strife or Sephiroth.
+
+Strengths
+
+Hits like a truck
+Incredible HP espers, Heavy Armor
+Great Out-of-Battle Healer (thanks to Empowerer); Has in-battle healing
+Cleave & Flurry Bushidos for AoE control/death
+
+Weaknesses
+
+No shield, forced two-handed (stats from only one weapon)
+Slow
+No party support
+Limited status control
+Bushido is untargetable (not applicable to AoE Bushido)
+AoE damage is limited (either Eclipse, or late-game Mutsuno/Quartr)
+Cyan is the simplest character not named Umaro. Grab lots of HP, maybe lots of vigor, hit like a truck, and tank. 
+He's got some minor healing, AoE, and status control, but for the most part, he's your resident heavy tank.
+
+BUILDS (go for 1300+ hp, focus EL down one path, focus on a primary damage type, don't neglect defense and auto-status)
+
+- Samurai
+
+Vig/HP Cyan. A late bloomer who really shines after you've cleared his Soul, 
+giving you access to Crusader levels and all of his Bushidos. (Flurry is more about status control, 
+and Mutsuno comes late unless you do an early Ebot's Rock). Carves enemies up left and right. Enjoy.
+Not recommended to go pure vigor. Cyan's a heavy tank, not a glass cannon like Shadow. 
+Get this guy some serious Crusader levels to go with his vigor levels.
+
+- Sentinel
+
+Pure Kirin Cyan. Infinite HP, heavy armor, spams Dragon, and ain't afraid of anything. 
+Pretty much dominates the whole game up until Kefka's Tower, and even then, still has his uses. 
+All that stamina gives him a high counterattack rate, so don't forget to keep him in the front row. 
+Oh, he's also got some AoE and healing too.
+No, seriously, if the mid-game is giving you trouble, use this build.
+
+MISC
+
+Stalwart Cyan dominates the mid-game, while Samurai Cyan shines best in the lategame. 
+Ultros' Esper Reset allows you to enjoy the benefits of both. Build Cyan as a Stalwart for the mid-game, 
+then esper reset over to Samurai after clearing his soul. Samurai Cyan isn't fun to play as in the mid-game.
+Don't forget your Force Armor lategame. Cyan needs magic defense.

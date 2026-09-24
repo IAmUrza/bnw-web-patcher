@@ -1,6 +1,6 @@
 // CustomOptionsPanel.tsx
 // code co-authored by Claude Sonnet 4
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ImagePreviewModal from './ImagePreviewModal';
 import { usePasswordUnlock, PasswordForm } from './PasswordGate';
 
@@ -73,6 +73,7 @@ const CustomOptionsPanel: React.FC<CustomOptionsPanelProps> = ({
   hideInfoIn = []
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const panelTopRef = useRef<HTMLDivElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [promptingFor, setPromptingFor] = useState<string | null>(null);
   const [modalProps, setModalProps] = useState<{
@@ -172,7 +173,7 @@ const CustomOptionsPanel: React.FC<CustomOptionsPanelProps> = ({
   }
 
   return (
-    <div className="w-full max-w-2xl">
+	<div className="w-full max-w-2xl" ref={panelTopRef}>
 
       <div className="options-toggle">
         <button
@@ -391,18 +392,16 @@ const CustomOptionsPanel: React.FC<CustomOptionsPanelProps> = ({
             ))}
           </div>
 
-          {/* Clear All Button */}
-          {getSelectedCount() > 0 && (
-            <div className="p-4 border-t border-gray-700">
-              <button
-                onClick={() => onSelectionChange([])}
-                disabled={isDisabled}
-                className="mx-auto px-2 py-2 text-white nicer-btn"
-              >
-                Clear All Selections
-              </button>
-            </div>
-          )}
+  {/* Back to Top Button */}
+  <div className="p-4 border-t border-gray-700">
+    <button
+      type="button"
+	  onClick={() => document.getElementById('download-rom-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+      className="mx-auto px-2 py-2 text-white nicer-btn"
+    >
+      Back to Top
+    </button>
+  </div>
 
           {modalOpen && modalProps && (
             <ImagePreviewModal

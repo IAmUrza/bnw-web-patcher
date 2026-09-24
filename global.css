@@ -456,6 +456,7 @@ button {
   font-size: 0.8rem;
   color: #d8c8f0;
   margin-bottom: 1rem;
+  white-space: pre-line;
 }
 
 /* Grid, not flex: fixed 215px columns mean a box that wraps to a second
@@ -1044,6 +1045,36 @@ td:nth-child(even) {
   grid-template-columns: repeat(auto-fit, 130px);
   justify-content: start;
   gap: 4px 16px;
+}
+
+.docs-guide-btn {
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(168, 85, 247, 0.5);
+  color: #e9d5ff;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.docs-guide-btn:hover,
+.docs-guide-btn-active {
+  color: #fff;
+  border-bottom-color: #a855f7;
+}
+
+.character-guide-display {
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.character-guide-text {
+  white-space: pre-wrap;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #d8c8f0;
+  line-height: 1.4;
 }
 
 /* Collapsible Printme tables */

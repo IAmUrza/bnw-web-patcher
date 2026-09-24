@@ -1,0 +1,214 @@
+TERRA BRANFORD
+the power of love
+
+BASE STATS (experience & growth chart >printme) 
+
+Vigor	Magic	Speed	Stamina	(HPBase)(MPBase)(ATTBase) Def&MagDef Evade&MagEva  RetreatSpeed 
+30	 42	 30	  30	   60	   45	   32	   30/36	 6/12	     Average 
+
+SKILLS
+
+Morph - 50% bonus to all damage/healing output, double damage taken 
+	(Stamina reduces incoming damage penalty to a minimum of 25%)
+
+ESPERS	  Cost	Effect
+
+Maduin	  48 MP:defense-ignoring wind damage (Magic) on all foes
+Unicorn	  36 MP:restores HP to party (Stamina) and lifts most bad statuses
+Carbunkl  24 MP:sets Rflect on party
+Bismark	  32 MP:water damage (Magic) on all foes
+Tritoch	  64 MP:fire/ice/bolt damage (Magic) on all foes
+Phoenix	  80 MP:revives all dead allies to max HP
+Ragnarok  99 MP:9,999 damage to one foe
+
+SPELLS (details >printme)
+
+Fire (lv. 4)		Muddle (lv. 6)		Cure-Magic (lv. 1)
+Fire2 (lv. 10)		Mute			Cure2-Magic
+Fire3 (lv. 20)		Imp (lv. 8)		Cure3-Magic
+Ice3			Stop			Life
+Bolt3			Slow (lv. 16)		Life2 (lv. 20)
+Break			Shell			Remedy-Stamina
+Storm			Rflect			Regen-Stamina
+Ultima			Scan			RegenX-Stamina (lv. 30)
+
+(All of Terra's black spells scale with Magic)
+
+EQUIPMENT ($ shoppable, *unique, details >printme)
+
+WEAPONS: Swords, Maces, Thrown Weapons
+	
+		Att	Eva	Stats		Description
+$ Flametongue	125	-/10	+3 Vig/Mag	Fire2
+$ Icebrand	125	-/10	+3 Sta/Mag	Ice2
+$ Elec Sword	125	-/10	+3 Spd/Mag	Bolt2
+Blood Sword	160	10/-			Drain
+$ Morning Star	125		-2 Spd		Ignore Defense
+
+$ Scimitar	150	10/-	+3 Vig/Spd	DualWield, CounterAtt
+$ Rising Sun	130				Thrown Weapon (Ignore Row, Strong vs Flying, DualWield)
+--WOR--
+$ Rune Blade	140	-/10	+5 Vig/Mag	MP Crit								
+Soul Sabre	175 	-/10 	+7 Magic   	Osmose					
+Zantetsuken	210	20/20	+7 Vig/Spd	CountAtt, Hits, HighCrit, Instakill
+Excalibur	210	10/10	+7 Vig/Mag	MP Crit, 2 hands
+Atma Weapon	255				Stamina Att, weaker with low HP	
+*Apocalypse	180	10/10	+5 All		MP Crit, Flare
+
+$ Falchion	200 	10/-	+5 Vig/Spd 	DualWield, CounterAtt
+Wing Edge	160				Thrown Weapon (Ignore Row, Strong vs Flying, DualWield)	
+
+SHIELDS:	Def	Eva	Stats		Description
+
+$ Gold Shield	30/30	10/10	-2 Spd		Halves Water
+--WOR--
+Flameguard	20/30	-/10	+3 Vig/Mag	Absorbs Fire
+Iceguard	20/30	-/10	+3 Sta/Mag	Absorbs Ice
+Thunderguard	20/30	-/10	+3 Spd/Mag	Absorbs Bolt
+$ Diamond Kite	40/35	10/10	-2 Spd		Halves Bolt 
+$ Crystal Kite	50/40	10/10	-2 Spd		Halves Wind 
+Genji Shield	45/30	20/-	+5 Vig/Sta	Auto-Safe
+Force Shield	30/45	-/20	+5 Mag		Auto-Shell
+Aegis Shield	25/25	20/20	+5 Spd		Auto-Haste (blocks Slow)
+Hero Shield	40/40	10/10	+5 Vig/Mag	Auto-Regen (blocks Sap)
+Multiguard	20/40	-/10	-3 All		Absorb Fire,Ice,Bolt
+
+HELMETS:
+
+$ Green Beret	10/10	10/10	+3 Sta		+12.5% HP-MP
+$ Mystery Veil	5/25	10/-	+3 Mag +2 Vig	Sword spellcast up
+$ Magus Hat	5/35	-/10	+3 Mag +2 Sta	+25% MP
+$ Gold Helm	30/25		-2 Spd		Halves Water
+Stat Hat	10/10		+5 All
+--WOR--
+$ Crystal Helm	40/35	-	-2 Spd		Halves Wind 
+$ Dark Hood	10/25	20/-	+5 Spd		
+$ Oath Veil	10/35	-/10	+5 Mag +3 Vig	Sword spellcast up
+$ Circlet	10/45	10/-	+5 Mag +3 Sta	+50% MP
+Red Cap		15/15	10/10	+5 Sta		+25% HP-MP
+Genji Helm	40/20	10/-	+5 Vig +3 Sta	
+Skull Cap	30/30		+7 Sta
+
+ARMORS:
+$ White Dress	20/40	-/20	+5 Mag
+$ Power Armor	40/25		+5 Vig +3 Sta
+$ Gold Armor	55/40		-3 Spd		Halves Water
+--WOR--
+$ Diamond Mail	65/45		-3 Spd		Halves Bolt
+$ Crystal Mail	75/50		-3 Spd		Halves Wind
+$ Light Robe	25/50	-/20	+5 Mag/Sta	
+Genji Armor	70/35	10/-	+7 Vig/Sta
+Force Armor	35/70	-/10	+7 Mag		Halves Fire,Ice,Bolt
+Minerva		50/50	10/10	+5 Vig/Mag	Blocks Fire,Ice,Bolt
+Mirage Vest	35/35	20/20	+7 Spd		Auto-Haste (blocks Slow)
+Lazy Shell	70/70		-7 Vig/Spd	Halves Bolt/Wind
+
+RELICS:	(details >printme)
+Spirit Stone	15/-		+5 Vig/Sta	Blocks Blind, Poison, Petrify
+Amulet		-/15		+5 Mag/Sta	Blocks Sleep, Muddle, Berserk
+White Cape		-/10	+5 Mag +3 Spd	Blocks Imp, Mute, Berserk
+Knight Cape		10/-	+5 Vig +3 Spd	+12.5% HP, cover
+Back Guard	20/20				Prevents ambushes
+Hyper Wrist					Auto Berserk
+Guard Ring	5/15				Auto-Safe
+Wall Ring	15/5				Auto-Shell
+Sprint Shoes		20/-			Auto-Haste (blocks Slow)
+Stat Stick			+5 All		+12.5% HP/MP
+Gale Hairpin		-/20	+5 Spd +3 Mag	Pre-emptive rate up
+----------
+Reflect Ring					Auto-Reflect
+Ribbon			20/20			Blocks Stop, Petrify, Death
+Quartz Charm			+7 Sta		Auto-Safe/Shell
+Zephyr Cape		10/10	+7 Spd +5 Sta	Haste on low Hp
+Life Bell			+5 Sta		Auto-Regen (blocks Sap)
+Black Belt			+7 Spd		Hits, CounterAtt
+Power Glove			+7 Vig		Physical output +25%
+Magic Cube		-/20	+7 Mag		+50% MP
+Hero Ring			+7 Vig +7 Mag	+25% HP/MP, cover
+Muscle Bolt	10/10				+25% HP, physical output +25%
+Crystal Orb					+25% MP, magical output +25%
+Black Heart					+50% HP; blocks Poison/Holy; weak to all else
+Mistery Egg					It's a Mistery...
+----------
+Gem Box*	20/-		+7 Vig		MP costs 1/2
+
+ESPERS:		Equip Bonus		Esper level Bonus
+
+Maduin		Halves Wind 		Magic+1/Stamina+1
+Unicorn		Vigor +5		HP+30/Stamina+1
+Carbunkl	Auto-Regen		MP+25/Stamina+1
+Bismark		Halves Water 		Vigor+2
+Tritoch		Auto-Shell		Stamina+2
+Phoenix		HP+25%			HP+30/MP+15
+Ragnarok	Mag.Damage +25%		MP+40
+
+ANALYSIS
+
+The Main Character, the Esper-Human Hybrid, the Magitek Knight, the Caretaker of Orphans. 
+(Oh, you thought "love" meant teenage romance? Haha, you're silly).
+
+Strengths
+
+WoR Elemental Control
+Primary Healer, has Life 2
+High Base Magic with Magic+ Equipment
+Tanky; HP Espers with Incredible Armor Selection
+Good Weapon Selection; Weapons Complementary to Magic (providing weakness sniping vs. neutral damage, or vice versa)
+Can Stance Shift to a Glass Cannon for Boss Fights (Morph)
+Solid Status Control
+Decent Party Buffs (esp. Regen & Shell)
+
+Weaknesses
+
+Low Speed
+Party Buffs are either single-target, niche, or very latecoming
+Status control is limited
+For almost whole game, AoE damage is niche, mediocre, or average
+For most of WoR, no great neutral magic damage options (Fire 3 is average)
+Offense uses Lots of MP
+Morph may be Tricky to Use
+
+Terra's role on the team is as a bulky attacker & cleric, who can optionally stance shift during boss fights into 
+a glass cannon (& healer, still). Surprisingly, her job is not about being an all-around mage - that is more of a 
+job for the Thamasa Duo.
+
+BUILDS (go for 1300+ hp, focus EL down one path, focus on a primary damage type, don't neglect defense and auto-status)
+
+- Magic Knight
+
+Vigor Terra, building vigor & HP to strengthen Terra's role as a tank & dps fighter. Grab one or two of many of her 
+good weapons, Morph (for boss fights), kill things. Dual-wielding works especially well with self-Berserk (and Morph). 
+Terra can also build a little bit of MP through Phoenix (HP +30, MP +15) to strengthen her healing (Life 2 & Cure 3 
+are expensive), and perhaps even her lategame elemental control.
+Going without HP ELs is not advised. Even her Morph stance wants HP, so that she can at least survive one, maybe two, 
+attacks. Also, if you're doing Apocalypse + shield for the endgame, Morph & Berserk are only half as valuable.
+
+- Paladin
+
+Jedi Esper Terra, built with HP & stamina (Unicorn & Tritoch), maybe some MP (Carbunkl). Grab the Atma Weapon, Genji 
+gear, and hack things up with a lightsaber. Less potential damage than vig Terra, but much tankier. Your high stamina 
+also gives you a very high counterattack rate, so don't forget to wear a Black Belt. You also still have Terra's 
+solid magic selection at your disposal, as well as a stronger RegenX endgame.
+Thanks to all the stamina, Morph is a safe move with this build. You can ignore normal precautions & just rely on 
+Morph Terra's absurd regen ticks for survivability. Berserk strats are also still a very real thing.
+Unfortunately, Covering allies probably won't work as well, as it's anti-synergistic with Atma, Morph, & Berserk.
+
+- Sage
+
+Healer/magic Terra, built with some mix of HP, MP, & magic. The HP & stamina make her an excellent tank and potential 
+bodyguard (Cover), and the MP & magic insures she's an excellent healer with her magics. Also still has her usual 
+Wind magic & elemental sniping options, with more MP than any other build to actually utilize them. Best Ultima user 
+for the endgame as well, if that's your thing.
+
+While it might be flavorful & thematic to think of her as the "frail wizard with powerful magics," she's, again, more 
+of a bulky healer & party tank. Her powerful magics are limited to either modestly powerful Wind magic or elemental 
+sniping for most of the game. Also, Maduin isn't a good esper for building a "pure" mage. Still, if you just want to 
+nuke stuff (and I don't blame you), an endgame respec into raw Maduin & Ragnarok for Ultima spam isn't bad.
+
+MISC
+
+Protect Morph stance with Image, Golem, elemental resistances, and HP ELs.
+64 stamina points are an affordable goal to scale down incoming damage on morph to 150%,
+the cap is 96 for a reduction to 125%. Even in a pure stamina config, you can’t neglect defense at least not vs end game stuff. 
+She will still be glassy against stuff like Goddess/Kefka physicals and ITD Magics. Especially the former. 
+So you can’t wholly disregard her defense even if she can be quite tanky with big regen ticks.

@@ -1,0 +1,185 @@
+STRAGO MAGUS
+Get Off My Lawn!
+
+BASE STATS (experience & growth chart >printme)
+
+Vigor Magic Speed Stamina (HPBase) (MPBase) (ATTBase) Def&MagDef Evade&MagEva RetreatSpeed 
+24    48    24    42       18       60       16       24 / 36       6 / 18    Low
+
+SKILLS
+
+(Lore)
+Aqualung	(18 MP) - water damage to all foes (Magic)
+Bad Breath 	(16 MP) - sets Poison/Blind/Mute on a group of foes
+Black Omen 	(72 MP) - massive defense-ignoring damage to all foes (Magic)
+Blaze 		(12 MP) - fire damage (Magic); sets Sap/Blind, can target multiple foes
+Blow Fish 	(0 MP)  - 1,000 damage
+Discord 	(5 MP)  - sets Muddle/Bserk on one foe
+Holy Wind 	(30 MP) - restores HP to party by an amount equal to Strago's current HP
+Raid 		(15 MP) - absorbs HP/MP from foe (Magic); ignores defense
+Raze 		(36 MP) - heavy fire damage (Magic); may set Sap/Poison
+Refract 	(25 MP) - sets Image/Rflect on an ally
+Shield 		(48 MP) - sets Safe on party
+Tsunami 	(64 MP) - heavy water damage to all foes (Magic)
+---
+X-Magic (replaces Magic) - cast two spells instead of one
+	   
+SPELLS	(details >printme)
+
+Ice - Magic	Osmose - Magic
+Ice 2 -Magic	Stop
+Dark - Magic	Slow
+X-Zone		Shell
+		Rflect
+		Warp
+
+ESPERS		Cost   Effect
+	   
+Shiva		32 MP: ice damage (Magic) on all foes
+Carbunkl	24 MP: sets Rflect on party
+Zoneseek	48 MP: sets Shell on party
+Odin		99 MP: massive non-elemental damage (Stamina) to all foes; ignores defense
+
+EQUIPMENT
+
+WEAPONS: Rods
+		Att	Eva	Stats		Description
+
+$ Fire Rod	120		+3 Mag		Fire2 *(MP crit= 2x spell damage)
+$ Ice Rod	120		+3 Mag		Ice2 *(MP crit= 2x spell damage)	
+$ Thunder Rod	120		+3 Mag		Thunder2 *(MP crit= 2x spell damage)
+--WOR--
+$ Quartrstaff	150	10/-	+7 Sta		Quartr *(MP crit= hits foe group)
+$ Doomstick	150	10/-	+3 Mag/Sta	Doom *(MP crit= X-Zone)
+Punisher	150	10/-	+7 Mag/Sta	Dark *(MP crit= 2x spell damage)
+Wind Breaker	180	10/-	+5 Spd/Sta	Stamina-based wind attack
+
+SHIELDS:	Def	Eva	Stats		Description
+
+$ Targe		15/15	10/-			
+--WOR--  
+Flameguard	20/30	-/10	+3 Vig/Mag	Absorbs Fire
+Iceguard	20/30	-/10	+3 Sta/Mag	Absorbs Ice
+Thunderguard	20/30	-/10	+3 Spd/Mag	Absorbs Bolt
+Multiguard	20/40	-/10	-3 All		Absorb Fire,Ice,Bolt
+
+HELMETS:
+
+$ Green Beret	10/10	10/10	+3 Sta		+12,5% HP-MP
+$ Magus Hat	5/35	-/10	+3 Mag +2 Sta	+25% MP
+Stat Hat	10/10		+5 All
+--WOR--
+$ Dark Hood	10/25	20/-	+5 Spd		
+$ Circlet	10/45	10/-	+5 Mag +3 Sta	+50% MP
+Red Cap		15/15	10/10	+5 Sta		+25% HP/MP
+Skull Cap	30/30		+7 Sta
+
+ARMORS:
+Tabby Hide	25/30	10/10	+3 Spd/Mag	Halves Earth
+Gator Hide	30/35	10/10	+3 Spd/Sta	Halves Water
+--WOR--
+$ Diamond Vest	55/35	10/-			Halves Bolt	
+$ Light Robe	25/50	-/20	+5 Mag/Sta
+Chocobo Hide	35/40	10/10	+5 Spd/Sta	Halves Water/Wind
+Moogle Hide	40/45	10/10	+5 Spd/Mag	Halves Earth/Wind
+Dragon Hide	50/55	10/10	+7 Sta/Mag	Halves Fire/Wind
+Mirage Vest	35/35	20/20	+7 Spd		Auto-Haste (blocks Slow)
+Lazy Shell	70/70		-7 Vig/Spd	Halves Bolt/Wind
+
+RELICS: (details>printme)
+Spirit Stone	15/-		+5 Vig/Sta	Blocks Blind, Poison, Petrify
+Amulet		-/15		+5 Mag/Sta	Blocks Sleep, Muddle, Berserk
+White Cape		-/10	+5 Mag +3 Spd	Blocks Imp, Mute, Berserk
+Knight Cape		10/-	+5 Vig +3 Spd	+12.5% HP, cover
+Back Guard	20/20				Prevents ambushes
+Hyper Wrist					Auto Berserk
+Guard Ring	5/15				Auto-Safe
+Wall Ring	15/5				Auto-Shell
+Sprint Shoes		20/-			Auto-Haste (blocks Slow)
+Stat Stick			+5 All		+12.5% HP/MP
+----------
+Reflect Ring					Auto-Reflect
+Ribbon			20/20			Blocks Stop, Petrify, Death
+Quartz Charm			+7 Sta		Auto-Safe/Shell
+Zephyr Cape		10/10	+7 Spd +5 Sta	Haste on low Hp
+Life Bell			+5 Sta		Auto-Regen (blocks Sap)
+Black Belt			+7 Spd		Hits, CounterAtt
+Power Glove			+7 Vig		Physical output +25%
+Magic Cube		-/20	+7 Mag		+50% MP
+Hero Ring			+7 Vig +7 Mag	+25% HP/MP, cover
+Muscle Bolt	10/10				+25% HP, physical output +25%
+Crystal Orb					+25% MP, magical output +25%
+Black Heart					+50% HP; blocks Poison/Holy; weak to all else
+Mistery Egg					It's a mistery...
+----------
+Sage Stone	-/10		+3 Mag/Sta	X-Magic replaces Magic
+
+ESPERS:		Equip bonus	Esper Level bonus
+
+Shiva		Halves Ice	Magic+2
+Carbunkl	Auto-regen	MP+25/Stamina+1
+Zoneseek	Mag def +10	MP+20/Magic+1
+Odin		Speed +5	Stamina+2
+
+ANALYSIS
+
+Wise Old Man (maybe), Killer of Endangered Species (Hidon), The Man Whose Last Name is Magus (wonder if he hates frogs).
+
+Strengths
+
+Incredible party support; All Buffs except Haste & Golem
+Solid elemental control, decent neutral damage
+Very good AoE damage
+Lots of speed gear, Unique Hide gear
+Has Raid & Osmose for MP healing
+Tertiary healer
+Solid status control (strong trio of Bad Breath, Discord, and Raze)
+X-Zone
+
+Weaknesses
+
+No HP espers, no heavy armor, low p.def
+Neutral damage is only decent (mid-WoR Raze is nice, at least); X-Magic is mediocre (but Dark is buffed in 2.0)
+Most offensive options are MP hungry
+Very low base speed; good gear set-ups are limited to lots of speed
+Holy Wind doesn't work after big attacks
+Mediocre / so-so in the WoB
+
+Strago makes for an excellent party support with fairly good magical damage options to boot. 
+He can even have some surprising bulk with the right combo of elemental resistance, HP+ gear (Black Heart), 
+and Refract/Shield. Just make sure you equip him with as much speed gear as you can get.
+
+BUILDS (go for 1100+ hp, focus EL down one path, focus on a primary damage type, don't neglect defense and auto-status)
+
+- Blue Mage
+
+Shiva/Zoneseek for a magic build: lots of magic, with however much MP you feel is needed. Despite the high magic, this build is not a primary attacker. 
+Strago's attacks don't have the base power for that, unless you're weakness sniping. Rather, the raw magic gives him 
+strong attacks to fall back on when he's not doing his main job of supporting the party, or for just clearing randoms.
+Equip lots of speed gear, support the party, blow up stuff, and hope you don't eat a physical.
+
+An alternative attacking option to Lore is to go front-row with Rods. Thunder Rod provides Strago with another element 
+& the Punisher is just as good as Black Omen or X-Dark, barring specific circumstances (AoE, White Dragon, Asura). 
+Rods also pair with Black Belt, a beautiful +7 speed relic that gives powerful counterattacks, and they're nowhere 
+near as MP hungry as Lore. Just don't do this without at least a Guard Ring equipped, if not also a Red Cap & Refract 
+support (Reflect+Image is so good).
+
+- Stamina
+
+Carbunkl/Odin for a staminabuild: lots of stamina, with however much MP you feel is needed. An extremely latebloomer and highly niche, 
+as this build relies solely on stamina's defensive benefits. Regen is strong and stamina-related and "Viagra" Strago will also get 
+an auto-Regen esper option  Has some utility in big endgame boss fights with AoE magic nukes & status effects flying around. 
+By and large, however, this build's benefits can be imitated thru a Blue Mage with proper gear set-ups (Ribbon, 
+Amulet, Black Heart w/ elemental gear), and that build has better damage on the off-turns when Strago ain't supporting.
+
+You could use this build for a 100% counterattack Punisher Strago (provided you hit 96 stamina). (New stamina-based 
+weapon) Equip Black Belt, throw up Refract, attack & counterattack with a stick. Damage is less than Blue Mage, 
+but perhaps the counterattacks make up for it? Just don't try to Cover the party with the old man. Image doesn't work with Cover.
+
+MISC
+
+Black Heart combined with the proper shield & hide can make Strago quite bulky. Just be aware that Holy Wind won't 
+self-heal a Black Heart Strago. Don't discount Refract because it sets Reflect. Image is a very powerful buff. 
+(Maybe worth mentioning Reflect's changed behavior and that Holy Wind goes through Reflect)
+The Dark Hood is a very viable alternate to the Circlet or Red Cap.
+Blow Fish has no MP cost: a major boon to you LLG freaks out there.

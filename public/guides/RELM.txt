@@ -1,0 +1,171 @@
+RELM ARROWNY
+Age Is Just A Number
+
+BASE STATS (experience & growth chart >printme)
+
+Vigor Magic Speed Stamina (HPBase) (MPBase) (ATTBase) Def&MagDef Evade&MagEva RetreatSpeed 
+24    42    36    30       6        45       16       24 / 30      12 / 18    High
+
+SKILLS
+
+Sketch - use a foe's own attacks against it (relevant stat varies depending on attack used)
+	needs a paintbrush equipped
+	   
+SPELLS (details >printme)
+
+Fire		Osmose - Magic		Cure 3 - Magic
+Fire 2		Warp			Rerise  (Memento Ring)
+Flare					Remedy - Stamina
+Meteor					RegenX - Stamina
+Drain
+(All of Relm's black spells scale with Magic)
+
+ESPERS		Cost   Effect
+	   
+Ifrit 		32 MP: fire damage (Magic) on all foes
+Zoneseek 	48 MP: sets Shell on party
+Starlet 	80 MP: restores party's HP to max & lifts *all* bad statuses
+Bahamut 	99 MP: massive non-elemental damage (Magic) to all foes; ignores defense
+
+EQUIPMENT
+		
+WEAPONS: Paintbrushes, Rods
+		Att	Eva	Stats		Description
+
+$ Monet Brush	80	-/10	+3 Mag/Spd	Safe
+$ Fire Rod	120		+3 Mag		Fire2 *(MP crit= 2x spell damage)
+$ Ice Rod	120		+3 Mag		Ice2 *(MP crit= 2x spell damage)	
+$ Thunder Rod	120		+3 Mag		Thunder2 *(MP crit= 2x spell damage)
+--WOR--
+Dali Brush	100	-/10	+5 Mag + 3 Spd	Shell
+Ross Brush	120	-/10	+5 Mag/Spd	Reflect
+$ Quartrstaff	150	10/-	+7 Sta		Quartr *(MP crit= hits foe group)
+$ Doomstick	150	10/-	+3 Mag/Sta	Doom *(MP crit= X-Zone)
+Punisher	150	10/-	+7 Mag/Sta	Dark *(MP crit= 2x spell damage)
+Wind Breaker	180	10/-	+5 Spd/Sta	Stamina-based wind attack
+
+SHIELDS:	Def	Eva	Stats		Description 
+ 
+$ Targe		15/15	10/-			
+--WOR--  
+Flameguard	20/30	-/10	+3 Vig/Mag	Absorbs Fire
+Iceguard	20/30	-/10	+3 Sta/Mag	Absorbs Ice
+Thunderguard	20/30	-/10	+3 Spd/Mag	Absorbs Bolt
+Multiguard	20/40	-/10	-3 All		Absorb Fire,Ice,Bolt
+
+HELMETS:
+
+$ Green Beret	10/10	10/10	+3 Sta		+12,5% HP-MP
+Stat Hat	10/10		+5 All
+--WOR--
+$ Dark Hood	10/25	20/-	+5 Spd		
+Red Cap		15/15	10/10	+5 Sta		+25% HP/MP
+Cat Hood	10/30	10/10	+5 Mag/+5 Spd
+Skull Cap	30/30		+7 Sta
+
+ARMORS:
+
+$ White Dress	20/40	-/20	+5 Mag
+Tabby Hide	25/30	10/10	+3 Spd/Mag	Halves Earth
+Gator Hide	30/35	10/10	+3 Spd/Sta	Halves Water
+--WOR--
+$ Diamond Vest	55/35	10/-			Halves Bolt	
+Radiant Gown	40/50	-/20	+5 Mag		+25% MP, Brush Spellcast Up
+Chocobo Hide	35/40	10/10	+5 Spd/Sta	Halves Water/Wind
+Moogle Hide	40/45	10/10	+5 Spd/Mag	Halves Earth/Wind
+Dragon Hide	50/55	10/10	+7 Sta/Mag	Halves Fire/Wind
+Mirage Vest	35/35	20/20	+7 Spd		Auto-Haste (blocks Slow)
+Lazy Shell	70/70		-7 Vig/Spd	Halves Bolt/Wind
+
+RELICS: (details>printme)
+Spirit Stone	15/-		+5 Vig/Sta	Blocks Blind, Poison, Petrify
+Amulet		-/15		+5 Mag/Sta	Blocks Sleep, Muddle, Berserk
+White Cape		-/10	+5 Mag +3 Spd	Blocks Imp, Mute, Berserk
+Knight Cape		10/-	+5 Vig +3 Spd	+12.5% HP, cover
+Back Guard	20/20				Prevents ambushes
+Hyper Wrist					Auto Berserk
+Guard Ring	5/15				Auto-Safe
+Wall Ring	15/5				Auto-Shell
+Sprint Shoes		20/-			Auto-Haste (blocks Slow)
+Stat Stick			+5 All		+12.5% HP/MP
+Gale Hairpin		-/20	+3 Mag +5 Spd	Pre-emptive Up
+----------
+Reflect Ring					Auto-Reflect
+Ribbon			20/20			Blocks Stop, Petrify, Death
+Quartz Charm			+7 Sta		Auto-Safe/Shell
+Zephyr Cape		10/10	+7 Spd +5 Sta	Haste on low Hp
+Life Bell			+5 Sta		Auto-Regen (blocks Sap)
+Black Belt			+7 Spd		Hits, CounterAtt
+Power Glove			+7 Vig		Physical output +25%
+Magic Cube		-/20	+7 Mag		+50% MP
+Hero Ring			+7 Vig +7 Mag	+25% HP/MP, cover
+Muscle Bolt	10/10				+25% HP, physical output +25%
+Crystal Orb					+25% MP, magical output +25%
+Black Heart					+50% HP; blocks Poison/Holy; weak to all else
+Mistery Egg					It's a mistery...
+----------
+Memento Ring		-/10	+7 Mag/Sta	something related to rerise
+
+Espers:		Equip bonus	Esper Level bonus
+
+Ifrit		Halves Fire	Speed+2
+Zoneseek	Mag def +10	MP+20/Magic+1
+Starlet		+25% MP		Stamina+2	
+Bahamut		Auto-Safe	MP+40
+
+ANALYSIS
+
+The Foul Mouth, The Artist, The Living Nuclear Weapon, and The Poor Girl Without Father or Mother ; _ ;
+
+Strengths
+
+Brushes hits twice, healing and granting useful status
+Great offensive options, both ST and AoE
+Primary Healer, has Rerise
+Has Osmose; Magic esper gives MP
+Speed esper
+Can get Interceptor, greatly raising her p.eva
+Unique Hide armors & magic helmet
+Very solid debuff for randoms (Stop)
+Decent party buff & ST heal options
+Sketch is sometimes quite useful
+
+Weaknesses
+
+No HP espers, no heavy armor, low p.def
+Extremely limited No debuffs
+Offense is MP hungry, Osmose isn't terribly strong
+Interceptor requires killing an extremely valuable character
+Brush heal & buffs are more reliable in 2.0, but still limited to equipment
+Sketch is hit-or-miss
+Doesn't learn Life
+
+A simple character. Nukes stuff, heals the party, spams Rerise, drains MP with Osmose, and prays desperately 
+that she doesn't eat a physical or defense-ignoring nuke. In many ways, she's like the magical version of Locke, 
+except without the option to become tanky.
+
+BUILDS (go for 1100+ hp, focus EL down one path, focus on a primary damage type, don't neglect defense and auto-status)
+
+- Sage
+
+The simple, standard magical nuke, built with a mix of magic, speed, and MP. Could simply build pure Zoneseek, or go 
+for a mix of Ifrit, Bahamut, and Zoneseek. Does everything you expect out of Relm and does it well. Gear her for 
+magic & speed and blow stuff up. Heavy Zoneseek will lead to more damage, while mixing in lots of Ifrit tends to lead to more support.
+Highly recommended to always equip the Bahamut esper, unless it's a boss fight where you want Zoneseek but have someone 
+else to set Image/Safe/Golem. Or unless you have Interceptor, but why would you kill Shadow?
+
+- Stamina
+
+Stamina built Relm, with speed & MP as well. There's some decent synergy with Interceptor, Black Heart with 
+hide / shield resistances, and RegenX spam. Also, her attack power doesn't suffer too much, as it was only a +1 magic 
+esper. Biggest problem is that it's all a rather specific set-up, with one of the key components unavailable unless 
+you kill a valuable character. Also, Interceptor's dodge chance works just as well for the Nuke Mage.
+Stamina Relm (AKA "Love You Long Time" Relm) enjoy windbreaker rod that's basically a 1-handed Mutsunokami that 
+triggers a stamina-based wind attack.
+
+MISC
+
+Black Heart combined with the right shield & Hide can make Relm quite bulky. Even works with RegenX, though not with 
+Cure 3. Pure Zoneseek levels with an MP booster gives Relm an enormous amount of MP. It's very possible to drown out 
+Relm's "MP hungry" weakness under a giant pool of MP. Radiant Gown, brushes, and speed levels can maybe combine to 
+make Relm a decent buffer? If you have Interceptor, reach 60 stamina points to ignore defense.
