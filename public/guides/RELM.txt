@@ -160,8 +160,7 @@ Stamina built Relm, with speed & MP as well. There's some decent synergy with In
 hide / shield resistances, and RegenX spam. Also, her attack power doesn't suffer too much, as it was only a +1 magic 
 esper. Biggest problem is that it's all a rather specific set-up, with one of the key components unavailable unless 
 you kill a valuable character. Also, Interceptor's dodge chance works just as well for the Nuke Mage.
-Stamina Relm (AKA "Love You Long Time" Relm) enjoy windbreaker rod that's basically a 1-handed Mutsunokami that 
-triggers a stamina-based wind attack.
+Stamina Relm enjoy windbreaker rod that's basically a 1-handed Mutsunokami that triggers a stamina-based wind attack.
 
 MISC
 
