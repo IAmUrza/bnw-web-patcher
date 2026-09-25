@@ -1069,10 +1069,8 @@ td:nth-child(even) {
 }
 
 .character-guide-text {
-  white-space: pre-wrap;
   overflow-x: auto;
-  font-family: monospace;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #d8c8f0;
   line-height: 1.4;
 }
@@ -1235,5 +1233,132 @@ td:nth-child(even) {
 
 .printme-empty {
   color: #c4b5fd;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+}
+
+.guide-article {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.guide-section {
+  margin-bottom: 2.2rem;
+}
+
+.guide-section > p {
+  color: #d8c8f0;
+  line-height: 1.5;
+  font-size: 0.8rem;
+}
+
+.guide-tier-row td {
+  background: #4c1d95 !important;
+  color: #e9d5ff;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+  font-weight: normal !important;
+  padding: 0.2rem !important;
+}
+
+.guide-skill-list {
+  margin: 0;
+}
+
+.guide-skill-list dt {
+  color: #e9d5ff;
+  font-weight: bold;
+  margin-top: 0.6rem;
+}
+
+.guide-skill-list dt:first-child {
+  margin-top: 0;
+}
+
+.guide-skill-list dd {
+  margin: 0.15rem 0 0;
+  color: #d8c8f0;
+}
+
+.guide-tag-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.5rem;
+  padding: 0;
+  margin: 0 0 0.6rem;
+}
+
+.guide-tag-list li {
+  background: #2a1b3d;
+  border: 1px solid #4c1d95;
+  border-radius: 6px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.8rem;
+  color: #e9d5ff;
+}
+
+.guide-equip-heading {
+  color: #fff;
+  font-size: 1rem;
+  margin: 1.2rem 0 0.4rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+.guide-equip-heading:first-of-type {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.guide-pros-cons {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 0.8rem 0;
+}
+
+.guide-pros-cons > div {
+  flex: 1 1 240px;
+}
+
+.guide-pros-cons h4 {
+  color: #e9d5ff;
+  font-size: 0.8rem;
+  margin: 0 0 0.3rem;
+}
+
+.guide-pros-cons ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #d8c8f0;
+  font-size: 0.8rem;
+}
+
+.guide-pros-cons li {
+  margin-bottom: 0.2rem;
+}
+
+.guide-build {
+  margin-bottom: 1.2rem;
+}
+
+.guide-build h4 {
+  color: #fff;
+  background: #4c1d95;
+  display: inline-block;
+  padding: 0.15rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  margin: 0 0 0.4rem;
+}
+
+.guide-build p {
+  color: #d8c8f0;
+  line-height: 1.5;
+  font-size: 0.8rem;
+  margin: 0.3rem 0;
 }

@@ -6,7 +6,6 @@ const downloads = [
   { href: '/downloads/readme.txt', label: 'readme.txt' },
   { href: '/downloads/printme.pdf', label: 'printme.pdf' },
   { href: '/downloads/PDFme.pdf', label: 'PDFme.pdf' },
-  { href: '/downloads/char_planner.xlsm', label: 'char_planner.xlsm' },
   { href: '/downloads/unlockme.rar', label: 'unlockme.rar', note: 'Beat BNW to Unlock' },
 ];
 
@@ -42,7 +41,7 @@ const Guides: NextPage = () => {
     setSelectedCharacter(name);
     setGuideError(false);
     try {
-      const res = await fetch(`/guides/${slug}.txt`);
+      const res = await fetch(`/guides/${slug}.html`);
       if (!res.ok) throw new Error('failed');
       setGuideText(await res.text());
     } catch {
@@ -114,7 +113,7 @@ const Guides: NextPage = () => {
               <h3 className='docs-heading'><span>{selectedCharacter}</span></h3>
 			  {guideError && <p className='docs-note'>Couldn&apos;t load this guide.</p>}
 			  {!guideError && (
-		  		<pre className='character-guide-text'>{guideText}</pre>
+		  		<div className='character-guide-text' dangerouslySetInnerHTML={{ __html: guideText }} />
 			  )}
             </div>
           )}
