@@ -1,5 +1,4 @@
 import { NextPage } from 'next';
-import { useState } from 'react';
 import Layout from '@/layout';
 
 const downloads = [
@@ -15,40 +14,7 @@ const links = [
   { href: 'https://www.ff6hacking.com/', label: 'FF6Hacking' },
 ];
 
-const characterGuides = [
-  { name: 'Terra', slug: 'TERRA' },
-  { name: 'Celes', slug: 'CELES' },
-  { name: 'Locke', slug: 'LOCKE' },
-  { name: 'Edgar', slug: 'EDGAR' },
-  { name: 'Sabin', slug: 'SABIN' },
-  { name: 'Cyan', slug: 'CYAN' },
-  { name: 'Shadow', slug: 'SHADOW' },
-  { name: 'Gau', slug: 'GAU' },
-  { name: 'Setzer', slug: 'SETZER' },
-  { name: 'Mog', slug: 'MOG' },
-  { name: 'Strago', slug: 'STRAGO' },
-  { name: 'Relm', slug: 'RELM' },
-  { name: 'Umaro', slug: 'UMARO' },
-  { name: 'Gogo', slug: 'GOGO' },
-];
-
 const Guides: NextPage = () => {
-  const [selectedCharacter, setSelectedCharacter] = useState<string | null>(null);
-  const [guideText, setGuideText] = useState('');
-  const [guideError, setGuideError] = useState(false);
-
-  const handleCharacterClick = async (name: string, slug: string) => {
-    setSelectedCharacter(name);
-    setGuideError(false);
-    try {
-      const res = await fetch(`/guides/${slug}.html`);
-      if (!res.ok) throw new Error('failed');
-      setGuideText(await res.text());
-    } catch {
-      setGuideError(true);
-      setGuideText('');
-    }
-  };
 
   return (
     <Layout>
@@ -90,33 +56,6 @@ const Guides: NextPage = () => {
               </li>
             ))}
           </ul>
-        </section>
-
-        <section className='docs-section'>
-          <h2 className='docs-heading'><span>Character Guides</span></h2>
-          <ul className='docs-list docs-guide-grid'>
-            {characterGuides.map(g => (
-              <li key={g.slug}>
-                <button
-                  type='button'
-                  className={`docs-guide-btn${selectedCharacter === g.name ? ' docs-guide-btn-active' : ''}`}
-                  onClick={() => handleCharacterClick(g.name, g.slug)}
-                >
-                  {g.name}
-                </button>
-              </li>
-            ))}
-          </ul>
-
-{selectedCharacter && (
-            <div className='character-guide-display'>
-              <h3 className='docs-heading'><span>{selectedCharacter}</span></h3>
-			  {guideError && <p className='docs-note'>Couldn&apos;t load this guide.</p>}
-			  {!guideError && (
-		  		<div className='character-guide-text' dangerouslySetInnerHTML={{ __html: guideText }} />
-			  )}
-            </div>
-          )}
         </section>
       </div>
     </Layout>

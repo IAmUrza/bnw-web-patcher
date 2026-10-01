@@ -396,7 +396,7 @@ const CustomOptionsPanel: React.FC<CustomOptionsPanelProps> = ({
   <div className="p-4 border-t border-gray-700">
     <button
       type="button"
-	  onClick={() => document.getElementById('download-rom-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+	  onClick={() => document.getElementById('download-rom-section')?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
       className="mx-auto px-2 py-2 text-white nicer-btn"
     >
       Back to Top
