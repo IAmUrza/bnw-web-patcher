@@ -2,7 +2,7 @@ A challenging mode that owes its name to thzfunnyman's Brave New World spinoff, 
 
 1. Caps character levels at 30 and esper levels at 20.
 
-2. Weakness to an element will result in a 150% damage bonus, down from 200%.
+2. Weakness to an element will result in a +50% damage bonus, down from +100%.
 
 3. Reduces the HP and MP gained from Esper Levels.
 
