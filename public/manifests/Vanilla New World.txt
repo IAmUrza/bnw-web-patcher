@@ -1,5 +1,5 @@
-Changes the Brave New World script to be more... vanilla. Also makes some adjustments to various item names and enemy attacks.
+Changes the Brave New World script to be more vanilla.
 
-This optional patch does not affect gameplay.
+This patch also makes some adjustments to various item names, enemy attacks, and removes most swears.
 
 Credit: Deschain

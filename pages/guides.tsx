@@ -24,16 +24,20 @@ const Guides: NextPage = () => {
           <span className='app-subtitle'>Documentation</span>
         </p>
 
-        <p className='docs-bug-note'>
-          Found a bug? Report it on our{' '}
-            <a
-            href='https://discord.com/invite/bsuKp5A'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            Discord server
-          </a>!
-        </p>
+		<div className='docs-bug-row'>
+		  <img src='/img/bug1.png' alt='' className='docs-bug-img' />
+		  <p className='docs-bug-note'>
+			Found a bug? Report it on our{' '}
+			<a
+			  href='https://discord.com/invite/bsuKp5A'
+			  target='_blank'
+			  rel='noopener noreferrer'
+			>
+			  Discord server
+			</a>!
+		  </p>
+		  <img src='/img/bug2.png' alt='' className='docs-bug-img' />
+		</div>
 
         <section className='docs-section'>
           <h2 className='docs-heading'><span>Downloads</span></h2>

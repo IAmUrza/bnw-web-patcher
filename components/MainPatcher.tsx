@@ -562,7 +562,7 @@ export default function MainPatcher({ onHellModeChange }: MainPatcherProps) {
     <div className="patcher-hero">
       <PlusTitle />
       <p className="text-center mb-2">
-        Upload your FFIII (US) ROM to download FF6: BNW v3.0B2.1.<br/>
+        Upload your FFIII (US) ROM to download FF6: BNW v3.0 (Beta Release Candidate 2.1).<br/>
         Customize your experience with additional options below.
       </p>
     </div>

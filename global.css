@@ -940,7 +940,7 @@ td:nth-child(even) {
 .docs-bug-note {
   width: 100%;
   max-width: 1000px;
-  margin: 1.5rem auto 0.5rem;
+  margin: 1.5rem auto 1.5rem;
   padding: 0 1rem;
   text-align: center;
   font-size: 1rem;
@@ -962,7 +962,7 @@ td:nth-child(even) {
   max-width: 1000px;
   min-width: 0;
   margin: 0 auto;
-  padding: 0.5rem 1rem 1.5rem;
+  padding: 0.5rem 1rem 0;
 }
 
 .docs-heading {
@@ -1361,4 +1361,30 @@ td:nth-child(even) {
   line-height: 1.5;
   font-size: 0.8rem;
   margin: 0.3rem 0;
+}
+
+.docs-bug-row {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  min-width: 0;
+  max-width: 1000px;
+  margin: 1.5rem auto 1.5rem;
+  padding: 0 1rem;
+}
+
+.docs-bug-row .docs-bug-note {
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.docs-bug-img {
+  width: 60px;
+  height: auto;
+  flex: 0 0 auto;
+  image-rendering: pixelated;
 }

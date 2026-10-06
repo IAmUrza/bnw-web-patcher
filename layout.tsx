@@ -9,7 +9,7 @@ type NavLink = {
 };
 
 const navLinks: NavLink[] = [
-  { href: '/', label: 'Beta Web Patcher' },
+  { href: '/', label: 'Web Patcher' },
   { href: '/guides', label: 'Documentation' },
   { href: 'https://ngplus.net/mods/brave-new-world/', label: 'Website', external: true },
   { href: 'https://discord.com/invite/bsuKp5A', label: 'Discord', external: true }
