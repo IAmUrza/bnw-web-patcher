@@ -172,11 +172,16 @@ const CATEGORY_PREVIEWS: Record<string, { tag: string; image: string }> = {
 
 // Selecting every one of these flips the page into "Brave New Hell":
 // the title changes and the background fades red. Deselecting any one
-// of them reverts it.
+// of them reverts it. In addition, some patches will block BNH mode.
 const HELL_MODE_PATCHES: string[] = [
   "New Game Plus",
   "Frontier Challenge",
   "Hard Mode",
+];
+// None of these may be selected, or Hell Mode stays off.
+const HELL_MODE_BLOCKED: string[] = [
+  "Forgiving Slots",
+  "Slots Menu",
 ];
 
 const BASE_ROM_MB = 3;
@@ -546,7 +551,9 @@ export default function MainPatcher({ onHellModeChange }: MainPatcherProps) {
   useEffect(() => {
     if (!onHellModeChange) return;
     const selectedNames = getSelectedPatches(selectedOptionalPatches).map(p => p.name);
-    const active = HELL_MODE_PATCHES.every(n => selectedNames.includes(n));
+	const active =
+		HELL_MODE_PATCHES.every(n => selectedNames.includes(n)) &&
+		!HELL_MODE_BLOCKED.some(n => selectedNames.includes(n));
     onHellModeChange(active);
   }, [selectedOptionalPatches, optionalCategories, onHellModeChange]);
 
