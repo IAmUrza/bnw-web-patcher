@@ -916,7 +916,12 @@ td:nth-child(even) {
 
 /* older styling */
 .hidden-input {
-  visibility: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .kard {
